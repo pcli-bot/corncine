@@ -1,0 +1,64 @@
+# Render Blueprint for AniCine (web app).
+#
+# Cloudflare hosts the backend (Worker anicine-api + D1 + R2 + KV + Queue) via
+# deploy/cloudflare/setup.sh. Render hosts the Next.js web app + in-process
+# download engine. Deploy order: Cloudflare first (you need its URL), then Render.
+#
+# To use: push this repo to GitHub, create a new Render "Blueprint" from it,
+# and Render will provision the service below. Fill in the sync:false env vars.
+services:
+  - type: web
+    name: anicine-web
+    runtime: docker
+    dockerfilePath: ./deploy/render/Dockerfile
+    # free = fine for yt-dlp-only downloads, but it SLEEPS after 15m idle and
+    # can't run headless Chromium. starter ($7/mo) = always-on + enough RAM for
+    # embed extraction. Pick based on whether you need vidlink/hanime extraction.
+    plan: free
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: "3000"
+      # Cloudflare Worker URL from `wrangler deploy` (deploy/cloudflare/setup.sh).
+      - key: NEXT_PUBLIC_API_URL
+        sync: false
+      - key: NEXT_PUBLIC_SITE_URL
+        sync: false
+      # Residential/mobile proxy. Required for Coomer/OnlyFans and for embed
+      # extraction when the source blocks the render IP. Format:
+      # http://user:pass@host:port  (one, or comma-separated pool).
+      - key: PROXY_POOL
+        sync: false
+      - key: DL_MAX_CONCURRENT
+        value: "3"
+      # R2 (Cloudflare) for direct file delivery. Serving finished downloads from
+      # R2's edge bypasses the orange-cloud proxy's ~100MB response cap, so large
+      # videos download seamlessly. Create an R2 API token (Object Read/Write) for
+      # the anicine-downloads bucket. Leave blank to serve from local disk (capped).
+      - key: R2_ACCOUNT_ID
+        sync: false
+      - key: R2_ACCESS_KEY_ID
+        sync: false
+      - key: R2_SECRET_ACCESS_KEY
+        sync: false
+      - key: R2_BUCKET
+        value: anicine-downloads
+      - key: FLEET_TOKEN
+        sync: false
+# Optional scale-out: run the download fleet as a separate service instead of
+# in-process. Uncomment if you outgrow the single web service. The fleet image
+# lives at repo root (fleet/Dockerfile) and consumes the Cloudflare Queue.
+#  - type: web
+#    name: anicine-fleet
+#    runtime: docker
+#    dockerfilePath: ./fleet/Dockerfile
+#    plan: free
+#    envVars:
+#      - key: DOWNLOAD_FLEET_URL
+#        sync: false
+#      - key: FLEET_TOKEN
+#        sync: false
+#      - key: PROXY_POOL
+#        sync: false
