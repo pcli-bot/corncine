@@ -1,7 +1,9 @@
 import type { NextConfig } from "next";
 
+const isCloudflarePages = process.env.CF_PAGES === "1" || process.env.CF_PAGES === "true";
+
 const nextConfig: NextConfig = {
-  output: "standalone",
+  output: isCloudflarePages ? undefined : "standalone",
   reactStrictMode: true,
   poweredByHeader: false,
   compress: true,
