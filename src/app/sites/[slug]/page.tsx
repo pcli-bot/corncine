@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PROVIDERS, CATALOG_MODES, buildSearchUrl } from "@/lib/anicine-data";
 
-const BASE = process.env.NEXT_PUBLIC_SITE_URL || "https://anicine.pages.dev";
+const BASE = process.env.NEXT_PUBLIC_SITE_URL || "https://corncine.pages.dev";
 
 export function generateStaticParams() {
   return PROVIDERS.map((p) => ({ slug: p.domain }));

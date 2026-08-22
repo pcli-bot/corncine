@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ALL_TOP } from "@/lib/seo-top";
 import { CATALOG_MODES } from "@/lib/anicine-data";
 
-const BASE = process.env.NEXT_PUBLIC_SITE_URL || "https://anicine.pages.dev";
+const BASE = process.env.NEXT_PUBLIC_SITE_URL || "https://corncine.pages.dev";
 
 export async function generateMetadata({ searchParams }: { searchParams: Promise<{ q?: string; mode?: string }> }): Promise<Metadata> {
   const { q, mode } = await searchParams;

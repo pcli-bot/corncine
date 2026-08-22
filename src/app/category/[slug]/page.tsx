@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { CATALOG_MODES, PROVIDERS, type ProviderCategory } from "@/lib/anicine-data";
 import { ALL_TOP } from "@/lib/seo-top";
 
-const BASE = process.env.NEXT_PUBLIC_SITE_URL || "https://anicine.pages.dev";
+const BASE = process.env.NEXT_PUBLIC_SITE_URL || "https://corncine.pages.dev";
 
 export function generateStaticParams() {
   return CATALOG_MODES.map((m) => ({ slug: m.key }));

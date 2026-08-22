@@ -7,7 +7,7 @@
 // once via POST /api/account and stores it in localStorage. The token IS the
 // credential — only its SHA-256 (account_id) lives server-side.
 
-const RAW = process.env.NEXT_PUBLIC_API_URL || process.env.NEXT_PUBLIC_API_BASE || "https://pcli.onrender.com";
+const RAW = process.env.NEXT_PUBLIC_API_URL || process.env.NEXT_PUBLIC_API_BASE || "https://corncine.onrender.com";
 export const API_BASE = RAW.replace(/\/+$/, "");
 export const apiEnabled = API_BASE.length > 0;
 
@@ -18,7 +18,7 @@ if (typeof window !== "undefined" && apiEnabled) {
   }, 1000);
 }
 
-const TOKEN_KEY = "anicine_token";
+const TOKEN_KEY = "corncine_token";
 
 export function getToken(): string | null {
   if (typeof window === "undefined") return null;

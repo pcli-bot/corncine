@@ -47,7 +47,7 @@ export function Footer() {
               <li><a href="#desktop-apps" className="text-[#94A3B8] hover:text-[#3B82F6] spring-transition">Desktop App</a></li>
               <li><a href="#faq-section" className="text-[#94A3B8] hover:text-[#3B82F6] spring-transition">FAQ</a></li>
               <li><a href="#directory-hub" className="text-[#94A3B8] hover:text-[#3B82F6] spring-transition">Site Index</a></li>
-              <li><a href="https://anicine.pages.dev/sitemap.xml" className="text-[#94A3B8] hover:text-[#3B82F6] spring-transition">Sitemap</a></li>
+              <li><a href="https://corncine.pages.dev/sitemap.xml" className="text-[#94A3B8] hover:text-[#3B82F6] spring-transition">Sitemap</a></li>
             </ul>
           </div>
         </div>
