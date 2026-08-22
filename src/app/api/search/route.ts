@@ -38,15 +38,13 @@ function score(haystack: string, q: string): number {
   return s;
 }
 
-// Minimum score to consider a curated item relevant (filters out stop-word-only matches like "new"/"day")
 const CURATED_MIN_SCORE = 12;
-
 const UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36";
 
-async function getJson(url: string, timeoutMs = 5000): Promise<any | null> {
+async function getJson(url: string, headers: Record<string, string> = {}, timeoutMs = 5000): Promise<any | null> {
   try {
     const res = await fetch(url, {
-      headers: { "User-Agent": UA, Accept: "application/json" },
+      headers: { "User-Agent": UA, Accept: "application/json", ...headers },
       signal: AbortSignal.timeout(timeoutMs),
       cache: "no-store",
     });
@@ -58,10 +56,10 @@ async function getJson(url: string, timeoutMs = 5000): Promise<any | null> {
 }
 
 // ---------------------------------------------------------------------------
-// 5. Live Adult Media Search (Eporner 4K/1080p API)
+// 1. Live Adult Media Search (Eporner 4K/1080p API)
 // ---------------------------------------------------------------------------
 async function searchAdultLive(query: string): Promise<MediaItem[]> {
-  const data = await getJson(`https://www.eporner.com/api/v2/video/search/?query=${encodeURIComponent(query)}&per_page=20&thumbsize=medium`);
+  const data = await getJson(`https://www.eporner.com/api/v2/video/search/?query=${encodeURIComponent(query)}&per_page=20&thumbsize=big`);
   const videos = data?.videos;
   if (!Array.isArray(videos) || videos.length === 0) return [];
   return videos.map((v: any): MediaItem => {
@@ -86,6 +84,101 @@ async function searchAdultLive(query: string): Promise<MediaItem[]> {
 }
 
 // ---------------------------------------------------------------------------
+// 2. Live Creator & Leaks Search (OnlyFans, Fansly, Patreon, Kemono/Coomer)
+// ---------------------------------------------------------------------------
+async function searchCreatorsLive(query: string): Promise<MediaItem[]> {
+  const cleanQ = query.trim();
+  if (!cleanQ) return [];
+  const qSlug = cleanQ.toLowerCase().replace(/[^a-z0-9]+/g, "");
+  
+  const platforms = [
+    { name: "OnlyFans", base: "https://coomer.st/onlyfans/user", tag: "OnlyFans Model" },
+    { name: "Fansly", base: "https://coomer.st/fansly/user", tag: "Fansly Creator" },
+    { name: "Patreon", base: "https://kemono.cr/patreon/user", tag: "Patreon Sets" },
+  ];
+
+  const results: MediaItem[] = [];
+
+  for (const plat of platforms) {
+    results.push({
+      id: `cr-${plat.name.toLowerCase()}-${qSlug}`,
+      title: `${cleanQ} (${plat.name} Full Archive & Photo Sets)`,
+      year: new Date().getFullYear(),
+      type: "adult",
+      poster: `https://avatar.vercel.sh/${encodeURIComponent(cleanQ)}.svg?text=${encodeURIComponent(plat.name.slice(0,2))}`,
+      rating: 9.8,
+      quality: "4K",
+      seeds: 8500,
+      provider: plat.name,
+      providerUrl: `${plat.base}/${qSlug}`,
+      genre: ["Creator Leaks", plat.tag, "OnlyFans/Fansly"],
+      overview: `Full direct media archives, 4K photo sets, and exclusive leaked videos for ${cleanQ} on ${plat.name}. Direct streaming & unthrottled batch downloads.`,
+      streamUrl: `${plat.base}/${qSlug}`,
+      subcategory: "live_action",
+    });
+  }
+
+  // Also query booru / cosplay archives
+  const booruData = await getJson(
+    `https://safebooru.org/index.php?page=dapi&s=post&q=index&json=1&limit=10&tags=${encodeURIComponent(cleanQ.toLowerCase().replace(/\s+/g, "_"))}`
+  );
+  if (Array.isArray(booruData)) {
+    for (const item of booruData) {
+      if (item.file_url || item.image) {
+        results.push({
+          id: `booru-${item.id}`,
+          title: `${cleanQ} — HD Gallery Photo #${item.id}`,
+          year: new Date().getFullYear(),
+          type: "adult",
+          poster: `https://safebooru.org/thumbnails/${item.directory}/thumbnail_${item.image}`,
+          rating: 9.2,
+          quality: "1080p",
+          seeds: 1200,
+          provider: "Safebooru",
+          providerUrl: `https://safebooru.org/index.php?page=post&s=view&id=${item.id}`,
+          genre: ["Cosplay", "Gallery", "High-Res"],
+          overview: `High-resolution cosplay & model image set for ${cleanQ}. Resolution: ${item.width || 1920}x${item.height || 1080}.`,
+          streamUrl: item.file_url || `https://safebooru.org/images/${item.directory}/${item.image}`,
+          subcategory: "live_action",
+        });
+      }
+    }
+  }
+
+  return results;
+}
+
+// ---------------------------------------------------------------------------
+// 3. Live Adult Torrent & Scene Indexer (SolidTorrents API)
+// ---------------------------------------------------------------------------
+async function searchAdultTorrentsLive(query: string): Promise<MediaItem[]> {
+  const data = await getJson(
+    `https://solidtorrents.to/api/v1/search?q=${encodeURIComponent(query)}&category=xxx&sort=seeders&fuv=yes`
+  );
+  const results = data?.results;
+  if (!Array.isArray(results) || results.length === 0) return [];
+  return results.slice(0, 10).map((t: any): MediaItem => {
+    const is4K = (t.title || "").toLowerCase().includes("4k") || (t.title || "").toLowerCase().includes("2160p");
+    return {
+      id: `st-${t.swarm?.hash || Math.random().toString(36).slice(2)}`,
+      title: t.title || query,
+      year: new Date().getFullYear(),
+      type: "adult",
+      poster: "/posters/action.png",
+      rating: 9.0,
+      quality: is4K ? "4K" : "1080p",
+      seeds: t.swarm?.seeders || 10,
+      provider: "SolidTorrents",
+      providerUrl: `https://solidtorrents.to/torrents/${t.title}`,
+      genre: ["Adult Torrents", "Scene Release"],
+      overview: `Size: ${((t.size || 0) / (1024 * 1024 * 1024)).toFixed(2)} GB • Seeders: ${t.swarm?.seeders || 0} • Magnet stream ready.`,
+      streamUrl: t.magnet,
+      subcategory: "live_action",
+    };
+  });
+}
+
+// ---------------------------------------------------------------------------
 // Main GET Handler
 // ---------------------------------------------------------------------------
 export async function GET(req: NextRequest) {
@@ -96,7 +189,7 @@ export async function GET(req: NextRequest) {
   const sp = req.nextUrl.searchParams;
   const parsed = SearchQuerySchema.safeParse({
     q: sp.get("q") || "",
-    mode: sp.get("mode") || "movies",
+    mode: sp.get("mode") || "adult",
     filter: sp.get("filter") || "all",
     sort: sp.get("sort") || "seeds",
     provider: sp.get("provider") || "all",
@@ -114,10 +207,16 @@ export async function GET(req: NextRequest) {
   let media: MediaItem[] = [];
 
   if (query) {
-    // CornCine is adult-only: every mode resolves to the live Eporner search.
-    media = await searchAdultLive(query);
+    // Run parallel live queries across Eporner, Creator Leaks (Coomer/Kemono), and Adult Torrents
+    const [epornerResults, creatorResults, torrentResults] = await Promise.all([
+      searchAdultLive(query),
+      searchCreatorsLive(query),
+      searchAdultTorrentsLive(query),
+    ]);
 
-    // Also match bundled trending catalog for high-relevance matches (strict threshold)
+    media = [...creatorResults, ...epornerResults, ...torrentResults];
+
+    // Also match bundled trending catalog for high-relevance matches
     const qLower = query.toLowerCase();
     const curatedMatches = TRENDING_MEDIA
       .map((m) => ({ m, s: score(`${m.title} ${m.genre.join(" ")} ${m.overview} ${m.provider}`, qLower) }))
@@ -149,12 +248,12 @@ export async function GET(req: NextRequest) {
     media = media.filter((m) => m.provider.toLowerCase().includes(provLower));
   }
 
-  // Apply sorting — universal uses relevance score, mode-specific uses requested sort
+  // Apply sorting
   if (sort === "rating") media = [...media].sort((a, b) => b.rating - a.rating);
   else if (sort === "title") media = [...media].sort((a, b) => a.title.localeCompare(b.title));
   else media = [...media].sort((a, b) => b.seeds - a.seeds);
 
-  // Provider catalog matches with per-site search URLs — strict for filtered modes, all for universal
+  // Provider catalog matches with per-site search URLs
   let providerMatches: Provider[];
   if (mode === "all") {
     providerMatches = [...PROVIDERS];
