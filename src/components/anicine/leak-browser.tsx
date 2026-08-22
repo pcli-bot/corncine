@@ -1,6 +1,7 @@
 "use client";
 
 import { API_BASE } from "@/lib/api";
+import { useAnicineStore } from "@/lib/anicine-store";
 import { useEffect, useState, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import {
@@ -287,6 +288,8 @@ function AllSitesPanel({ query }: { query: string }) {
 
 function MediaTile({ item, onPlay }: { item: LeakMediaItem; onPlay: (u: string) => void }) {
   const [err, setErr] = useState(false);
+  const setImageViewer = useAnicineStore((s) => s.setImageViewer);
+
   if (item.kind === "video") {
     return (
       <div className="group relative aspect-square rounded-xl overflow-hidden border border-[#1E2A3C] bg-[#0B0F17]">
@@ -294,27 +297,16 @@ function MediaTile({ item, onPlay }: { item: LeakMediaItem; onPlay: (u: string) 
           onClick={() => onPlay(item.url)}
           className="absolute inset-0 flex flex-col items-center justify-center gap-2 text-white/80 group-hover:bg-black/40 transition-colors p-2"
         >
-          <Play className="w-10 h-10 fill-current" />
+          <Play className="w-10 h-10 fill-current text-[#3B82F6]" />
           <span className="text-[10px] font-mono text-center line-clamp-2">{item.name}</span>
         </button>
-        <a
-          href={item.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={(e) => e.stopPropagation()}
-          className="absolute bottom-1 right-1 p-1 rounded bg-[#0B0F17]/80 text-white/70 hover:text-white"
-        >
-          <ExternalLink className="w-3.5 h-3.5" />
-        </a>
       </div>
     );
   }
   return (
-    <a
-      href={item.url}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="group relative aspect-square rounded-xl overflow-hidden border border-[#1E2A3C] bg-[#0B0F17] block"
+    <button
+      onClick={() => setImageViewer({ open: true, title: item.name, url: proxiedMediaUrl(item.url) })}
+      className="group relative aspect-square rounded-xl overflow-hidden border border-[#1E2A3C] bg-[#0B0F17] block w-full text-left cursor-pointer"
     >
       {!err ? (
         <img
@@ -330,7 +322,7 @@ function MediaTile({ item, onPlay }: { item: LeakMediaItem; onPlay: (u: string) 
           <span className="text-[10px] font-mono text-center line-clamp-2">{item.name}</span>
         </div>
       )}
-    </a>
+    </button>
   );
 }
 

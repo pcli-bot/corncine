@@ -9,6 +9,7 @@ import { KnowledgeBase } from "@/components/anicine/knowledge-base";
 import { Footer } from "@/components/anicine/footer";
 import { DownloadsDrawer } from "@/components/anicine/downloads-drawer";
 import { PlayerModal } from "@/components/anicine/player-modal";
+import { ImageModal } from "@/components/anicine/image-modal";
 import { CommandPalette } from "@/components/anicine/command-palette";
 
 export default function Home() {
@@ -30,6 +31,7 @@ export default function Home() {
       {/* Overlays */}
       <DownloadsDrawer />
       <PlayerModal />
+      <ImageModal />
       <CommandPalette />
     </AnicineProviders>
   );

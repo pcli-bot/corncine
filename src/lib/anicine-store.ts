@@ -34,6 +34,15 @@ export interface PlayerState {
   type?: string;
 }
 
+export interface ImageViewerState {
+  open: boolean;
+  title: string;
+  url: string;
+  images?: string[];
+  currentIndex?: number;
+  source?: string;
+}
+
 interface AppState {
   // Tool / catalog selection
   mainTool: MainTool;
@@ -46,9 +55,11 @@ interface AppState {
   // Overlays
   drawerOpen: boolean;
   player: PlayerState;
+  imageViewer: ImageViewerState;
   paletteOpen: boolean;
   setDrawer: (v: boolean) => void;
   setPlayer: (p: PlayerState) => void;
+  setImageViewer: (v: Partial<ImageViewerState>) => void;
   setPalette: (v: boolean) => void;
 
   // Downloads queue
@@ -87,9 +98,11 @@ export const useAnicineStore = create<AppState>()(
 
       drawerOpen: false,
       player: { open: false, title: "" },
+      imageViewer: { open: false, title: "", url: "" },
       paletteOpen: false,
       setDrawer: (v) => set({ drawerOpen: v }),
       setPlayer: (p) => set({ player: p }),
+      setImageViewer: (v) => set({ imageViewer: { ...get().imageViewer, ...v } }),
       setPalette: (v) => set({ paletteOpen: v }),
 
       tasks: [],

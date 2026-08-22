@@ -33,11 +33,11 @@ export interface MediaItem {
   genre: string[];
   overview: string;
   streamUrl?: string;
-  /** TMDB numeric id — only ever a real TMDB id (never an IMDb tt-code). */
   tmdbId?: string;
-  /** IMDb id (e.g. "tt0816692") for embed providers that key off IMDb. */
   imdbId?: string;
   subcategory?: "hentai" | "live_action";
+  mediaKind?: "video" | "photo" | "set";
+  images?: string[];
 }
 
 export interface Topic {
