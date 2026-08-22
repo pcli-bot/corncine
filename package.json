@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev -p 3000 2>&1 | tee dev.log",
-    "build": "next build && (test -d .next/standalone && cp -r .next/static .next/standalone/.next/ 2>/dev/null && cp -r public .next/standalone/ 2>/dev/null || true)",
+    "build": "if [ \"$CF_PAGES\" = \"1\" ] || [ \"$CF_PAGES\" = \"true\" ]; then mv src/app/api ./_api_temp 2>/dev/null || true; npx next build; mv ./_api_temp src/app/api 2>/dev/null || true; else npx next build && (test -d .next/standalone && cp -r .next/static .next/standalone/.next/ 2>/dev/null && cp -r public .next/standalone/ 2>/dev/null || true); fi",
     "start": "NODE_ENV=production HOSTNAME=0.0.0.0 node .next/standalone/server.js",
     "lint": "eslint .",
     "db:push": "prisma db push --accept-data-loss",

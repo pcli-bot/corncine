@@ -3,11 +3,15 @@ import type { NextConfig } from "next";
 const isCloudflarePages = process.env.CF_PAGES === "1" || process.env.CF_PAGES === "true";
 
 const nextConfig: NextConfig = {
-  output: isCloudflarePages ? undefined : "standalone",
+  output: isCloudflarePages ? "export" : "standalone",
   reactStrictMode: true,
   poweredByHeader: false,
   compress: true,
+  images: {
+    unoptimized: true,
+  },
   async headers() {
+    if (isCloudflarePages) return [];
     return [
       {
         source: "/(.*)",

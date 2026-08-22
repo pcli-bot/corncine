@@ -2,6 +2,8 @@ import type { MetadataRoute } from "next";
 import { PROVIDERS, CATALOG_MODES } from "@/lib/anicine-data";
 import { ALL_TOP } from "@/lib/seo-top";
 
+export const dynamic = "force-static";
+
 const BASE = process.env.NEXT_PUBLIC_SITE_URL || "https://corncine.pages.dev";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
