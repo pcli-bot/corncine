@@ -1,5 +1,6 @@
 "use client";
 
+import { API_BASE } from "@/lib/api";
 import { useEffect, useState, useCallback } from "react";
 import { Search, Link2, ClipboardPaste, Play, Download, ShieldCheck, Sparkles } from "lucide-react";
 import { useAnicineStore } from "@/lib/anicine-store";
@@ -173,7 +174,7 @@ function LinkDownloader() {
     if (detection?.kind === "unknown") { showToast("Unrecognized link format", "error"); return; }
     setBusy(true);
     try {
-      const res = await fetch("/api/download", {
+      const res = await fetch(`${API_BASE}/api/download`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ url, title: detection?.platform ? `${detection.platform} stream` : "Direct stream", source: detection?.platform || "Direct", format, quality, engine }),

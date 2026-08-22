@@ -1,5 +1,6 @@
 "use client";
 
+import { API_BASE } from "@/lib/api";
 import { useEffect, useMemo, useRef, useState, useCallback } from "react";
 import { useAnicineStore } from "@/lib/anicine-store";
 import { EMBED_SERVERS, buildEmbedUrl, isDirectMediaFile, type EmbedServerKey } from "@/lib/anicine-data";
@@ -257,7 +258,7 @@ export function PlayerModal() {
     const url = embedUrlFinal && server !== "direct" ? embedUrlFinal : player.url;
     if (!url) { showToast("No downloadable source for this title", "error"); return; }
     try {
-      const res = await fetch("/api/download", {
+      const res = await fetch(`${API_BASE}/api/download`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

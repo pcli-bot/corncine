@@ -1,5 +1,6 @@
 "use client";
 
+import { API_BASE } from "@/lib/api";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Play, Download, Star, Users, Search as SearchIcon, Loader2, Film, ExternalLink, Layers, Zap, Heart } from "lucide-react";
@@ -62,7 +63,7 @@ async function fetchSearch(params: { q: string; mode: CatalogMode; filter: strin
     provider: params.provider,
     subDub: params.subDub,
   });
-  const res = await fetch(`/api/search?${sp.toString()}`);
+  const res = await fetch(`${API_BASE}/api/search?${sp.toString()}`);
   if (!res.ok) throw new Error("Search failed");
   return res.json();
 }
@@ -314,7 +315,7 @@ export function MediaCard({ item }: { item: MediaItem }) {
       source = item.provider;
     }
     try {
-      const res = await fetch("/api/download", {
+      const res = await fetch(`${API_BASE}/api/download`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

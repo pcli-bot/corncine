@@ -1,5 +1,6 @@
 "use client";
 
+import { API_BASE } from "@/lib/api";
 import { useEffect, useState, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import {
@@ -10,7 +11,7 @@ import { LEAK_SEARCH_TARGETS, leakSearchUrl, proxiedMediaUrl } from "@/lib/leak"
 
 // Points at the Cloudflare Worker when NEXT_PUBLIC_API_BASE is set; otherwise
 // hits the same-origin Next.js API routes. Both implement the same contract.
-const API_BASE = process.env.NEXT_PUBLIC_API_BASE ?? "";
+// API_BASE imported from @/lib/api
 
 type LeakCreator = {
   site: string;

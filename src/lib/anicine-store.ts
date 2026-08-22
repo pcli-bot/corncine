@@ -1,5 +1,4 @@
-"use client";
-
+import { API_BASE } from "@/lib/api";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import type { MediaItem, CatalogMode } from "./anicine-data";
@@ -122,7 +121,7 @@ export const useAnicineStore = create<AppState>()(
               return { ...t, status: "error" as DownloadStatus, error: "Queued before the download backend existed — remove and re-add this task." };
             }
             try {
-              const res = await fetch(`/api/download/${t.jobId}`, { cache: "no-store" });
+              const res = await fetch(`${API_BASE}/api/download/${t.jobId}`, { cache: "no-store" });
               if (res.status === 404) {
                 // Server restarted and lost the job (in-memory state).
                 return { ...t, status: "error" as DownloadStatus, error: "Server job vanished (backend restart). Retry to restart the download.", speed: 0 };
@@ -157,7 +156,7 @@ export const useAnicineStore = create<AppState>()(
         const t = get().tasks.find((x) => x.id === id);
         if (!t || (t.status !== "active" && t.status !== "queued")) return;
         if (t.jobId) {
-          try { await fetch(`/api/download/${t.jobId}`, { method: "DELETE" }); } catch { /* server gone; local state still flips */ }
+          try { await fetch(`${API_BASE}/api/download/${t.jobId}`, { method: "DELETE" }); } catch { /* server gone; local state still flips */ }
         }
         set({ tasks: get().tasks.map((x) => (x.id === id ? { ...x, status: "paused", speed: 0 } : x)) });
       },
@@ -166,7 +165,7 @@ export const useAnicineStore = create<AppState>()(
         const t = get().tasks.find((x) => x.id === id);
         if (!t || t.status !== "paused") return;
         try {
-          const res = await fetch("/api/download", {
+          const res = await fetch(`${API_BASE}/api/download`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ url: t.url, title: t.title, source: t.source, format: t.format, quality: t.quality }),
@@ -182,7 +181,7 @@ export const useAnicineStore = create<AppState>()(
       removeTask: async (id) => {
         const t = get().tasks.find((x) => x.id === id);
         if (t?.jobId) {
-          try { await fetch(`/api/download/${t.jobId}`, { method: "DELETE" }); } catch { /* noop */ }
+          try { await fetch(`${API_BASE}/api/download/${t.jobId}`, { method: "DELETE" }); } catch { /* noop */ }
         }
         set({ tasks: get().tasks.filter((x) => x.id !== id) });
       },
