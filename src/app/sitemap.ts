@@ -32,7 +32,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     });
   }
 
-  // Legal / compliance pages (required for ad-network approval)
+  // MCP docs + legal / compliance pages
+  urls.push({ url: `${BASE}/mcp`, lastModified: now, changeFrequency: "weekly", priority: 0.7 });
   for (const page of ["/dmca", "/2257", "/csam-policy", "/dsa-policy", "/cookies-policy", "/terms-of-service", "/privacy-policy"]) {
     urls.push({
       url: `${BASE}${page}`,

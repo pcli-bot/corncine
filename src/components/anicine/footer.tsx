@@ -4,7 +4,7 @@ export function Footer() {
   return (
     <footer className="mt-auto bg-[#0B0F17] border-t border-[#1E2A3C]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 items-start">
           {/* Brand */}
           <div className="space-y-3">
             <div className="flex items-center gap-2">
@@ -35,6 +35,7 @@ export function Footer() {
               <li><a href="https://github.com/pcli-bot/pcli/blob/main/LICENSE" target="_blank" rel="noreferrer" className="text-[#94A3B8] hover:text-[#3B82F6] spring-transition">License (GPLv3)</a></li>
               <li><a href="https://github.com/pcli-bot/pcli/issues" target="_blank" rel="noreferrer" className="text-[#94A3B8] hover:text-[#3B82F6] spring-transition">Report an Issue</a></li>
               <li><a href="https://github.com/fmhy/FMHY" target="_blank" rel="noreferrer" className="text-[#94A3B8] hover:text-[#3B82F6] spring-transition">FMHY Provider Wiki</a></li>
+              <li><a href="/mcp" className="text-[#94A3B8] hover:text-red-400 spring-transition">MCP for AI Agents 🔞</a></li>
             </ul>
           </div>
 
