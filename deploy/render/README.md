@@ -17,7 +17,7 @@ always-on metal. The Pi artifacts in `deploy/pi/` are now unnecessary.
 
 ## 1. Cloudflare (edge + Worker) first
 ```bash
-cd /home/suman/porncli
+cd /opt/corncine
 wrangler login
 bash deploy/cloudflare/setup.sh      # creates D1/KV/R2/Queue, migrates, deploys Worker
 ```
