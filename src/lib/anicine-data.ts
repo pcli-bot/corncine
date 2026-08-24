@@ -98,6 +98,7 @@ export const PROVIDERS: Provider[] = [
 
   // ---- Adult torrents ----
   { name: "1337x XXX", url: "https://1337x.to/", domain: "1337x.to", category: "torrents", blurb: "Adult torrent packs via 1337x XXX category", searchPattern: "https://1337x.to/category-search/{q}/XXX/1/" },
+  { name: "DesiTales2", url: "https://desitales2.com/", domain: "desitales2.com", subcategory: "live_action", category: "adult", blurb: "Indian Desi chudai kahaniyan & sex videos — Hindi erotica", searchPattern: "https://desitales2.com/?s={q}" },
 ];
 
 export function buildSearchUrl(provider: Provider, query: string): string {
@@ -222,6 +223,24 @@ export const TRENDING_MEDIA: MediaItem[] = [
   makeItem("ad-nozoki", "Nozoki Ana", 2009, "adult", 8.7, "1080p", 15800, "MangaDex", "https://mangadex.org/title/076da7fe-a78b-4b2a-8c54-7c27d89617b6/nozoki-ana", ["Adult Manga", "Ecchi"], "Tatsuhiko discovers a peephole in his apartment wall connecting to his neighbor.", "https://cdn.myanimelist.net/images/manga/1/158659l.jpg", undefined, "hentai"),
   makeItem("ad-4k-cinema", "Ultra HD 4K Cinema Collection 60FPS", 2024, "adult", 9.0, "4K", 26500, "Eporner (4K)", "https://www.eporner.com/search/4k/", ["4K Tube", "Ultra HD"], "Curated high-bitrate 60FPS Ultra HD video streams from verified studios.", "https://static-ca-cdn.eporner.com/thumbs/static4/1/17/179/17977963/5_240.jpg", undefined, "live_action"),
   makeItem("ad-spank-hdr", "SpankBang 4K HDR Direct Streams", 2024, "adult", 8.9, "4K", 23400, "SpankBang", "https://spankbang.com/s/4k", ["4K Tube", "Direct MP4"], "Ultra-fast direct MP4 video downloads and HD streaming playback.", "https://static-ca-cdn.eporner.com/thumbs/static4/1/17/179/17984135/10_240.jpg", undefined, "live_action"),
+  makeItem("ad-bibleblack", "Bible Black (Uncensored Collection)", 2001, "adult", 8.8, "1080p", 22100, "HentaiHaven", "https://hentaihaven.xxx/?s=bible+black", ["Hentai", "Supernatural"], "The origins of the cursed Bible Black spellbook.", "https://media.kitsu.app/anime/poster_images/1061/large.jpg", undefined, "hentai"),
+  makeItem("ad-prison-school", "Prison School (Uncensored)", 2015, "adult", 8.6, "1080p", 18900, "Hanime", "https://hanime.tv/browse/search?q=prison+school", ["Hentai", "Comedy"], "Five boys face an unusual detention at a strict academy.", "https://media.kitsu.app/anime/poster_images/10740/large.jpg", undefined, "hentai"),
+  makeItem("ad-7010", "Amakano + White Season", 2017, "adult", 8.7, "1080p", 16700, "Hanime", "https://hanime.tv/browse/search?q=amakano", ["Hentai", "Romance"], "Winter romance stories from the Amakano universe.", "https://media.kitsu.app/anime/poster_images/12246/large.jpg", undefined, "hentai"),
+  makeItem("ad-pornhub-4k", "Pornhub 4K Premium Selection", 2024, "adult", 9.1, "4K", 31200, "Pornhub", "https://www.pornhub.com/video/search?search=4k", ["4K Tube", "Premium"], "Curated 4K premium streams from verified models and studios.", "https://static-ca-cdn.eporner.com/thumbs/static4/1/17/179/17983001/5_240.jpg", undefined, "live_action"),
+  makeItem("ad-xvideos-hd", "XVideos HD Global Network", 2024, "adult", 8.9, "1080p", 29800, "XVideos", "https://www.xvideos.com/?k=4k", ["Global", "HD"], "High-speed worldwide HD video network.", "https://static-ca-cdn.eporner.com/thumbs/static4/1/17/179/17983042/10_240.jpg", undefined, "live_action"),
+  makeItem("ad-xhamster-vr", "XHamster VR & 4K Library", 2024, "adult", 8.8, "4K", 25600, "XHamster", "https://xhamster.com/search/4k", ["4K Tube", "VR"], "Verified 4K and VR streams with fast CDN.", "https://static-ca-cdn.eporner.com/thumbs/static4/1/17/179/17983077/5_240.jpg", undefined, "live_action"),
+  makeItem("ad-beeg-hd", "Beeg Clean HD Collection", 2024, "adult", 8.7, "1080p", 18200, "Beeg", "https://beeg.com/?q=hd", ["Clean", "HD"], "Minimal interface, clean HD streams.", "https://static-ca-cdn.eporner.com/thumbs/static4/1/17/179/17983112/10_240.jpg", undefined, "live_action"),
+  makeItem("ad-missav-jav", "MissAV JAV Uncensored 1080p", 2024, "adult", 9.0, "1080p", 27400, "MissAV", "https://missav.ai/search/uncensored", ["JAV", "Uncensored"], "Asian cinema — censored and uncensored JAV with multi-server streams.", "https://media.kitsu.app/anime/poster_images/39565/large.jpg", undefined, "live_action"),
+  makeItem("ad-nhentai-228922", "Hentai Doujinshi Archive (Nhentai)", 2020, "adult", 8.9, "1080p", 19200, "Nhentai", "https://nhentai.net/search/?q=full+color", ["Doujinshi", "Manga"], "Full-color doujinshi and manga archive — searchable and downloadable.", "https://cdn.myanimelist.net/images/manga/3/181693l.jpg", undefined, "hentai"),
+  // ---- Famous performers — maximum traffic SEO ----
+  makeItem("ad-sunny-leone", "Sunny Leone — 4K Ultimate Collection", 2024, "adult", 9.4, "4K", 52000, "Pornhub", "https://www.pornhub.com/video/search?search=sunny+leone", ["4K Tube", "Most Searched"], "India's most searched icon — Sunny Leone 4K ultimate collection.", undefined, "live_action"),
+  makeItem("ad-mia-khalifa", "Mia Khalifa — Viral Archive", 2024, "adult", 9.3, "4K", 48000, "Pornhub", "https://www.pornhub.com/video/search?search=mia+khalifa", ["Viral", "Most Searched"], "Global viral icon Mia Khalifa — most searched archive.", undefined, "live_action"),
+  makeItem("ad-dani-daniels", "Dani Daniels — Top Rated 4K", 2024, "adult", 9.1, "4K", 39000, "Pornhub", "https://www.pornhub.com/video/search?search=dani+daniels", ["4K Tube", "Top Rated"], "Top-rated performer Dani Daniels — 4K collection.", undefined, "live_action"),
+  makeItem("ad-jonny-sins", "Johnny Sins — Most Popular Male", 2024, "adult", 9.2, "4K", 41000, "Pornhub", "https://www.pornhub.com/video/search?search=johnny+sins", ["Most Searched", "Male"], "World's most searched male performer — Johnny Sins full archive.", undefined, "live_action"),
+  makeItem("ad-eva-elfie", "Eva Elfie — OnlyFans Leaks 4K", 2024, "adult", 9.3, "4K", 44000, "Kemono", "https://kemono.cr/search?q=eva+elfie", ["Leaks", "OnlyFans"], "Top OnlyFans leak — Eva Elfie 4K archive via Kemono/Coomer.", undefined, "live_action"),
+  makeItem("ad-angela-white", "Angela White — #1 Pornhub 2025", 2024, "adult", 9.5, "4K", 55000, "Pornhub", "https://www.pornhub.com/video/search?search=angela+white", ["#1 Ranked", "Most Searched"], "Pornhub #1 2025 — Angela White 4K top collection.", undefined, "live_action"),
+  makeItem("ad-lana-rhoades", "Lana Rhoades — Viral Archive", 2024, "adult", 9.4, "4K", 50000, "Pornhub", "https://www.pornhub.com/video/search?search=lana+rhoades", ["Viral", "Most Searched"], "Former #1 — Lana Rhoades viral archive.", undefined, "live_action"),
+  makeItem("ad-bonnie-blue", "Bonnie Blue — New #2 2025", 2024, "adult", 9.2, "4K", 38000, "Pornhub", "https://www.pornhub.com/video/search?search=bonnie+blue", ["New", "Top 2"], "Breakout #2 2025 — Bonnie Blue 4K collection.", undefined, "live_action"),
 ];
 
 // ---------------------------------------------------------------------------
@@ -241,8 +260,8 @@ export interface CatalogModeInfo {
 }
 
 export const CATALOG_MODES: CatalogModeInfo[] = [
-  { key: "all", label: "Universal", count: 21, title: "Universal Adult Search", desc: "Search across all 21+ providers at once — JAV, hentai, OnlyFans leaks, tubes and torrents in one query.", categories: ["adult", "torrents"] },
-  { key: "adult", label: "Adult Media", count: 19, title: "JAV, Hentai & Tube Catalogs", desc: "High-speed 4K networks: Pornhub, Eporner, SpankBang, MissAV, JAVGuru, Hanime, HentaiHaven, Kemono leaks.", categories: ["adult"] },
+  { key: "all", label: "Universal", count: 22, title: "Universal Adult Search", desc: "Search across all 22+ providers at once — JAV, hentai, OnlyFans leaks, tubes, Indian Desi and torrents in one query.", categories: ["adult", "torrents"] },
+  { key: "adult", label: "Adult Media", count: 20, title: "JAV, Hentai & Tube Catalogs", desc: "High-speed 4K networks: Pornhub, Eporner, SpankBang, MissAV, JAVGuru, Hanime, HentaiHaven, DesiTales2, Kemono leaks.", categories: ["adult"] },
 ];
 
 export const TOPICS: Topic[] = [

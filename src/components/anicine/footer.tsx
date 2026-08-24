@@ -38,6 +38,20 @@ export function Footer() {
             </ul>
           </div>
 
+          {/* Legal / compliance */}
+          <div className="space-y-3">
+            <h4 className="text-[11px] font-mono font-semibold uppercase tracking-wider text-[#64748B]">Legal</h4>
+            <ul className="space-y-2 text-xs">
+              <li><a href="/dmca" className="text-[#94A3B8] hover:text-[#3B82F6] spring-transition">DMCA / Takedown</a></li>
+              <li><a href="/2257" className="text-[#94A3B8] hover:text-[#3B82F6] spring-transition">2257 Compliance</a></li>
+              <li><a href="/csam-policy" className="text-[#94A3B8] hover:text-[#EF4444] spring-transition">CSAM Policy</a></li>
+              <li><a href="/dsa-policy" className="text-[#94A3B8] hover:text-[#3B82F6] spring-transition">DSA Contact</a></li>
+              <li><a href="/cookies-policy" className="text-[#94A3B8] hover:text-[#3B82F6] spring-transition">Cookies Policy</a></li>
+              <li><a href="/terms-of-service" className="text-[#94A3B8] hover:text-[#3B82F6] spring-transition">Terms of Service</a></li>
+              <li><a href="/privacy-policy" className="text-[#94A3B8] hover:text-[#3B82F6] spring-transition">Privacy Policy</a></li>
+            </ul>
+          </div>
+
           {/* Directory */}
           <div className="space-y-3">
             <h4 className="text-[11px] font-mono font-semibold uppercase tracking-wider text-[#64748B]">Directory</h4>

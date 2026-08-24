@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Script from "next/script";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
@@ -22,10 +23,15 @@ const jetbrains = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://corncine.pages.dev"),
   alternates: { canonical: "/" },
-  title: "CornCine — JAV, Hentai & OnlyFans Leaks 4K Downloader | MissAV, JAVGuru, Hanime, Kemono",
+  title: {
+    default: "CornCine — JAV, Hentai, Desi & OnlyFans Leaks 4K Downloader | 22 Providers",
+    template: "%s — CornCine",
+  },
   description:
-    "CornCine: 21+ adult providers at once — JAV uncensored (MissAV/JAVGuru/SupJAV), hentai (Hanime/HentaiHaven/Nhentai), tubes (Pornhub/Eporner/SpankBang 4K), OnlyFans leaks (Kemono/Coomer) and XXX torrents. Download via yt-dlp/aria2c. 18+ only.",
-  other: { rating: "adult" },
+    "CornCine: 22+ adult providers at once — JAV uncensored (MissAV/JAVGuru/SupJAV), hentai (Hanime/HentaiHaven/Nhentai), Indian Desi (DesiTales2), tubes (Pornhub/Eporner/SpankBang 4K), OnlyFans leaks (Kemono/Coomer) and XXX torrents. Download via yt-dlp/aria2c. 18+ only.",
+  category: "adult",
+  classification: "Adult",
+  other: { rating: "adult", "RTA": "RTA-5042-1996-1400-0005" },
   keywords: [
     "corncine",
     "jav download",
@@ -42,22 +48,67 @@ export const metadata: Metadata = {
     "spankbang direct mp4",
     "adult torrent search",
     "1337x xxx",
+    "desitales2",
+    "desi kahani",
+    "indian sex stories",
+    "desi chudai kahani",
+    "savita bhabhi",
+    "sunny leone 4k download",
+    "mia khalifa viral download",
+    "dani daniels 4k download",
+    "johnny sins most searched",
+    "eva elfie onlyfans leak",
+    "angela white pornhub #1",
+    "lana rhoades viral archive",
+    "bonnie blue 2025",
     "creator leak archive",
   ],
-  authors: [{ name: "CornCine open source collective" }],
+  authors: [{ name: "CornCine open source collective", url: "https://corncine.pages.dev" }],
+  creator: "CornCine",
+  publisher: "CornCine",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 },
+  },
   openGraph: {
-    title: "CornCine — JAV, Hentai & OnlyFans Leaks 4K",
+    title: "CornCine — JAV, Hentai, Desi & OnlyFans Leaks 4K | 22 Providers",
     description:
-      "CornCine: 21+ adult providers — JAV uncensored, hentai sub/dub, tubes 4K, OnlyFans/Kemono leaks, XXX torrents via yt-dlp/aria2c. 18+ only.",
+      "CornCine: 22+ adult providers — JAV uncensored, hentai sub/dub, DesiTales2 Indian stories, tubes 4K, OnlyFans/Kemono leaks, XXX torrents via yt-dlp/aria2c. 18+ only.",
     siteName: "CornCine",
     type: "website",
+    locale: "en_US",
+    url: "/",
+    images: [{ url: "/og-corncine.png", width: 1200, height: 630, alt: "CornCine — 22 Adult Providers" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "CornCine — JAV, Hentai & OnlyFans Leaks 4K",
-    description:
-      "JAV, hentai, tubes 4K, OnlyFans leaks — 21+ adult providers.",
+    title: "CornCine — JAV, Hentai, Desi & OnlyFans Leaks 4K",
+    description: "JAV, hentai, DesiTales2, tubes 4K, OnlyFans leaks — 22+ adult providers.",
+    images: ["/og-corncine.png"],
   },
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION || undefined,
+  },
+};
+
+const jsonLdWebsite = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "CornCine",
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://corncine.pages.dev",
+  description: "22+ adult providers — JAV, hentai, Desi, tubes 4K, OnlyFans leaks, XXX torrents",
+  inLanguage: "en-US",
+  isFamilyFriendly: false,
+  potentialAction: {
+    "@type": "SearchAction",
+    target: {
+      "@type": "EntryPoint",
+      urlTemplate: `${process.env.NEXT_PUBLIC_SITE_URL || "https://corncine.pages.dev"}/search?q={search_term_string}`,
+    },
+    "query-input": "required name=search_term_string",
+  },
+  publisher: { "@type": "Organization", name: "CornCine", url: process.env.NEXT_PUBLIC_SITE_URL || "https://corncine.pages.dev" },
 };
 
 export default function RootLayout({
@@ -67,6 +118,23 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
+      {/* TrafficStars Popunder — $0.30–$2.47 per pop (NL/US premium).
+          Params set in dashboard: 1 pop/session, 10s first delay, 30m between,
+          12h session duration, blind clicks disabled, Chrome NOT excluded. */}
+      <Script
+        src="https://cdn.tsyndicate.com/sdk/v1/p.js"
+        data-ts-spot="91984ba499b941f791b6ee0b4a38000f"
+        data-ts-mode="selective"
+        data-ts-count="1"
+        data-ts-first-delay="10"
+        data-ts-delay="30"
+        data-ts-session-duration="12"
+        strategy="afterInteractive"
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdWebsite) }}
+      />
       <body
         className={`${inter.variable} ${jetbrains.variable} antialiased font-sans bg-[#0B0F17] text-[#F8FAFC] min-h-screen flex flex-col overflow-x-hidden`}
       >

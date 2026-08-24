@@ -32,6 +32,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     });
   }
 
+  // Legal / compliance pages (required for ad-network approval)
+  for (const page of ["/dmca", "/2257", "/csam-policy", "/dsa-policy", "/cookies-policy", "/terms-of-service", "/privacy-policy"]) {
+    urls.push({
+      url: `${BASE}${page}`,
+      lastModified: now,
+      changeFrequency: "yearly",
+      priority: 0.3,
+    });
+  }
+
   // Top-searched adult download pages
   for (const e of ALL_TOP) {
     urls.push({

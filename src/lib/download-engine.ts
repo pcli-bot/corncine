@@ -677,7 +677,7 @@ export async function runYtDlpGetUrl(url: string): Promise<string | null> {
   const host = hostOf(url);
   const proxy = await proxyPool.next(host);
   const cookieFile = host ? cookieJars.cookieFile(host) : undefined;
-  const args = ["--get-url", "--no-warnings", "-c", "--socket-timeout", "15", "--retries", "1"];
+  const args = ["--get-url", "--no-warnings", "-c", "--socket-timeout", "15", "--retries", "1", "-f", "bv*+ba/b"];
   if (proxy) args.push("--proxy", proxy);
   if (cookieFile) args.push("--cookies", cookieFile);
   args.push("--extractor-args", "generic:impersonate");

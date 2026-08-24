@@ -25,12 +25,12 @@ const nextConfig: NextConfig = {
             key: "Content-Security-Policy",
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googletagmanager.com",
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googletagmanager.com https://cdn.tsyndicate.com",
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
               "font-src 'self' https://fonts.gstatic.com data:",
               "img-src 'self' data: blob: https: http:",
               "media-src 'self' blob: https: http:",
-              "connect-src 'self' https: wss:",
+              "connect-src 'self' https: wss:", // tsyndicate beacons covered by https:
               "frame-src 'self' https://vidlink.pro https://anyembed.xyz https://www.2embed.skin https://vidsrc.to https://*.vidsrc.*",
               "frame-ancestors 'none'",
             ].join("; "),

@@ -27,6 +27,15 @@ export const TOP_ADULT: SeoEntry[] = [
   { slug: "spankbang-4k", q: "SpankBang 4K", mode: "adult", title: "SpankBang 4K HDR Direct Download", desc: "SpankBang 4K HDR direct MP4." },
   { slug: "hanime-top", q: "Hanime uncensored", mode: "adult", title: "Hanime Uncensored Subbed Download", desc: "Hanime 1080p subbed uncensored episodes." },
   { slug: "hentai-haven-classic", q: "Hentai Haven", mode: "adult", title: "Hentai Haven HD Download", desc: "Classic HD hentai via HentaiHaven." },
+  { slug: "desitales2-desi", q: "DesiTales2", mode: "adult", title: "DesiTales2 Desi Kahani Download — Indian Sex Stories", desc: "Download DesiTales2 Indian desi chudai kahaniyan & sex videos — Hindi erotica via DesiTales2." },
+  { slug: "sunny-leone", q: "Sunny Leone", mode: "adult", title: "Sunny Leone Download 4K — Most Searched Indian Icon", desc: "Download Sunny Leone 4K via Pornhub/XHamster — India's most searched icon." },
+  { slug: "mia-khalifa", q: "Mia Khalifa", mode: "adult", title: "Mia Khalifa Viral Download — Most Searched Worldwide", desc: "Download Mia Khalifa viral archive via Pornhub — most searched worldwide." },
+  { slug: "dani-daniels", q: "Dani Daniels", mode: "adult", title: "Dani Daniels 4K Download — Top Rated", desc: "Download Dani Daniels 4K top-rated collection via Pornhub." },
+  { slug: "johnny-sins", q: "Johnny Sins", mode: "adult", title: "Johnny Sins Download — Most Popular Male 4K", desc: "Download Johnny Sins full archive via Pornhub — world's most searched male performer." },
+  { slug: "eva-elfie", q: "Eva Elfie", mode: "all", title: "Eva Elfie OnlyFans Leak Download — Kemono Coomer 4K", desc: "Download Eva Elfie OnlyFans leak via Kemono/Coomer — top leak 2025." },
+  { slug: "angela-white", q: "Angela White", mode: "adult", title: "Angela White Download 4K — Pornhub #1 2025", desc: "Download Angela White Pornhub #1 2025 4K collection." },
+  { slug: "lana-rhoades", q: "Lana Rhoades", mode: "adult", title: "Lana Rhoades Download — Viral Archive", desc: "Download Lana Rhoades viral archive via Pornhub — former #1." },
+  { slug: "bonnie-blue", q: "Bonnie Blue", mode: "adult", title: "Bonnie Blue Download 4K — Breakout #2 2025", desc: "Download Bonnie Blue breakout #2 2025 4K collection." },
 ];
 
 export const ALL_TOP = [...TOP_HENTAI, ...TOP_ADULT];

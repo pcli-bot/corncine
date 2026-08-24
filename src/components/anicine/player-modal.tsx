@@ -29,6 +29,11 @@ export function PlayerModal() {
   const addTask = useAnicineStore((s) => s.addTask);
   const [speed, setSpeed] = useState(1);
   const [server, setServer] = useState<EmbedServerKey>("vidlink");
+
+  // Server-resolved direct stream (adult catalog: no TMDB id -> /api/stream).
+  const [resolvedStream, setResolvedStream] = useState<string | null>(null);
+  const [resolving, setResolving] = useState(false);
+  const [resolveFailed, setResolveFailed] = useState(false);
   const [season, setSeason] = useState(1);
   const [episode, setEpisode] = useState(1);
   const [theater, setTheater] = useState(false);
@@ -51,20 +56,70 @@ export function PlayerModal() {
   const isMagnet = !!player.isMagnet || (player.url?.startsWith("magnet:") ?? false);
   const isArt = player.type === "art";
   const isBook = player.type === "book";
-  const isDirectHls = /\.(m3u8|mpd)(\?|#|$)/i.test(player.url || "");
-  const showNativeVideo = !isBook && !isArt && !isMagnet && (server === "direct" || (isDirectMediaFile(player.url) && !isDirectHls));
+  const effUrl = resolvedStream ?? player.url ?? "";
+  const isDirectHls = /\.(m3u8|mpd)(\?|#|$)/i.test(effUrl);
+  const showNativeVideo = !isBook && !isArt && !isMagnet && (server === "direct" || (isDirectMediaFile(effUrl) && !isDirectHls));
 
   const target = useMemo(
     () => ({
       tmdbId: player.tmdbId,
       imdbId: player.imdbId,
       type: player.type,
-      streamUrl: player.url,
+      streamUrl: resolvedStream ?? player.url,
       season,
       episode,
     }),
-    [player.tmdbId, player.imdbId, player.type, player.url, season, episode],
+    [player.tmdbId, player.imdbId, player.type, player.url, resolvedStream, season, episode],
   );
+
+  // ------------------- Server-side stream resolution -------------------
+  // Adult catalog entries carry provider/search pages instead of TMDB ids.
+  // When no embed can be built, ask our server to extract the real media URL.
+  useEffect(() => {
+    setResolvedStream(null);
+    setResolveFailed(false);
+    setResolving(false);
+
+    const url = player.url || "";
+    if (
+      !player.open ||
+      player.tmdbId ||
+      player.isMagnet ||
+      player.type === "book" ||
+      player.type === "art" ||
+      !/^https?:\/\//i.test(url) ||
+      isDirectMediaFile(url)
+    ) {
+      return; // embeds handle tmdb titles; magnets/books/art/direct files have their own paths
+    }
+
+    let canceled = false;
+    setResolving(true);
+    void (async () => {
+      try {
+        const res = await fetch(`${API_BASE}/api/stream`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ url }),
+        });
+        const data = await res.json();
+        if (canceled) return;
+        if (data?.ok && data.playUrl) {
+          setResolvedStream(data.playUrl as string);
+        } else {
+          setResolveFailed(true);
+        }
+      } catch {
+        if (!canceled) setResolveFailed(true);
+      } finally {
+        if (!canceled) setResolving(false);
+      }
+    })();
+
+    return () => {
+      canceled = true;
+    };
+  }, [player.open, player.url, player.tmdbId, player.isMagnet, player.type]);
 
   // Only offer servers we can actually build a URL for with the ids this title has.
   const usableServers = useMemo(
@@ -107,7 +162,7 @@ export function PlayerModal() {
 
   useEffect(() => {
     const videoEl = videoRef.current;
-    const src = player.url || "";
+    const src = resolvedStream ?? (player.url || "");
     const isHlsSrc = /\.(m3u8)(\?|#|$)/i.test(src);
     setVideoError(null);
 
@@ -175,7 +230,7 @@ export function PlayerModal() {
       detachHls();
     };
      
-  }, [player.url, detachHls]);
+  }, [player.url, resolvedStream, detachHls]);
 
   // Track fullscreen state so icon toggles reactively
   useEffect(() => {
@@ -255,7 +310,7 @@ export function PlayerModal() {
   const handleDownload = async () => {
     // Prefer the currently selected embed server's URL; fall back to the raw
     // stream URL (magnet / direct file / source page) when no embed exists.
-    const url = embedUrlFinal && server !== "direct" ? embedUrlFinal : player.url;
+    const url = embedUrlFinal && server !== "direct" ? embedUrlFinal : (resolvedStream ?? player.url);
     if (!url) { showToast("No downloadable source for this title", "error"); return; }
     try {
       const res = await fetch(`${API_BASE}/api/download`, {
@@ -405,6 +460,18 @@ export function PlayerModal() {
                 <button onClick={handleDownload} className="px-3.5 py-1.5 rounded-lg bg-[#243044] border border-[#1E2A3C] text-xs font-semibold text-[#F8FAFC] hover:border-[#2D3D54] spring-transition">Queue on Server</button>
               </div>
             </div>
+          ) : resolving ? (
+            <EmptyState
+              icon={<Loader2 className="w-8 h-8 animate-spin text-[#64748B] mx-auto mb-2" />}
+              text="Resolving stream source…"
+              sub="Extracting the real video URL from the provider (usually 5–30 seconds)."
+            />
+          ) : resolveFailed ? (
+            <EmptyState
+              icon={<Film className="w-8 h-8 text-[#64748B] mx-auto mb-2" />}
+              text="Couldn't extract a stream from this source."
+              sub="The provider may be blocking server playback. Download still works — or open the source page directly."
+            />
           ) : embedUrlFinal && (showNativeVideo || isDirectHls) ? (
             <>
               <video

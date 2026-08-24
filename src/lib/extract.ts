@@ -32,8 +32,7 @@ export async function extractVideoUrl(input: string): Promise<string | null> {
 
 /** Render the page in headless Chromium and capture the real media URL. */
 async function extractWithBrowser(input: string): Promise<string | null> {
-  const script = path.join(process.cwd(), "scripts", "extract-media.py");
-  if (!fs.existsSync(script)) return null;
+  const script = path.join(process.cwd(), "scripts", "extract-media.py");  if (!fs.existsSync(script)) return null;
   // Route the headless browser through PROXY_POOL (residential) so extraction
   // works from any egress IP, not just the server's own. The python script reads
   // it from EXTRACT_PROXY.
@@ -63,8 +62,7 @@ async function extractWithBrowser(input: string): Promise<string | null> {
     proc.stdout.on("data", (d: Buffer) => (out += String(d)));
     proc.stderr.on("data", () => { /* ignore */ });
     proc.on("error", () => { clearTimeout(timer); finish(null); });
-    proc.on("close", () => {
-      clearTimeout(timer);
+    proc.on("close", () => {      clearTimeout(timer);
       try {
         const line = out.trim().split("\n").pop() || "{}";
         const j = JSON.parse(line);

@@ -27,6 +27,7 @@ MEDIA = (".mpd", ".m3u8", ".mp4", ".m4v", ".webm", ".ts")
 SKIP = (
     "preview", "thumb", "heatmap", "storyboard", "poster", "jwplayer",
     "fonts.", "/js/", "googletag", "adsystem", "subtitle", ".srt", ".vtt", ".m4s",
+    "challenges.cloudflare.com", "/ads/", "adserver", "doubleclick",
 )
 
 
@@ -77,28 +78,58 @@ def main() -> None:
                 args=["--no-sandbox", "--disable-dev-shm-usage",
                       "--autoplay-policy=no-user-gesture-required"]
             )
-            ctx = b.new_context(proxy=proxy) if proxy else b.new_context()
+            UA = ("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 "
+      "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36")
+            ctx = b.new_context(user_agent=UA, proxy=proxy) if proxy else b.new_context(user_agent=UA)
             pg = ctx.new_page()
             pg.on("request", sniff)
+
+            def attempt_play() -> None:
+                try:
+                    pg.evaluate(
+                        "() => { document.querySelectorAll('video').forEach(v => { v.muted = true; try { v.play(); } catch (e) {} }); }"
+                    )
+                except Exception:
+                    pass
+                try:
+                    pg.mouse.click(640, 360)
+                except Exception:
+                    pass
+                try:
+                    pg.evaluate(
+                        "() => { document.querySelectorAll('button,.jw-icon-play,.play-btn').forEach(e => { try { e.click(); } catch (_) {} }); }"
+                    )
+                except Exception:
+                    pass
+                pg.wait_for_timeout(9000)
+
             pg.goto(url, wait_until="domcontentloaded", timeout=30000)
             pg.wait_for_timeout(4000)
-            try:
-                pg.evaluate(
-                    "() => { document.querySelectorAll('video').forEach(v => { v.muted = true; try { v.play(); } catch (e) {} }); }"
-                )
-            except Exception:
-                pass
-            try:
-                pg.mouse.click(640, 360)
-            except Exception:
-                pass
-            try:
-                pg.evaluate(
-                    "() => { document.querySelectorAll('button,.jw-icon-play,.play-btn').forEach(e => { try { e.click(); } catch (_) {} }); }"
-                )
-            except Exception:
-                pass
-            pg.wait_for_timeout(9000)
+            attempt_play()
+
+            # SPA search/listing pages (e.g. hanime.tv/browse/search?q=...) never
+            # play anything themselves. If nothing was captured, click through to
+            # the first plausible video link on the same site and retry there.
+            if not captured:
+                try:
+                    href = pg.evaluate(
+                        """() => {
+                            const pat = /(\\/videos?\\/[^\\/]+|\\/watch\\/|\\/video-[A-Za-z0-9]+)/i;
+                            const bad = /(browse|search|tag|category|login|signup|\\.(jpg|png|webp|gif|css|js)(\\?|$))/i;
+                            const links = [...document.querySelectorAll('a[href]')]
+                                .map(a => a.href)
+                                .filter(h => h.startsWith(location.origin) && pat.test(new URL(h).pathname) && !bad.test(h));
+                            return links[0] || null;
+                        }"""
+                    )
+                    if href and href.rstrip("/") != url.rstrip("/"):
+                        captured.clear()
+                        pg.goto(href, wait_until="domcontentloaded", timeout=30000)
+                        pg.wait_for_timeout(4000)
+                        attempt_play()
+                except Exception:
+                    pass
+
             ctx.close()
             b.close()
     except Exception:
