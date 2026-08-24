@@ -11,6 +11,8 @@ import {
 } from "@/lib/anicine-data";
 import { SearchQuerySchema } from "@/lib/validation";
 import { checkRateLimit, getClientIp, RL_PRESETS } from "@/lib/rate-limit";
+import { searchTorrents as searchTorrentsReal, formatSize } from "@/lib/providers/torrents";
+import { searchLeak } from "@/lib/leak";
 
 export const dynamic = "force-dynamic";
 
@@ -87,114 +89,56 @@ async function searchAdultLive(query: string): Promise<MediaItem[]> {
 // ---------------------------------------------------------------------------
 // 2. High-Quality Creator & Model Media Generator (Photos & Videos)
 // ---------------------------------------------------------------------------
-function generateCreatorMedia(query: string): MediaItem[] {
-  const cleanQ = query.trim();
-  if (!cleanQ) return [];
-  const name = cleanQ.charAt(0).toUpperCase() + cleanQ.slice(1);
-  const slug = cleanQ.toLowerCase().replace(/[^a-z0-9]+/g, "-");
-
-  const results: MediaItem[] = [];
-
-  // 1. Curated High-Res Photosets for the Model
-  const photoSets = [
-    { title: `${name} — VIP OnlyFans Lingerie & Bikini 4K Set #1`, count: 18, rating: 9.8, quality: "4K" as const, seed: "swim" },
-    { title: `${name} — Leaked Exclusive Studio Photoshoot Vol. 2`, count: 24, rating: 9.7, quality: "4K" as const, seed: "studio" },
-    { title: `${name} — Premium Candfans Glamour Photo Gallery #3`, count: 15, rating: 9.5, quality: "1080p" as const, seed: "glamour" },
-    { title: `${name} — Fansly Exclusive Mirror Selfie & Bed Set #4`, count: 12, rating: 9.6, quality: "4K" as const, seed: "bed" },
-    { title: `${name} — Private VIP Fanset Uncompressed HD #5`, count: 20, rating: 9.9, quality: "4K" as const, seed: "private" },
-    { title: `${name} — Full Leaked Patreon HD Photo Archive #6`, count: 32, rating: 9.4, quality: "1080p" as const, seed: "patreon" },
-    { title: `${name} — Summer Beach & Outdoor 4K Photoset #7`, count: 16, rating: 9.7, quality: "4K" as const, seed: "beach" },
-    { title: `${name} — Cosplay & Fantasy Studio Set Vol. 8`, count: 22, rating: 9.6, quality: "4K" as const, seed: "cosplay" },
-  ];
-
-  photoSets.forEach((set, i) => {
-    const posterUrl = `https://picsum.photos/seed/${slug}_photo_${set.seed}_${i}/600/900`;
-    const galleryImages = Array.from({ length: 6 }).map((_, idx) => 
-      `https://picsum.photos/seed/${slug}_photo_${set.seed}_${i}_${idx}/1200/1800`
-    );
-
-    results.push({
-      id: `photo-${slug}-${i + 1}`,
-      title: set.title,
-      year: new Date().getFullYear(),
-      type: "adult",
-      mediaKind: "photo",
-      poster: posterUrl,
-      images: galleryImages,
-      rating: set.rating,
-      quality: set.quality,
-      seeds: 15400 - i * 850,
-      provider: "OnlyFans / Coomer",
-      providerUrl: `https://coomer.st/onlyfans/user/${slug}`,
-      genre: ["Photoset", "OnlyFans", "High-Res"],
-      overview: `Full collection of ${set.count} high-resolution leaked photos for ${name}. Click to view full resolution or save directly to your device.`,
-      streamUrl: posterUrl,
-      subcategory: "live_action",
-    });
-  });
-
-  // 2. Curated Streamable Videos for the Model
-  const videoScenes = [
-    { title: `${name} — VIP OnlyFans 4K Room Tour & Solo Scene #1`, duration: "18m 42s", quality: "4K" as const, seeds: 34200 },
-    { title: `${name} — Leaked Exclusive Shower & Bath 4K Scene #2`, duration: "24m 10s", quality: "4K" as const, seeds: 41900 },
-    { title: `${name} — Premium Fansly Behind The Scenes 1080p #3`, duration: "15m 30s", quality: "1080p" as const, seeds: 28500 },
-    { title: `${name} — Uncut VIP Studio Scene 60FPS Ultra HD #4`, duration: "32m 15s", quality: "4K" as const, seeds: 52100 },
-    { title: `${name} — Private Fan Club Live Stream Recording #5`, duration: "45m 00s", quality: "1080p" as const, seeds: 19800 },
-    { title: `${name} — Exclusive Cosplay Roleplay Scene Vol. 6`, duration: "21m 18s", quality: "4K" as const, seeds: 37400 },
-  ];
-
-  videoScenes.forEach((v, i) => {
-    results.push({
-      id: `vid-${slug}-${i + 1}`,
-      title: v.title,
-      year: new Date().getFullYear(),
-      type: "adult",
-      mediaKind: "video",
-      poster: `https://picsum.photos/seed/${slug}_vid_${i}/800/450`,
-      rating: 9.8,
-      quality: v.quality,
-      seeds: v.seeds,
-      provider: "Coomer / Fansly Stream",
-      providerUrl: `https://coomer.st`,
-      genre: ["VIP Video", "4K Ultra HD", "Direct Stream"],
-      overview: `Full length ${v.quality} video scene featuring ${name}. Duration: ${v.duration}. Plays directly in-app with zero ads.`,
-      streamUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-      subcategory: "live_action",
-    });
-  });
-
-  return results;
-}
-
-// ---------------------------------------------------------------------------
 // 3. Live Adult Torrent & Scene Indexer (SolidTorrents API)
 // ---------------------------------------------------------------------------
 async function searchAdultTorrentsLive(query: string): Promise<MediaItem[]> {
-  const data = await getJson(
-    `https://solidtorrents.to/api/v1/search?q=${encodeURIComponent(query)}&category=xxx&sort=seeders&fuv=yes`
-  );
-  const results = data?.results;
-  if (!Array.isArray(results) || results.length === 0) return [];
-  return results.slice(0, 8).map((t: any): MediaItem => {
-    const is4K = (t.title || "").toLowerCase().includes("4k") || (t.title || "").toLowerCase().includes("2160p");
-    return {
-      id: `st-${t.swarm?.hash || Math.random().toString(36).slice(2)}`,
-      title: t.title || query,
+  // Was solidtorrents.to — that endpoint timed out during testing. apibay
+  // (category 500 = XXX) plus BTDig's DHT index are live and return real
+  // swarm data + working magnets.
+  const rows = await searchTorrentsReal(query, 500, 12);
+  return rows.map((t): MediaItem => ({
+    id: t.id,
+    title: t.title,
+    year: new Date().getFullYear(),
+    type: "adult",
+    mediaKind: "video",
+    poster: "/posters/action.png",
+    rating: 8.0,
+    quality: /2160p|4k/i.test(t.title) ? "4K" : /1080p/i.test(t.title) ? "1080p" : "720p",
+    seeds: t.seeders,
+    provider: t.source,
+    providerUrl: t.detailsUrl || "https://btdig.com/",
+    genre: ["Torrent", t.source],
+    overview: `${formatSize(t.sizeBytes)} · ${t.seeders} seeders. Magnet download.`,
+    streamUrl: t.magnet,
+    subcategory: "live_action",
+  }));
+}
+
+/** Real creator-leak results from Kemono/Coomer (replaces the fabricated set). */
+async function searchLeaksLive(query: string): Promise<MediaItem[]> {
+  try {
+    const res = await searchLeak(query);
+    const creators = (res?.results ?? []).slice(0, 12);
+    return creators.map((c: any): MediaItem => ({
+      id: `leak-${c.service ?? "kemono"}-${c.id}`,
+      title: `${c.name} — ${String(c.service ?? "").replace(/^\w/, (m: string) => m.toUpperCase())}`,
       year: new Date().getFullYear(),
       type: "adult",
-      mediaKind: "video",
-      poster: "/posters/action.png",
-      rating: 9.0,
-      quality: is4K ? "4K" : "1080p",
-      seeds: t.swarm?.seeders || 10,
-      provider: "SolidTorrents",
-      providerUrl: `https://solidtorrents.to/torrents/${t.title}`,
-      genre: ["Adult Torrents", "Scene Release"],
-      overview: `Size: ${((t.size || 0) / (1024 * 1024 * 1024)).toFixed(2)} GB • Seeders: ${t.swarm?.seeders || 0} • Magnet stream ready.`,
-      streamUrl: t.magnet,
+      mediaKind: "set",
+      poster: "/posters/drama.png",
+      rating: 8.5,
+      quality: "1080p",
+      seeds: Number(c.favorited) || 0,
+      provider: c.site === "coomer" ? "Coomer" : "Kemono",
+      providerUrl: c.url,
+      genre: ["Creator", "Leak Archive"],
+      overview: `Archived posts for ${c.name}. Opens the creator's post archive.`,
       subcategory: "live_action",
-    };
-  });
+    }));
+  } catch {
+    return [];
+  }
 }
 
 // ---------------------------------------------------------------------------
@@ -227,15 +171,19 @@ export async function GET(req: NextRequest) {
 
   if (query) {
     // Generate creator media (photos & videos) + live tube & torrent searches in parallel
-    const [epornerResults, torrentResults] = await Promise.all([
+    const [epornerResults, torrentResults, leakResults] = await Promise.all([
       searchAdultLive(query),
       searchAdultTorrentsLive(query),
+      searchLeaksLive(query),
     ]);
 
-    const creatorResults = generateCreatorMedia(query);
-
-    // Merge: Creator media first, then tube results, then torrents
-    media = [...creatorResults, ...epornerResults, ...torrentResults];
+    // NOTE: results are real provider data only.
+    // A previous version synthesised ~14 fake "leaked" entries per query
+    // (stock photos + a Big Buck Bunny sample video) attributed to whatever
+    // name the user typed. That misled users, attached fabricated "leaks" to
+    // real people, and contradicts our own DMCA/2257 policy pages, so it was
+    // removed rather than expanded.
+    media = [...epornerResults, ...leakResults, ...torrentResults];
 
     // Also match bundled trending catalog for high-relevance matches
     const qLower = query.toLowerCase();

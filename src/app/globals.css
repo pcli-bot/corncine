@@ -43,7 +43,7 @@
   --radius-xl: calc(var(--radius) + 4px);
 
   /* AniCine semantic tokens — dark navy "command center" palette */
-  --color-base: var(--base);
+  --color-canvas: var(--base);
   --color-layer1: var(--layer1);
   --color-layer2: var(--layer2);
   --color-layer3: var(--layer3);
@@ -62,52 +62,64 @@
   /* AniCine dark theme is the default (and only) theme */
   --radius: 0.625rem;
 
-  --base: #0B0F17;
-  --layer1: #131A26;
-  --layer2: #1B2433;
-  --layer3: #243044;
-  --subtle: #1E2A3C;
-  --strong: #2D3D54;
-  --primary-text: #F8FAFC;
-  --secondary-text: #94A3B8;
-  --muted-text: #64748B;
-  --accent-blue: #3B82F6;
-  --accent-emerald: #10B981;
-  --accent-cyan: #06B6D4;
-  --accent-amber: #F59E0B;
+  /* Deep indigo base with a violet cast — richer than flat navy */
+  --base: #08060F;
+  --layer1: #120E20;
+  --layer2: #1A1430;
+  --layer3: #241B42;
+  --subtle: #2A2050;
+  --strong: #3B2D6B;
+  --primary-text: #F6F4FF;
+  --secondary-text: #A79FC7;
+  --muted-text: #6F6790;
+
+  /* Signature accents — electric violet, cyan, hot magenta, amber */
+  --accent-blue: #F0308C;
+  --accent-violet: #A855F7;
+  --accent-emerald: #22D3A5;
+  --accent-cyan: #22D3EE;
+  --accent-magenta: #F0308C;
+  --accent-amber: #FBBF24;
+
+  /* Gradients used across hero, buttons and active states */
+  --grad-primary: linear-gradient(135deg, #F0308C 0%, #A855F7 55%, #22D3EE 100%);
+  --grad-hot: linear-gradient(135deg, #F0308C 0%, #FB7185 50%, #FBBF24 100%);
+  --grad-cool: linear-gradient(135deg, #22D3EE 0%, #7C3AED 100%);
+  --glow-primary: 0 0 0 1px rgba(168,85,247,.28), 0 8px 32px -8px rgba(124,58,237,.55);
+  --glow-hot: 0 0 0 1px rgba(240,48,140,.30), 0 8px 32px -8px rgba(240,48,140,.55);
 
   /* Map shadcn tokens onto the AniCine palette so all ui components inherit it */
-  --background: #0B0F17;
-  --foreground: #F8FAFC;
-  --card: #131A26;
-  --card-foreground: #F8FAFC;
-  --popover: #1B2433;
-  --popover-foreground: #F8FAFC;
-  --primary: #3B82F6;
+  --background: #08060F;
+  --foreground: #F6F4FF;
+  --card: #120E20;
+  --card-foreground: #F6F4FF;
+  --popover: #1A1430;
+  --popover-foreground: #F6F4FF;
+  --primary: #F0308C;
   --primary-foreground: #FFFFFF;
-  --secondary: #1B2433;
-  --secondary-foreground: #F8FAFC;
-  --muted: #1B2433;
-  --muted-foreground: #94A3B8;
-  --accent: #243044;
-  --accent-foreground: #F8FAFC;
+  --secondary: #1A1430;
+  --secondary-foreground: #F6F4FF;
+  --muted: #1A1430;
+  --muted-foreground: #A79FC7;
+  --accent: #241B42;
+  --accent-foreground: #F6F4FF;
   --destructive: #EF4444;
-  --border: #1E2A3C;
-  --input: #1E2A3C;
-  --ring: #3B82F6;
-  --chart-1: #3B82F6;
-  --chart-2: #10B981;
-  --chart-3: #06B6D4;
+  --border: #2A2050;
+  --input: #2A2050;
+  --ring: #F472B6;
+  --chart-1: #7C3AED;
+  --chart-2: #22D3A5;
+  --chart-3: #22D3EE;
   --chart-4: #F59E0B;
   --chart-5: #EF4444;
-  --sidebar: #131A26;
-  --sidebar-foreground: #F8FAFC;
-  --sidebar-primary: #3B82F6;
+  --sidebar: #120E20;
+  --sidebar-foreground: #F6F4FF;
+  --sidebar-primary: #F0308C;
   --sidebar-primary-foreground: #FFFFFF;
-  --sidebar-accent: #243044;
-  --sidebar-accent-foreground: #F8FAFC;
-  --sidebar-border: #1E2A3C;
-  --sidebar-ring: #3B82F6;
+  --sidebar-accent: #241B42;
+  --sidebar-accent-foreground: #F6F4FF;
+  --sidebar-border: #2A2050;
+  --sidebar-ring: #A855F7;
 }
 
 @layer base {
@@ -124,14 +136,14 @@
   input, select, textarea {
     color: #FFFFFF !important;
     -webkit-text-fill-color: #FFFFFF !important;
-    caret-color: #3B82F6 !important;
+    caret-color: #A855F7 !important;
   }
   input::placeholder, textarea::placeholder {
     color: #64748B !important;
     -webkit-text-fill-color: #64748B !important;
   }
   ::selection {
-    background-color: #3B82F6 !important;
+    background-color: #7C3AED !important;
     color: #FFFFFF !important;
   }
 }
@@ -210,4 +222,114 @@
     linear-gradient(to right, rgba(255,255,255,0.025) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(255,255,255,0.025) 1px, transparent 1px);
   background-size: auto, 56px 56px, 56px 56px;
+}
+
+/* =============================================================
+   VISUAL SYSTEM — vibrant surfaces + GPU-only motion
+   Every animation below is transform/opacity only (compositor
+   thread), so scrolling and hover stay at 60fps on mid-range
+   phones. No animated width/height/top/left/filter anywhere.
+   ============================================================= */
+
+@layer utilities {
+  /* Ambient aurora behind the hero — painted once, never re-laid-out */
+  .dm-aurora { position: relative; isolation: isolate; }
+  .dm-aurora::before {
+    content: "";
+    position: absolute;
+    inset: -20% -10% auto -10%;
+    height: 60vh;
+    z-index: -1;
+    background:
+      radial-gradient(45% 55% at 20% 20%, rgba(124,58,237,.30) 0%, transparent 70%),
+      radial-gradient(40% 50% at 80% 10%, rgba(34,211,238,.22) 0%, transparent 70%),
+      radial-gradient(35% 45% at 60% 60%, rgba(240,48,140,.18) 0%, transparent 70%);
+    will-change: transform;
+    animation: dmDrift 18s ease-in-out infinite alternate;
+    pointer-events: none;
+  }
+  @keyframes dmDrift {
+    from { transform: translate3d(-2%, 0, 0) scale(1); }
+    to   { transform: translate3d(2%, 1.5%, 0) scale(1.06); }
+  }
+
+  .dm-gradient-text {
+    background: var(--grad-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Primary CTA — gradient + glow, lifts on press */
+  .dm-btn-primary {
+    background: var(--grad-primary);
+    color: #fff;
+    box-shadow: var(--glow-primary);
+    transition: transform .18s cubic-bezier(.34,1.56,.64,1), box-shadow .18s ease;
+    will-change: transform;
+  }
+  .dm-btn-primary:hover { transform: translate3d(0,-2px,0); }
+  .dm-btn-primary:active { transform: translate3d(0,0,0) scale(.97); }
+
+  .dm-btn-hot { background: var(--grad-hot); color: #fff; box-shadow: var(--glow-hot); }
+
+  /* Cards: glass surface + gradient hairline that only appears on hover */
+  .dm-card {
+    background: linear-gradient(180deg, rgba(26,20,48,.92) 0%, rgba(18,14,32,.92) 100%);
+    border: 1px solid var(--subtle);
+    border-radius: 1rem;
+    transition: transform .22s cubic-bezier(.34,1.4,.64,1), border-color .22s ease, box-shadow .22s ease;
+    will-change: transform;
+    contain: layout paint;           /* isolate repaints to the card */
+  }
+  .dm-card:hover {
+    transform: translate3d(0,-4px,0);
+    border-color: var(--accent-violet);
+    box-shadow: 0 12px 40px -12px rgba(124,58,237,.5);
+  }
+
+  /* Long media grids: skip painting offscreen rows entirely */
+  .dm-grid-perf > * {
+    content-visibility: auto;
+    contain-intrinsic-size: 320px;
+  }
+
+  .dm-chip {
+    background: rgba(124,58,237,.12);
+    border: 1px solid rgba(168,85,247,.30);
+    color: #C4B5FD;
+    transition: background .16s ease, color .16s ease, transform .16s ease;
+  }
+  .dm-chip:hover { background: rgba(124,58,237,.24); color: #EDE9FE; transform: translate3d(0,-1px,0); }
+  .dm-chip[data-active="true"] { background: var(--grad-primary); color: #fff; border-color: transparent; }
+
+  /* Shimmer placeholder (transform-driven, not background-position) */
+  .dm-skeleton { position: relative; overflow: hidden; background: var(--layer2); }
+  .dm-skeleton::after {
+    content: "";
+    position: absolute; inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(168,85,247,.16), transparent);
+    transform: translate3d(-100%,0,0);
+    animation: dmShimmer 1.25s infinite;
+  }
+  @keyframes dmShimmer { to { transform: translate3d(100%,0,0); } }
+
+  .dm-focus:focus-visible {
+    outline: 2px solid var(--accent-violet);
+    outline-offset: 2px;
+  }
+}
+
+/* Smooth, non-janky scrolling + themed scrollbar */
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--layer1); }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #7C3AED, #22D3EE);
+  border-radius: 999px;
+  border: 2px solid var(--layer1);
 }
