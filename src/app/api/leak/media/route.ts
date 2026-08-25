@@ -58,8 +58,30 @@ export async function GET(request: NextRequest) {
     } else if (proxy) {
       proxyPool.markFailure(proxy);
     }
-  } catch {
+  } catch (err) {
     if (proxy) proxyPool.markFailure(proxy);
+    // Distinguish "network can't reach the CDN" from a real upstream error.
+    // Kemono/Coomer serve media from separate CDN nodes (n1-n4.*), and many
+    // ISPs filter that subnet while leaving the main domain reachable — the
+    // symptom is that posts list fine but every image/video fails. A connect
+    // timeout here is almost always that, and the fix is a proxy, not a retry.
+    const code = (err as { cause?: { code?: string } })?.cause?.code ?? "";
+    const unreachable =
+      code === "UND_ERR_CONNECT_TIMEOUT" ||
+      code === "ECONNREFUSED" ||
+      code === "ENETUNREACH" ||
+      code === "EHOSTUNREACH" ||
+      code === "ETIMEDOUT";
+
+    if (unreachable) {
+      return new NextResponse(
+        proxyPool.enabled
+          ? `Media CDN ${host} is unreachable through the configured proxy.`
+          : `Media CDN ${host} is unreachable from this server (connection filtered). ` +
+            `Set PROXY_POOL to route media through a proxy.`,
+        { status: 504, headers: { "X-Media-Error": "cdn-unreachable" } },
+      );
+    }
     return new NextResponse("upstream fetch failed", { status: 502 });
   }
   if (!upstream.ok) {
