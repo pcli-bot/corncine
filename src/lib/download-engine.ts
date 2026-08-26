@@ -20,7 +20,8 @@ import { Readable } from "node:stream";
 import { proxyPool, cookieJars } from "./proxy-pool";
 
 export type JobStatus = "queued" | "active" | "done" | "failed" | "canceled";
-export type DownloadFormat = "video" | "audio" | "lossless";
+/** "file" = fetch the URL verbatim (images, archives, documents). */
+export type DownloadFormat = "video" | "audio" | "lossless" | "file";
 
 export interface DownloadJob {
   id: string;
@@ -185,14 +186,22 @@ export class DownloadEngine {
   submit(input: SubmitInput): DownloadJob {
     const id = input.id || `job-${crypto.randomUUID().slice(0, 8)}`;
     const isTorrent = /^magnet:/i.test(input.url) || /\.torrent(\?.*)?$/i.test(input.url);
+    // Signed CDN links (Bunkr) and plain documents/images must be fetched
+    // verbatim: yt-dlp works for media but reports no byte counter, and it
+    // cannot handle a PDF/zip at all. Query strings are stripped before the
+    // extension test because signed URLs carry ?token=...&ex=...
+    const isPlainFile =
+      /\.(pdf|epub|mobi|azw3|djvu|cbz|cbr|txt|zip|rar|7z|jpe?g|png|webp|gif|mp4|m4v|mkv|webm|mov)$/i.test(
+        (() => { try { return new URL(input.url).pathname; } catch { return input.url.split("?")[0]; } })(),
+      );
     const job: DownloadJob = {
       id,
       url: input.url,
       title: input.title?.trim() || (isTorrent ? "Torrent" : "Direct stream"),
       source: input.source?.trim() || (isTorrent ? "BitTorrent" : "Direct"),
-      format: input.format ?? "video",
+      format: input.format ?? (isPlainFile && !isTorrent ? "file" : "video"),
       quality: input.quality ?? "best",
-      engine: input.engine ?? (isTorrent ? "aria2c" : "yt-dlp"),
+      engine: input.engine ?? (isTorrent ? "aria2c" : isPlainFile ? "http" : "yt-dlp"),
       status: "queued",
       progress: 0,
       speedBps: 0,
@@ -313,7 +322,7 @@ export class DownloadEngine {
         return;
       }
       this.runTorrent(job);
-    } else if (isDirectBook) {
+    } else if (isDirectBook || job.format === "file") {
       // Direct book files (PDF/EPUB etc) — use generic fetch, not yt-dlp
       void this.runDirectFile(job);
     } else {

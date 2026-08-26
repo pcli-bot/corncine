@@ -116,7 +116,7 @@ export function CatalogBrowser() {
     <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
       {/* 3-Mode Slider / Switcher */}
       <div className="flex flex-col items-center mb-8">
-        <div className="relative bg-[#131A26] p-1 rounded-xl border border-[#1E2A3C] flex items-center space-x-1 max-w-full overflow-x-auto scrollbar-none">
+        <div className="relative bg-[#151922] p-1 rounded-xl border border-[#323947] flex items-center space-x-1 max-w-full overflow-x-auto scrollbar-none">
           {CATALOG_MODES.map((tab) => {
             const active = mode === tab.key && !showFavorites;
             return (
@@ -129,15 +129,15 @@ export function CatalogBrowser() {
                 className={cn(
                   "relative px-4 sm:px-5 py-2 rounded-lg text-xs sm:text-sm font-bold spring-transition flex items-center space-x-2 whitespace-nowrap z-10",
                   active
-                    ? "text-white bg-[#3B82F6] shadow-lg shadow-blue-500/20"
-                    : "text-[#94A3B8] hover:text-[#F8FAFC]"
+                    ? "text-[#0B0E15] bg-[#EC69AE] shadow-lg shadow-blue-500/20"
+                    : "text-[#B3B7C1] hover:text-[#F8FAFC]"
                 )}
               >
                 <span>{tab.label}</span>
                 <span
                   className={cn(
                     "text-[10px] font-mono px-1.5 py-0.5 rounded-full font-bold",
-                    active ? "bg-white/20 text-white" : "bg-[#1B2433] text-[#64748B]"
+                    active ? "bg-white/20 text-white" : "bg-[#202530] text-[#878C97]"
                   )}
                 >
                   {tab.count}
@@ -149,19 +149,19 @@ export function CatalogBrowser() {
       </div>
 
       {/* Catalog Filter and Query Counter Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 pb-4 border-b border-[#1E2A3C]">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 pb-4 border-b border-[#323947]">
         <div className="space-y-1">
           <div className="flex items-center gap-2">
             <h2 className="text-lg sm:text-xl font-bold text-[#F8FAFC] flex items-center gap-2">
               {showFavorites ? "Saved Favorites" : activeModeMeta.label}
             </h2>
             {!showFavorites && (
-              <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-[#131A26] border border-[#1E2A3C] text-[#3B82F6]">
+              <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-[#151922] border border-[#323947] text-[#EC69AE]">
                 {availableProviders.length} PROVIDERS ONLINE
               </span>
             )}
           </div>
-          <p className="text-xs text-[#94A3B8]">
+          <p className="text-xs text-[#B3B7C1]">
             {showFavorites
               ? `${favorites.length} saved titles stored in local storage`
               : activeModeMeta.desc}
@@ -177,7 +177,7 @@ export function CatalogBrowser() {
               "px-3 py-1.5 rounded-lg text-xs font-semibold spring-transition flex items-center gap-1.5 border",
               showFavorites
                 ? "bg-[#EF4444] border-[#EF4444] text-white shadow-lg shadow-red-500/20"
-                : "bg-[#131A26] border-[#1E2A3C] text-[#94A3B8] hover:text-[#F8FAFC]"
+                : "bg-[#151922] border-[#323947] text-[#B3B7C1] hover:text-[#F8FAFC]"
             )}
           >
             <Heart className={cn("w-3.5 h-3.5", showFavorites && "fill-current")} />
@@ -189,11 +189,11 @@ export function CatalogBrowser() {
 
           {/* Provider selector */}
           <div className="flex items-center gap-1.5">
-            <span className="text-xs text-[#64748B]">Provider:</span>
+            <span className="text-xs text-[#878C97]">Provider:</span>
             <select
               value={providerFilter}
               onChange={(e) => setProviderFilter(e.target.value)}
-              className="bg-[#131A26] border border-[#1E2A3C] text-xs rounded-lg px-2.5 py-1.5 text-[#F8FAFC] font-medium focus:outline-none focus:border-[#3B82F6]"
+              className="bg-[#151922] border border-[#323947] text-xs rounded-lg px-2.5 py-1.5 text-[#F8FAFC] font-medium focus:outline-none focus:border-[#EC69AE]"
             >
               <option value="all">All Providers</option>
               {availableProviders.map((p) => (
@@ -206,11 +206,11 @@ export function CatalogBrowser() {
 
           {/* Sort selector */}
           <div className="flex items-center gap-1.5">
-            <span className="text-xs text-[#64748B]">Sort:</span>
+            <span className="text-xs text-[#878C97]">Sort:</span>
             <select
               value={sort}
               onChange={(e) => setSort(e.target.value as typeof sort)}
-              className="bg-[#131A26] border border-[#1E2A3C] text-xs rounded-lg px-2.5 py-1.5 text-[#F8FAFC] font-medium focus:outline-none focus:border-[#3B82F6]"
+              className="bg-[#151922] border border-[#323947] text-xs rounded-lg px-2.5 py-1.5 text-[#F8FAFC] font-medium focus:outline-none focus:border-[#EC69AE]"
             >
               <option value="seeds">Most Seeders</option>
               <option value="rating">Highest Rated</option>
@@ -219,7 +219,7 @@ export function CatalogBrowser() {
           </div>
 
           {/* Media Kind and Quality Filter Buttons */}
-          <div className="flex items-center gap-1 pl-2 border-l border-[#1E2A3C]">
+          <div className="flex items-center gap-1 pl-2 border-l border-[#323947]">
             {[
               { key: "all", label: "All" },
               { key: "video", label: "🎬 Videos" },
@@ -233,8 +233,8 @@ export function CatalogBrowser() {
                 className={cn(
                   "px-2.5 py-1 rounded text-xs font-semibold spring-transition",
                   filter === f.key
-                    ? "bg-[#3B82F6] text-white shadow-md shadow-blue-500/20"
-                    : "bg-[#131A26] border border-[#1E2A3C] text-[#94A3B8] hover:text-[#F8FAFC]"
+                    ? "bg-[#EC69AE] text-[#0B0E15] shadow-md shadow-blue-500/20"
+                    : "bg-[#151922] border border-[#323947] text-[#B3B7C1] hover:text-[#F8FAFC]"
                 )}
               >
                 {f.label}
@@ -250,7 +250,7 @@ export function CatalogBrowser() {
       )}
 
       {/* Status row */}
-      <div className="flex items-center justify-between mb-4 text-[11px] text-[#64748B] font-mono">
+      <div className="flex items-center justify-between mb-4 text-[11px] text-[#878C97] font-mono">
         <span>
           {!showFavorites && isFetching ? "Scanning providers..." : `${gridItems.length} results`}
           {!showFavorites && debounced ? ` for "${debounced}"` : ""}
@@ -305,11 +305,11 @@ export function MediaCard({ item }: { item: MediaItem }) {
   // Gradient fallback keyed on title
   const fallback = useMemo(() => {
     const palette = [
-      ["#3B82F6", "#06B6D4"],
-      ["#10B981", "#06B6D4"],
+      ["#EC69AE", "#F997C6"],
+      ["#6AB27A", "#F997C6"],
       ["#F59E0B", "#EF4444"],
-      ["#8B5CF6", "#3B82F6"],
-      ["#06B6D4", "#10B981"],
+      ["#DB3E98", "#EC69AE"],
+      ["#F997C6", "#6AB27A"],
     ] as const;
     let h = 0;
     for (let i = 0; i < item.title.length; i++) h = (h * 31 + item.title.charCodeAt(i)) >>> 0;
@@ -429,7 +429,7 @@ export function MediaCard({ item }: { item: MediaItem }) {
     <article
       ref={ref}
       onClick={handleOpenMedia}
-      className="group relative rounded-xl border border-[#1E2A3C] bg-[#131A26] overflow-hidden card-hover cursor-pointer"
+      className="group relative rounded-xl border border-[#323947] bg-[#151922] overflow-hidden card-hover cursor-pointer"
     >
       {/* Poster / Thumbnail */}
       <div className="relative aspect-[2/3] overflow-hidden bg-black/40">
@@ -447,20 +447,20 @@ export function MediaCard({ item }: { item: MediaItem }) {
             style={{ background: fallback }}
           >
             {isPhoto ? <ImageIcon className="w-8 h-8 text-white/70 mb-2" /> : <Film className="w-8 h-8 text-white/70 mb-2" />}
-            <span className="text-sm font-bold text-white leading-tight">{item.title}</span>
+            <span className="text-sm font-bold text-[#F8FAFC] leading-tight">{item.title}</span>
             <span className="text-[10px] font-mono text-white/70 mt-1">{item.year}</span>
           </div>
         )}
 
         {/* Badges */}
-        <span className="absolute top-2 left-2 px-2 py-0.5 rounded text-[10px] font-semibold bg-[#0B0F17]/85 text-[#F8FAFC] border border-[#1E2A3C] backdrop-blur-sm">
+        <span className="absolute top-2 left-2 px-2 py-0.5 rounded text-[10px] font-semibold bg-[#0B0E15]/85 text-[#F8FAFC] border border-[#323947] backdrop-blur-sm">
           {item.provider}
         </span>
         <FavoriteButton item={item} className="absolute top-2 right-2 z-10" />
         <span
           className={cn(
             "absolute top-2 right-9 pr-7 px-1.5 py-0.5 rounded text-[10px] font-mono text-white border backdrop-blur-sm",
-            isPhoto ? "bg-[#10B981]/80 border-[#10B981]" : "bg-[#0B0F17]/85 border-[#1E2A3C]"
+            isPhoto ? "bg-[#6AB27A]/80 border-[#6AB27A]" : "bg-[#0B0E15]/85 border-[#323947]"
           )}
         >
           {isPhoto ? "PHOTO" : item.quality}
@@ -471,7 +471,7 @@ export function MediaCard({ item }: { item: MediaItem }) {
           <div
             className={cn(
               "w-12 h-12 rounded-full flex items-center justify-center shadow-xl transform scale-90 group-hover:scale-100 transition-transform duration-200",
-              isPhoto ? "bg-[#10B981] text-black" : "bg-[#3B82F6] text-white"
+              isPhoto ? "bg-[#6AB27A] text-black" : "bg-[#EC69AE] text-[#0B0E15]"
             )}
           >
             {isPhoto ? <ImageIcon className="w-6 h-6" /> : <Play className="w-6 h-6 fill-current ml-0.5" />}
@@ -482,17 +482,17 @@ export function MediaCard({ item }: { item: MediaItem }) {
       {/* Meta */}
       <div className="p-3 space-y-1.5">
         <h3
-          className="text-sm font-bold text-[#F8FAFC] leading-tight line-clamp-1 group-hover:text-[#3B82F6] transition-colors"
+          className="text-sm font-bold text-[#F8FAFC] leading-tight line-clamp-1 group-hover:text-[#EC69AE] transition-colors"
           title={item.title}
         >
           {item.title}
         </h3>
-        <div className="flex items-center justify-between text-[11px] text-[#64748B] font-mono">
+        <div className="flex items-center justify-between text-[11px] text-[#878C97] font-mono">
           <span className="flex items-center gap-1">
             <Star className="w-3 h-3 text-[#F59E0B] fill-[#F59E0B]" /> {item.rating.toFixed(1)}
           </span>
           <span className="flex items-center gap-1">
-            <Users className="w-3 h-3 text-[#10B981]" /> {item.seeds.toLocaleString()}
+            <Users className="w-3 h-3 text-[#6AB27A]" /> {item.seeds.toLocaleString()}
           </span>
           <span className="font-semibold text-[10px]">{isPhoto ? "HD Set" : item.quality}</span>
         </div>
@@ -501,7 +501,7 @@ export function MediaCard({ item }: { item: MediaItem }) {
           {item.genre.slice(0, 2).map((g) => (
             <span
               key={g}
-              className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-[#1B2433] border border-[#1E2A3C] text-[#94A3B8]"
+              className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-[#202530] border border-[#323947] text-[#B3B7C1]"
             >
               {g}
             </span>
@@ -518,8 +518,8 @@ export function MediaCard({ item }: { item: MediaItem }) {
             className={cn(
               "flex-1 px-2 py-1.5 rounded-lg text-xs font-bold active:scale-95 spring-transition flex items-center justify-center gap-1 shadow-md",
               isPhoto
-                ? "bg-[#10B981] hover:bg-[#059669] text-black"
-                : "bg-[#3B82F6] hover:bg-blue-600 text-white shadow-blue-500/20"
+                ? "bg-[#6AB27A] hover:bg-[#059669] text-black"
+                : "bg-[#EC69AE] hover:bg-blue-600 text-[#0B0E15] shadow-blue-500/20"
             )}
           >
             {isPhoto ? (
@@ -534,7 +534,7 @@ export function MediaCard({ item }: { item: MediaItem }) {
           </button>
           <button
             onClick={handleDownload}
-            className="flex-1 px-2 py-1.5 rounded-lg bg-[#1B2433] border border-[#1E2A3C] text-[#F8FAFC] text-xs font-semibold hover:bg-[#243044] active:scale-95 spring-transition flex items-center justify-center gap-1"
+            className="flex-1 px-2 py-1.5 rounded-lg bg-[#202530] border border-[#323947] text-[#F8FAFC] text-xs font-semibold hover:bg-[#2A303D] active:scale-95 spring-transition flex items-center justify-center gap-1"
           >
             <Download className="w-3.5 h-3.5" /> Save
           </button>
@@ -570,7 +570,7 @@ function FavoriteButton({ item, className }: { item: MediaItem; className?: stri
     <button
       onClick={toggle}
       className={cn(
-        "p-1.5 rounded-full bg-[#0B0F17]/85 border border-[#1E2A3C] text-[#94A3B8] hover:text-[#EF4444] spring-transition backdrop-blur-sm",
+        "p-1.5 rounded-full bg-[#0B0E15]/85 border border-[#323947] text-[#B3B7C1] hover:text-[#EF4444] spring-transition backdrop-blur-sm",
         isFavorite && "text-[#EF4444] border-red-500/50",
         className
       )}
@@ -599,17 +599,17 @@ function SearchAcrossSites({
   if (matchedProviders.length === 0) return null;
 
   return (
-    <div className="bg-[#131A26] border border-[#1E2A3C] rounded-xl p-4 mb-6">
+    <div className="bg-[#151922] border border-[#323947] rounded-xl p-4 mb-6">
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2">
-          <SlidersHorizontal className="w-4 h-4 text-[#3B82F6]" />
+          <SlidersHorizontal className="w-4 h-4 text-[#EC69AE]" />
           <h3 className="text-xs sm:text-sm font-bold text-[#F8FAFC]">
             {query ? `Indexed Search Providers for "${query}"` : "Direct Index Providers"}
           </h3>
         </div>
         <button
           onClick={() => setCollapsed(!collapsed)}
-          className="text-xs text-[#94A3B8] hover:text-[#F8FAFC] font-medium"
+          className="text-xs text-[#B3B7C1] hover:text-[#F8FAFC] font-medium"
         >
           {collapsed ? "Show" : "Hide"}
         </button>
@@ -623,15 +623,15 @@ function SearchAcrossSites({
               href={p.searchUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2.5 rounded-lg bg-[#1B2433]/70 hover:bg-[#1B2433] border border-[#1E2A3C] hover:border-[#3B82F6] spring-transition flex items-center justify-between text-xs group"
+              className="p-2.5 rounded-lg bg-[#202530]/70 hover:bg-[#202530] border border-[#323947] hover:border-[#EC69AE] spring-transition flex items-center justify-between text-xs group"
             >
               <div className="truncate">
-                <div className="font-semibold text-[#F8FAFC] truncate group-hover:text-[#3B82F6]">
+                <div className="font-semibold text-[#F8FAFC] truncate group-hover:text-[#EC69AE]">
                   {p.name}
                 </div>
-                <div className="text-[10px] text-[#64748B] font-mono truncate">{p.domain}</div>
+                <div className="text-[10px] text-[#878C97] font-mono truncate">{p.domain}</div>
               </div>
-              <ExternalLink className="w-3.5 h-3.5 text-[#64748B] group-hover:text-[#3B82F6] shrink-0 ml-2" />
+              <ExternalLink className="w-3.5 h-3.5 text-[#878C97] group-hover:text-[#EC69AE] shrink-0 ml-2" />
             </a>
           ))}
         </div>
@@ -644,13 +644,13 @@ function GridSkeleton() {
   return (
     <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-5">
       {Array.from({ length: 10 }).map((_, i) => (
-        <div key={i} className="rounded-xl border border-[#1E2A3C] bg-[#131A26] overflow-hidden">
-          <div className="aspect-[2/3] bg-[#1B2433] animate-pulse-soft flex items-center justify-center">
-            <Loader2 className="w-5 h-5 text-[#64748B] animate-spin" />
+        <div key={i} className="rounded-xl border border-[#323947] bg-[#151922] overflow-hidden">
+          <div className="aspect-[2/3] bg-[#202530] animate-pulse-soft flex items-center justify-center">
+            <Loader2 className="w-5 h-5 text-[#878C97] animate-spin" />
           </div>
           <div className="p-3 space-y-2">
-            <div className="h-3 w-3/4 rounded bg-[#1B2433]" />
-            <div className="h-2 w-1/2 rounded bg-[#1B2433]" />
+            <div className="h-3 w-3/4 rounded bg-[#202530]" />
+            <div className="h-2 w-1/2 rounded bg-[#202530]" />
           </div>
         </div>
       ))}
@@ -660,11 +660,11 @@ function GridSkeleton() {
 
 function EmptyState({ message }: { message: string }) {
   return (
-    <div className="py-16 text-center bg-[#131A26] rounded-xl border border-[#1E2A3C] border-dashed">
-      <div className="inline-grid place-items-center w-12 h-12 rounded-xl bg-[#1B2433] border border-[#1E2A3C] mb-3">
-        <SearchIcon className="w-5 h-5 text-[#64748B]" />
+    <div className="py-16 text-center bg-[#151922] rounded-xl border border-[#323947] border-dashed">
+      <div className="inline-grid place-items-center w-12 h-12 rounded-xl bg-[#202530] border border-[#323947] mb-3">
+        <SearchIcon className="w-5 h-5 text-[#878C97]" />
       </div>
-      <p className="text-xs font-medium text-[#94A3B8]">{message}</p>
+      <p className="text-xs font-medium text-[#B3B7C1]">{message}</p>
     </div>
   );
 }

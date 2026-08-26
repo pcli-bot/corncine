@@ -35,7 +35,7 @@ export default function McpAdultDocs() {
   };
 
   return (
-    <main className="min-h-screen bg-[#0B0F17] text-[#F8FAFC] px-4 py-10 max-w-3xl mx-auto">
+    <main className="min-h-screen bg-[#0B0E15] text-[#F8FAFC] px-4 py-10 max-w-3xl mx-auto">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
       <nav className="text-sm text-slate-400 mb-6">
@@ -77,13 +77,13 @@ Rejection handling:
       <h2 className="text-xl font-bold mt-10">Setup — 30 seconds</h2>
 
       <div className="mt-4 space-y-6">
-        <div className="rounded-2xl border border-white/10 bg-[#131A26] p-6">
+        <div className="rounded-2xl border border-white/10 bg-[#151922] p-6">
           <h3 className="font-semibold text-red-300">1. Install</h3>
           <pre className="mt-2 rounded-lg bg-black/50 p-3 text-xs text-slate-300 overflow-x-auto">npm i -g @corncine/mcp-adult
 # or: npx @corncine/mcp-adult</pre>
         </div>
 
-        <div className="rounded-2xl border border-white/10 bg-[#131A26] p-6">
+        <div className="rounded-2xl border border-white/10 bg-[#151922] p-6">
           <h3 className="font-semibold text-red-300">2. Claude Desktop — claude_desktop_config.json</h3>
           <pre className="mt-2 rounded-lg bg-black/50 p-3 text-xs text-slate-300 overflow-x-auto">{`{
   "mcpServers": {
@@ -102,7 +102,7 @@ Rejection handling:
           <p className="text-xs text-slate-500 mt-2">Install both — Claude will route clean vs adult automatically. Adult tools stay locked until <code className="bg-white/10 px-1 rounded">verify_age</code>.</p>
         </div>
 
-        <div className="rounded-2xl border border-white/10 bg-[#131A26] p-6">
+        <div className="rounded-2xl border border-white/10 bg-[#151922] p-6">
           <h3 className="font-semibold">3. Cursor / Windsurf</h3>
           <pre className="mt-2 rounded-lg bg-black/50 p-3 text-xs text-slate-300 overflow-x-auto">{`{
   "mcpServers": {
@@ -115,7 +115,7 @@ Rejection handling:
 }`}</pre>
         </div>
 
-        <div className="rounded-2xl border border-white/10 bg-[#131A26] p-6">
+        <div className="rounded-2xl border border-white/10 bg-[#151922] p-6">
           <h3 className="font-semibold">Tools (6, all gated except verify_age)</h3>
           <ul className="mt-3 space-y-2 text-sm">
             {adultTools.map((t) => (
@@ -139,7 +139,7 @@ Rejection handling:
           </ul>
         </div>
 
-        <div className="rounded-2xl border border-white/10 bg-[#131A26] p-6">
+        <div className="rounded-2xl border border-white/10 bg-[#151922] p-6">
           <h3 className="font-semibold">Troubleshooting</h3>
           <ul className="list-disc list-inside text-sm text-slate-400 space-y-1">
             <li><code className="bg-white/10 px-1 rounded">CORN_API</code> must be reachable — use hosted <code className="bg-white/10 px-1 rounded">https://corncine.com</code> when not running locally</li>

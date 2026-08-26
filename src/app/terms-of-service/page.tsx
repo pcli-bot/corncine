@@ -54,18 +54,18 @@ const SECTIONS: { h: string; p: string[] }[] = [
 
 export default function TermsPage() {
   return (
-    <main className="min-h-screen bg-[#0B0F17] text-[#F8FAFC] px-4 py-12">
+    <main className="min-h-screen bg-[#0B0E15] text-[#F8FAFC] px-4 py-12">
       <div className="max-w-3xl mx-auto space-y-6">
         <h1 className="text-2xl font-extrabold">Terms of Service</h1>
         {SECTIONS.map((s) => (
-          <div key={s.h} className="rounded-2xl border border-white/10 bg-[#131A26] p-6 space-y-3 text-sm leading-relaxed text-[#CBD5E1]">
+          <div key={s.h} className="rounded-2xl border border-white/10 bg-[#151922] p-6 space-y-3 text-sm leading-relaxed text-[#B3B7C1]">
             <h2 className="text-lg font-bold text-[#F8FAFC]">{s.h}</h2>
             {s.p.map((t, i) => (
               <p key={i}>{t}</p>
             ))}
           </div>
         ))}
-        <p className="text-xs text-[#64748B]">Last updated: August 2026</p>
+        <p className="text-xs text-[#878C97]">Last updated: August 2026</p>
       </div>
     </main>
   );

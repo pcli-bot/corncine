@@ -48,12 +48,12 @@ export function FavoriteButton({ item, className }: { item: Favoriteable; classN
       title={isFav ? "Remove from favorites" : "Add to favorites"}
       aria-label={isFav ? "Remove from favorites" : "Add to favorites"}
       className={cn(
-        "grid place-items-center w-7 h-7 rounded-lg bg-[#0B0F17]/85 border border-[#1E2A3C] backdrop-blur-sm hover:bg-[#1B2433] active:scale-95 spring-transition",
+        "grid place-items-center w-7 h-7 rounded-lg bg-[#0B0E15]/85 border border-[#323947] backdrop-blur-sm hover:bg-[#202530] active:scale-95 spring-transition",
         className,
       )}
     >
       <Heart
-        className={cn("w-3.5 h-3.5 spring-transition", isFav ? "fill-[#EF4444] text-[#EF4444]" : "text-[#94A3B8]")}
+        className={cn("w-3.5 h-3.5 spring-transition", isFav ? "fill-[#EF4444] text-[#EF4444]" : "text-[#B3B7C1]")}
       />
     </button>
   );

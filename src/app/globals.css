@@ -59,67 +59,80 @@
 }
 
 :root {
+  /* ============================================================
+     Palette derived in OKLCH on a fixed perceptual lightness ladder,
+     then verified numerically. Rules applied (dark-mode engineering):
+       · never pure black  — #0B0E15 keeps elevation headroom and avoids halation
+       · never pure white  — text tops out at ~93% L, not 100%
+       · elevation rises in LIGHTNESS (shadows are invisible on dark)
+       · chroma is REDUCED — a dark surround inflates apparent colourfulness,
+         which is what made the previous violet/cyan build read harsh
+       · exactly ONE vivid hue. Attention is produced by isolation
+         (von Restorff), not by saturating everything at once.
+     Measured: primary text 16.0:1 · secondary 9.6:1 · muted 5.7:1 ·
+               accent-400 6.8:1 · ink-on-accent 6.8:1
+     ============================================================ */
   /* AniCine dark theme is the default (and only) theme */
   --radius: 0.625rem;
 
   /* Deep indigo base with a violet cast — richer than flat navy */
-  --base: #08060F;
-  --layer1: #120E20;
-  --layer2: #1A1430;
-  --layer3: #241B42;
-  --subtle: #2A2050;
-  --strong: #3B2D6B;
-  --primary-text: #F6F4FF;
-  --secondary-text: #A79FC7;
-  --muted-text: #6F6790;
+  --base: #0B0E15;
+  --layer1: #151922;
+  --layer2: #202530;
+  --layer3: #2A303D;
+  --subtle: #323947;
+  --strong: #4D5566;
+  --primary-text: #E7EAEF;
+  --secondary-text: #B3B7C1;
+  --muted-text: #878C97;
 
   /* Signature accents — electric violet, cyan, hot magenta, amber */
-  --accent-blue: #F0308C;
-  --accent-violet: #A855F7;
-  --accent-emerald: #22D3A5;
-  --accent-cyan: #22D3EE;
-  --accent-magenta: #F0308C;
-  --accent-amber: #FBBF24;
+  --accent-blue: #EC69AE;
+  --accent-violet: #F997C6;
+  --accent-emerald: #6AB27A;
+  --accent-cyan: #5DA3E9;
+  --accent-magenta: #EC69AE;
+  --accent-amber: #C99341;
 
   /* Gradients used across hero, buttons and active states */
-  --grad-primary: linear-gradient(135deg, #F0308C 0%, #A855F7 55%, #22D3EE 100%);
-  --grad-hot: linear-gradient(135deg, #F0308C 0%, #FB7185 50%, #FBBF24 100%);
-  --grad-cool: linear-gradient(135deg, #22D3EE 0%, #7C3AED 100%);
-  --glow-primary: 0 0 0 1px rgba(168,85,247,.28), 0 8px 32px -8px rgba(124,58,237,.55);
-  --glow-hot: 0 0 0 1px rgba(240,48,140,.30), 0 8px 32px -8px rgba(240,48,140,.55);
+  --grad-primary: linear-gradient(135deg, #EC69AE 0%, #DB3E98 100%);
+  --grad-hot: linear-gradient(135deg, #EF755E 0%, #C99341 100%);
+  --grad-cool: linear-gradient(135deg, #5DA3E9 0%, #6AB27A 100%);
+  --glow-primary: 0 0 0 1px rgba(236,105,174,.22), 0 10px 34px -12px rgba(219,62,152,.55);
+  --glow-hot: 0 0 0 1px rgba(236,105,174,.22), 0 10px 34px -12px rgba(219,62,152,.55);
 
   /* Map shadcn tokens onto the AniCine palette so all ui components inherit it */
-  --background: #08060F;
-  --foreground: #F6F4FF;
-  --card: #120E20;
-  --card-foreground: #F6F4FF;
-  --popover: #1A1430;
-  --popover-foreground: #F6F4FF;
-  --primary: #F0308C;
+  --background: #0B0E15;
+  --foreground: #E7EAEF;
+  --card: #151922;
+  --card-foreground: #E7EAEF;
+  --popover: #202530;
+  --popover-foreground: #E7EAEF;
+  --primary: #EC69AE;
   --primary-foreground: #FFFFFF;
-  --secondary: #1A1430;
-  --secondary-foreground: #F6F4FF;
-  --muted: #1A1430;
-  --muted-foreground: #A79FC7;
-  --accent: #241B42;
-  --accent-foreground: #F6F4FF;
+  --secondary: #202530;
+  --secondary-foreground: #E7EAEF;
+  --muted: #202530;
+  --muted-foreground: #B3B7C1;
+  --accent: #2A303D;
+  --accent-foreground: #E7EAEF;
   --destructive: #EF4444;
-  --border: #2A2050;
-  --input: #2A2050;
-  --ring: #F472B6;
-  --chart-1: #7C3AED;
+  --border: #323947;
+  --input: #323947;
+  --ring: #EC69AE;
+  --chart-1: #EC69AE;
   --chart-2: #22D3A5;
   --chart-3: #22D3EE;
   --chart-4: #F59E0B;
   --chart-5: #EF4444;
-  --sidebar: #120E20;
+  --sidebar: #151922;
   --sidebar-foreground: #F6F4FF;
-  --sidebar-primary: #F0308C;
+  --sidebar-primary: #EC69AE;
   --sidebar-primary-foreground: #FFFFFF;
-  --sidebar-accent: #241B42;
+  --sidebar-accent: #2A303D;
   --sidebar-accent-foreground: #F6F4FF;
-  --sidebar-border: #2A2050;
-  --sidebar-ring: #A855F7;
+  --sidebar-border: #323947;
+  --sidebar-ring: #EC69AE;
 }
 
 @layer base {
@@ -136,15 +149,15 @@
   input, select, textarea {
     color: #FFFFFF !important;
     -webkit-text-fill-color: #FFFFFF !important;
-    caret-color: #A855F7 !important;
+    caret-color: #EC69AE !important;
   }
   input::placeholder, textarea::placeholder {
     color: #64748B !important;
     -webkit-text-fill-color: #64748B !important;
   }
   ::selection {
-    background-color: #7C3AED !important;
-    color: #FFFFFF !important;
+    background-color: #EC69AE !important;
+    color: #0B0E15 !important;
   }
 }
 
@@ -241,9 +254,8 @@
     height: 60vh;
     z-index: -1;
     background:
-      radial-gradient(45% 55% at 20% 20%, rgba(124,58,237,.30) 0%, transparent 70%),
-      radial-gradient(40% 50% at 80% 10%, rgba(34,211,238,.22) 0%, transparent 70%),
-      radial-gradient(35% 45% at 60% 60%, rgba(240,48,140,.18) 0%, transparent 70%);
+      radial-gradient(46% 56% at 22% 18%, rgba(239,117,94,.10) 0%, transparent 70%),
+      radial-gradient(40% 50% at 78% 12%, rgba(93,163,233,.07) 0%, transparent 70%);
     will-change: transform;
     animation: dmDrift 18s ease-in-out infinite alternate;
     pointer-events: none;
@@ -284,8 +296,8 @@
   }
   .dm-card:hover {
     transform: translate3d(0,-4px,0);
-    border-color: var(--accent-violet);
-    box-shadow: 0 12px 40px -12px rgba(124,58,237,.5);
+    border-color: var(--accent-blue);
+    box-shadow: 0 14px 40px -14px rgba(0,0,0,.65);
   }
 
   /* Long media grids: skip painting offscreen rows entirely */
@@ -295,12 +307,12 @@
   }
 
   .dm-chip {
-    background: rgba(124,58,237,.12);
-    border: 1px solid rgba(168,85,247,.30);
-    color: #C4B5FD;
+    background: rgba(239,117,94,.10);
+    border: 1px solid rgba(239,117,94,.26);
+    color: #FB9E8C;
     transition: background .16s ease, color .16s ease, transform .16s ease;
   }
-  .dm-chip:hover { background: rgba(124,58,237,.24); color: #EDE9FE; transform: translate3d(0,-1px,0); }
+  .dm-chip:hover { background: rgba(239,117,94,.18); color: #FFD9CE; transform: translate3d(0,-1px,0); }
   .dm-chip[data-active="true"] { background: var(--grad-primary); color: #fff; border-color: transparent; }
 
   /* Shimmer placeholder (transform-driven, not background-position) */
@@ -308,14 +320,14 @@
   .dm-skeleton::after {
     content: "";
     position: absolute; inset: 0;
-    background: linear-gradient(90deg, transparent, rgba(168,85,247,.16), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.06), transparent);
     transform: translate3d(-100%,0,0);
     animation: dmShimmer 1.25s infinite;
   }
   @keyframes dmShimmer { to { transform: translate3d(100%,0,0); } }
 
   .dm-focus:focus-visible {
-    outline: 2px solid var(--accent-violet);
+    outline: 2px solid var(--accent-blue);
     outline-offset: 2px;
   }
 }
@@ -329,7 +341,73 @@ html { scroll-behavior: smooth; }
 ::-webkit-scrollbar { width: 10px; height: 10px; }
 ::-webkit-scrollbar-track { background: var(--layer1); }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #7C3AED, #22D3EE);
+  background: linear-gradient(180deg, #EF755E, #C1361F);
   border-radius: 999px;
   border: 2px solid var(--layer1);
+}
+
+/* =============================================================
+   TYPOGRAPHY — Perfect Fourth (1.333) from a 16px body, rounded
+   to half-pixels so rasterisation stays consistent.
+   Dark-mode correction: light-on-dark text blooms and reads
+   heavier than the same weight on light, so headings drop a
+   weight step and gain tracking rather than being set bolder.
+   ============================================================= */
+:root {
+  --fs-xs:   12.5px;
+  --fs-sm:   14px;
+  --fs-body: 16px;
+  --fs-lead: 21.5px;   /* 16 x 1.333 */
+  --fs-h3:   28.5px;   /* x 1.333^2  */
+  --fs-h2:   38px;     /* x 1.333^3  */
+  --fs-h1:   50.5px;   /* x 1.333^4  */
+
+  /* Body copy sits at 1.5-1.6; display tightens as size grows. */
+  --lh-body: 1.55;
+  --lh-lead: 1.45;
+  --lh-head: 1.15;
+
+  /* Negative tracking on large text, positive on small caps/labels. */
+  --tr-head: -0.021em;
+  --tr-body: 0em;
+  --tr-label: 0.055em;
+
+  /* Optimal measure is ~60-75 characters. */
+  --measure: 68ch;
+}
+
+@layer base {
+  body {
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+    letter-spacing: var(--tr-body);
+    /* Reduce apparent weight gain from light-on-dark blooming. */
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  h1, h2, h3 {
+    line-height: var(--lh-head);
+    letter-spacing: var(--tr-head);
+    /* 700 rather than 800/900: on a dark surface the heavier cuts smear. */
+    font-weight: 700;
+    text-wrap: balance;
+  }
+  h1 { font-size: var(--fs-h1); }
+  h2 { font-size: var(--fs-h2); }
+  h3 { font-size: var(--fs-h3); }
+  p  { text-wrap: pretty; }
+  /* Long-form paragraphs stay inside a readable measure. */
+  .prose p, .lede { max-width: var(--measure); }
+  /* Tabular figures keep sizes/counts from jittering as they update. */
+  .tabular, [data-numeric] { font-variant-numeric: tabular-nums; }
+}
+
+/* Dark-surface weight correction.
+   Light-on-dark text blooms, so 800/900 cuts smear and lose definition against
+   a dark field; the vault's guidance is to drop a weight step and add negative
+   tracking instead. Written UNLAYERED on purpose: Tailwind's `font-extrabold`
+   lives in the utilities layer, and unlayered CSS outranks every @layer. */
+h1, h2, h3 {
+  font-weight: 700;
+  letter-spacing: var(--tr-head);
 }

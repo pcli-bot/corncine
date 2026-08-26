@@ -77,12 +77,12 @@ export function LeakBrowser() {
   );
 
   return (
-    <section id="leaks" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 border-t border-[#1E2A3C]">
+    <section id="leaks" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 border-t border-[#323947]">
       <div className="flex flex-col items-center text-center mb-8">
         <h2 className="text-2xl sm:text-3xl font-extrabold text-[#F8FAFC]">Model &amp; Leak Search</h2>
-        <p className="text-sm text-[#94A3B8] mt-2 max-w-2xl">
-          Search any model across <span className="text-[#3B82F6] font-semibold">Kemono</span> &amp;{" "}
-          <span className="text-[#3B82F6] font-semibold">Coomer</span> — the archives of Patreon, OnlyFans, Fanbox &amp; Gumroad
+        <p className="text-sm text-[#B3B7C1] mt-2 max-w-2xl">
+          Search any model across <span className="text-[#EC69AE] font-semibold">Kemono</span> &amp;{" "}
+          <span className="text-[#EC69AE] font-semibold">Coomer</span> — the archives of Patreon, OnlyFans, Fanbox &amp; Gumroad
           creators. Filter their content by video or photo, or search every other leak site below.
         </p>
       </div>
@@ -90,18 +90,18 @@ export function LeakBrowser() {
       {!selected ? (
         <>
           <div className="max-w-2xl mx-auto mb-6">
-            <div className="relative bg-[#131A26] rounded-xl p-1.5 border border-[#2D3D54] shadow-xl focus-within:ring-2 focus-within:ring-[#3B82F6]/40">
+            <div className="relative bg-[#151922] rounded-xl p-1.5 border border-[#4D5566] shadow-xl focus-within:ring-2 focus-within:ring-[#EC69AE]/40">
               <div className="flex items-center">
-                <div className="pl-3 text-[#64748B]"><Search className="w-5 h-5" /></div>
+                <div className="pl-3 text-[#878C97]"><Search className="w-5 h-5" /></div>
                 <input
                   type="text"
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && (e.target as HTMLInputElement).blur()}
                   placeholder="Search a model or creator name (e.g. emma, derpixon)…"
-                  className="w-full bg-transparent border-0 px-3 py-3 text-white font-semibold text-sm placeholder:text-[#64748B] focus:outline-none"
+                  className="w-full bg-transparent border-0 px-3 py-3 text-white font-semibold text-sm placeholder:text-[#878C97] focus:outline-none"
                 />
-                {creators.isFetching && <Loader2 className="w-4 h-4 mr-3 text-[#64748B] animate-spin" />}
+                {creators.isFetching && <Loader2 className="w-4 h-4 mr-3 text-[#878C97] animate-spin" />}
               </div>
             </div>
           </div>
@@ -111,13 +111,13 @@ export function LeakBrowser() {
           )}
 
           {creators.data?.degraded && (
-            <div className="max-w-2xl mx-auto mb-4 flex items-center gap-2 text-[#F59E0B] text-xs bg-[#1B2433] border border-[#2D3D54] rounded-lg px-3 py-2">
+            <div className="max-w-2xl mx-auto mb-4 flex items-center gap-2 text-[#F59E0B] text-xs bg-[#202530] border border-[#4D5566] rounded-lg px-3 py-2">
               <AlertTriangle className="w-4 h-4" /> One or more sites were unreachable — showing results from the sites that responded.
             </div>
           )}
 
           {creators.data && creators.data.results.length > 0 && (
-            <div className="text-center text-[#64748B] text-xs mb-4 font-mono">
+            <div className="text-center text-[#878C97] text-xs mb-4 font-mono">
               {creators.data.total} matches across sites · showing top {creators.data.results.length}
             </div>
           )}
@@ -127,18 +127,18 @@ export function LeakBrowser() {
               <button
                 key={`${c.site}-${c.service}-${c.id}`}
                 onClick={() => setSelected(c)}
-                className="text-left rounded-xl border border-[#1E2A3C] bg-[#131A26] hover:border-[#3B82F6]/60 hover:bg-[#16203a] transition-colors p-4 flex items-center justify-between gap-3"
+                className="text-left rounded-xl border border-[#323947] bg-[#151922] hover:border-[#EC69AE]/60 hover:bg-[#16203a] transition-colors p-4 flex items-center justify-between gap-3"
               >
                 <div className="min-w-0">
                   <div className="text-[#F8FAFC] font-bold truncate">{c.name}</div>
-                  <div className="text-[11px] text-[#64748B] font-mono mt-0.5 capitalize">{c.service}</div>
+                  <div className="text-[11px] text-[#878C97] font-mono mt-0.5 capitalize">{c.service}</div>
                 </div>
                 <div className="flex flex-col items-end gap-1 shrink-0">
                   <span className={cn("text-[10px] font-semibold px-2 py-0.5 rounded-full",
-                    c.site === "kemono" ? "bg-[#3B82F6]/15 text-[#3B82F6]" : "bg-[#06B6D4]/15 text-[#06B6D4]")}>
+                    c.site === "kemono" ? "bg-[#EC69AE]/15 text-[#EC69AE]" : "bg-[#F997C6]/15 text-[#F997C6]")}>
                     {c.site}
                   </span>
-                  <span className="flex items-center gap-1 text-[10px] text-[#94A3B8] font-mono">
+                  <span className="flex items-center gap-1 text-[10px] text-[#B3B7C1] font-mono">
                     <Users className="w-3 h-3" /> {(c.favorited || 0).toLocaleString()}
                   </span>
                 </div>
@@ -147,7 +147,7 @@ export function LeakBrowser() {
           </div>
 
           {creators.data && creators.data.results.length === 0 && !creators.isFetching && (
-            <div className="text-center text-[#64748B] text-sm py-10">
+            <div className="text-center text-[#878C97] text-sm py-10">
               No models found on Kemono/Coomer. Try a different name — or search the other leak sites below.
             </div>
           )}
@@ -155,7 +155,7 @@ export function LeakBrowser() {
           {creators.data?.web && creators.data.web.length > 0 && (
             <div className="max-w-3xl mx-auto mt-10">
               <div className="flex items-center gap-2 mb-3">
-                <Globe className="w-4 h-4 text-[#3B82F6]" />
+                <Globe className="w-4 h-4 text-[#EC69AE]" />
                 <span className="text-sm font-semibold text-[#F8FAFC]">Also on other leak sites</span>
               </div>
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
@@ -165,16 +165,16 @@ export function LeakBrowser() {
                     href={w.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group flex items-center gap-2 rounded-lg border border-[#1E2A3C] bg-[#131A26] hover:border-[#3B82F6]/60 p-2"
+                    className="group flex items-center gap-2 rounded-lg border border-[#323947] bg-[#151922] hover:border-[#EC69AE]/60 p-2"
                   >
                     {w.thumb ? (
                       <img src={proxiedMediaUrl(w.thumb)} alt="" loading="lazy" className="w-10 h-10 rounded object-cover shrink-0" />
                     ) : (
-                      <div className="w-10 h-10 rounded bg-[#1B2433] shrink-0" />
+                      <div className="w-10 h-10 rounded bg-[#202530] shrink-0" />
                     )}
                     <div className="min-w-0">
                       <div className="text-[#F8FAFC] text-xs font-semibold truncate">{w.name}</div>
-                      <div className="text-[10px] text-[#64748B] font-mono truncate">{w.site}</div>
+                      <div className="text-[10px] text-[#878C97] font-mono truncate">{w.site}</div>
                     </div>
                   </a>
                 ))}
@@ -189,7 +189,7 @@ export function LeakBrowser() {
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
             <button
               onClick={() => setSelected(null)}
-              className="inline-flex items-center gap-2 text-[#94A3B8] hover:text-[#F8FAFC] text-sm font-medium"
+              className="inline-flex items-center gap-2 text-[#B3B7C1] hover:text-[#F8FAFC] text-sm font-medium"
             >
               <ArrowLeft className="w-4 h-4" /> Back to search
             </button>
@@ -200,7 +200,7 @@ export function LeakBrowser() {
                   onClick={() => setMediaType(t)}
                   className={cn(
                     "px-4 py-1.5 rounded-lg text-xs font-semibold capitalize transition-colors",
-                    mediaType === t ? "bg-[#3B82F6] text-white" : "bg-[#1B2433] text-[#94A3B8] hover:text-[#F8FAFC]"
+                    mediaType === t ? "bg-[#EC69AE] text-[#0B0E15]" : "bg-[#202530] text-[#B3B7C1] hover:text-[#F8FAFC]"
                   )}
                 >
                   {t === "video" && <Play className="w-3 h-3 inline mr-1" />}
@@ -211,7 +211,7 @@ export function LeakBrowser() {
             </div>
           </div>
 
-          <div className="flex items-center justify-between mb-4 text-[#64748B] text-xs font-mono">
+          <div className="flex items-center justify-between mb-4 text-[#878C97] text-xs font-mono">
             <span className="text-[#F8FAFC] font-bold text-sm">{selected.name}</span>
             <span>
               {filteredTotal} {mediaType === "all" ? "items" : mediaType + "s"} · {selected.site}/{selected.service}
@@ -219,7 +219,7 @@ export function LeakBrowser() {
           </div>
 
           {posts.data?.degraded && (
-            <div className="mb-4 flex items-center gap-2 text-[#F59E0B] text-xs bg-[#1B2433] border border-[#2D3D54] rounded-lg px-3 py-2">
+            <div className="mb-4 flex items-center gap-2 text-[#F59E0B] text-xs bg-[#202530] border border-[#4D5566] rounded-lg px-3 py-2">
               <AlertTriangle className="w-4 h-4" /> This site was slow/unreachable — results may be incomplete.
             </div>
           )}
@@ -227,7 +227,7 @@ export function LeakBrowser() {
           {posts.isLoading && (
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
               {Array.from({ length: 10 }).map((_, i) => (
-                <div key={i} className="aspect-square rounded-xl bg-[#1B2433] animate-pulse-soft" />
+                <div key={i} className="aspect-square rounded-xl bg-[#202530] animate-pulse-soft" />
               ))}
             </div>
           )}
@@ -243,7 +243,7 @@ export function LeakBrowser() {
           </div>
 
           {posts.data && visiblePosts.length === 0 && !posts.isLoading && (
-            <div className="text-center text-[#64748B] text-sm py-10">
+            <div className="text-center text-[#878C97] text-sm py-10">
               No {mediaType === "all" ? "" : mediaType + " "}content found for this model.
             </div>
           )}
@@ -258,9 +258,9 @@ export function LeakBrowser() {
 function AllSitesPanel({ query }: { query: string }) {
   if (!query.trim()) return null;
   return (
-    <div className="max-w-3xl mx-auto mt-10 rounded-xl border border-[#1E2A3C] bg-[#131A26] p-4">
+    <div className="max-w-3xl mx-auto mt-10 rounded-xl border border-[#323947] bg-[#151922] p-4">
       <div className="flex items-center gap-2 mb-3">
-        <Globe className="w-4 h-4 text-[#3B82F6]" />
+        <Globe className="w-4 h-4 text-[#EC69AE]" />
         <span className="text-sm font-semibold text-[#F8FAFC]">
           Can&apos;t find them here? Search &quot;{query}&quot; on every leak site
         </span>
@@ -272,15 +272,15 @@ function AllSitesPanel({ query }: { query: string }) {
             href={leakSearchUrl(t, query)}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-[#1B2433] border border-[#1E2A3C] text-[#94A3B8] hover:text-white hover:border-[#3B82F6]/60 text-xs font-medium transition-colors"
+            className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-[#202530] border border-[#323947] text-[#B3B7C1] hover:text-white hover:border-[#EC69AE]/60 text-xs font-medium transition-colors"
           >
             {t.name} <ExternalLink className="w-3 h-3" />
           </a>
         ))}
       </div>
-      <p className="text-[11px] text-[#64748B] mt-3 leading-relaxed">
+      <p className="text-[11px] text-[#878C97] mt-3 leading-relaxed">
         Kemono &amp; Coomer results above are live. The chips open each site&apos;s own search in a new tab —
-        most have no public API to aggregate, so the <span className="text-[#94A3B8]">Leak CSE</span> does the true cross-site sweep.
+        most have no public API to aggregate, so the <span className="text-[#B3B7C1]">Leak CSE</span> does the true cross-site sweep.
       </p>
     </div>
   );
@@ -292,12 +292,12 @@ function MediaTile({ item, onPlay }: { item: LeakMediaItem; onPlay: (u: string) 
 
   if (item.kind === "video") {
     return (
-      <div className="group relative aspect-square rounded-xl overflow-hidden border border-[#1E2A3C] bg-[#0B0F17]">
+      <div className="group relative aspect-square rounded-xl overflow-hidden border border-[#323947] bg-[#0B0E15]">
         <button
           onClick={() => onPlay(item.url)}
           className="absolute inset-0 flex flex-col items-center justify-center gap-2 text-white/80 group-hover:bg-black/40 transition-colors p-2"
         >
-          <Play className="w-10 h-10 fill-current text-[#3B82F6]" />
+          <Play className="w-10 h-10 fill-current text-[#EC69AE]" />
           <span className="text-[10px] font-mono text-center line-clamp-2">{item.name}</span>
         </button>
       </div>
@@ -306,7 +306,7 @@ function MediaTile({ item, onPlay }: { item: LeakMediaItem; onPlay: (u: string) 
   return (
     <button
       onClick={() => setImageViewer({ open: true, title: item.name, url: proxiedMediaUrl(item.url) })}
-      className="group relative aspect-square rounded-xl overflow-hidden border border-[#1E2A3C] bg-[#0B0F17] block w-full text-left cursor-pointer"
+      className="group relative aspect-square rounded-xl overflow-hidden border border-[#323947] bg-[#0B0E15] block w-full text-left cursor-pointer"
     >
       {!err ? (
         <img

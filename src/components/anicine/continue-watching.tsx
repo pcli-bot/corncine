@@ -39,12 +39,12 @@ export function ContinueWatching() {
     <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
       <div className="flex items-center justify-between mb-3">
         <h2 className="text-lg font-bold text-[#F8FAFC] flex items-center gap-2">
-          <History className="w-4 h-4 text-[#3B82F6]" />
+          <History className="w-4 h-4 text-[#EC69AE]" />
           Continue Watching
         </h2>
         <button
           onClick={() => void clearHistory()}
-          className="text-[11px] text-[#64748B] hover:text-[#F8FAFC] font-mono spring-transition"
+          className="text-[11px] text-[#878C97] hover:text-[#F8FAFC] font-mono spring-transition"
         >
           Clear
         </button>

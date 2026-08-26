@@ -15,7 +15,7 @@ function SearchContent() {
   const top = ALL_TOP.slice(0, 12);
 
   return (
-    <main className="min-h-screen bg-[#0B0F17] text-[#F8FAFC] px-4 py-10 max-w-5xl mx-auto">
+    <main className="min-h-screen bg-[#0B0E15] text-[#F8FAFC] px-4 py-10 max-w-5xl mx-auto">
       <nav className="text-sm text-slate-400 mb-6">
         <Link href="/" className="hover:text-[#F8FAFC]">CornCine</Link> <span className="mx-2">/</span> <span className="text-slate-200">Search</span>
       </nav>
@@ -27,7 +27,7 @@ function SearchContent() {
       {query && (
         <div className="mb-8 flex flex-wrap gap-2">
           {CATALOG_MODES.map((c) => (
-            <Link key={c.key} href={`/search?q=${encodeURIComponent(query)}&mode=${c.key}`} className={`text-sm rounded-full border px-3 py-1 ${m === c.key ? "bg-[#3B82F6] text-white border-[#3B82F6]" : "border-white/10 hover:bg-white/10"}`}>
+            <Link key={c.key} href={`/search?q=${encodeURIComponent(query)}&mode=${c.key}`} className={`text-sm rounded-full border px-3 py-1 ${m === c.key ? "bg-[#EC69AE] text-[#0B0E15] border-[#EC69AE]" : "border-white/10 hover:bg-white/10"}`}>
               {c.label}
             </Link>
           ))}
@@ -37,7 +37,7 @@ function SearchContent() {
       <h2 className="text-lg font-semibold mb-4">Top searches</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 mb-10">
         {top.map((item) => (
-          <Link key={item.slug} href={`/search?q=${encodeURIComponent(item.title)}`} className="p-3 rounded-lg bg-white/5 border border-white/10 hover:border-[#3B82F6] transition flex flex-col">
+          <Link key={item.slug} href={`/search?q=${encodeURIComponent(item.title)}`} className="p-3 rounded-lg bg-white/5 border border-white/10 hover:border-[#EC69AE] transition flex flex-col">
             <span className="font-semibold text-sm">{item.title}</span>
             <span className="text-xs text-slate-400 mt-1 line-clamp-2">{item.desc}</span>
           </Link>
@@ -46,7 +46,7 @@ function SearchContent() {
 
       <div className="p-4 rounded-xl bg-white/5 border border-white/10 text-center">
         <p className="text-sm text-slate-300 mb-2">Want universal search across all 27+ adult indexers?</p>
-        <Link href="/" className="inline-block px-4 py-2 rounded-lg bg-[#3B82F6] text-white font-bold text-sm hover:bg-[#2563EB] transition">
+        <Link href="/" className="inline-block px-4 py-2 rounded-lg bg-[#EC69AE] text-[#0B0E15] font-bold text-sm hover:bg-[#2563EB] transition">
           Open Homepage Player & Grabber →
         </Link>
       </div>
@@ -56,7 +56,7 @@ function SearchContent() {
 
 export default function SearchPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-[#0B0F17] flex items-center justify-center text-slate-400">Loading search...</div>}>
+    <Suspense fallback={<div className="min-h-screen bg-[#0B0E15] flex items-center justify-center text-slate-400">Loading search...</div>}>
       <SearchContent />
     </Suspense>
   );

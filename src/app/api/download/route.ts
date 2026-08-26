@@ -1,5 +1,6 @@
 import { engine } from "@/lib/download-engine";
 import { extractVideoUrl } from "@/lib/extract";
+import { isBunkrUrl, resolveBunkrAlbum } from "@/lib/providers/bunkr";
 import { DownloadBodySchema } from "@/lib/validation";
 import { checkRateLimit, getClientIp, RL_PRESETS } from "@/lib/rate-limit";
 
@@ -46,6 +47,46 @@ export async function POST(req: Request) {
       }
     } catch {
       return Response.json({ ok: false, error: "invalid url" }, { status: 400 });
+    }
+  }
+
+  // Bunkr links must be signed before the CDN will serve them, and an album
+  // link is many files rather than one. Resolve here so a pasted album URL
+  // queues every file instead of failing on an unsigned request.
+  if (isBunkrUrl(url)) {
+    try {
+      const album = await resolveBunkrAlbum(url, 30);
+      if (album && album.files.length > 0) {
+        const jobs = album.files.map((f) =>
+          engine.submit({
+            url: f.url,
+            title: f.name,
+            source: `Bunkr · ${album.title}`,
+            format: "file",
+          }),
+        );
+        const brief = (j: ReturnType<typeof engine.submit>) => ({
+          id: j.id, title: j.title, source: j.source, format: j.format, status: j.status,
+        });
+        return Response.json({
+          ok: true,
+          kind: "album",
+          album: album.title,
+          count: jobs.length,
+          // Mirror a single job at the top level so existing clients keep working.
+          ...brief(jobs[0]),
+          jobs: jobs.map(brief),
+        });
+      }
+      return Response.json(
+        { ok: false, error: "Could not resolve that Bunkr link (album empty, expired, or region-blocked)." },
+        { status: 422 },
+      );
+    } catch (err) {
+      return Response.json(
+        { ok: false, error: `Bunkr resolve failed: ${err instanceof Error ? err.message : "unknown"}` },
+        { status: 502 },
+      );
     }
   }
 

@@ -347,39 +347,39 @@ export function PlayerModal() {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-      <div onClick={close} className="absolute inset-0 bg-[#0B0F17]/95 backdrop-blur-md" />
-      <div className={cn("relative bg-[#131A26] border border-[#2D3D54] rounded-xl w-full overflow-hidden shadow-2xl animate-scale-in flex flex-col spring-transition", theater ? "max-w-6xl" : "max-w-4xl")}>
+      <div onClick={close} className="absolute inset-0 bg-[#0B0E15]/95 backdrop-blur-md" />
+      <div className={cn("relative bg-[#151922] border border-[#4D5566] rounded-xl w-full overflow-hidden shadow-2xl animate-scale-in flex flex-col spring-transition", theater ? "max-w-6xl" : "max-w-4xl")}>
 
         {/* Header */}
-        <div className="p-3.5 bg-[#1B2433] border-b border-[#1E2A3C] flex items-center justify-between gap-2">
+        <div className="p-3.5 bg-[#202530] border-b border-[#323947] flex items-center justify-between gap-2">
           <div className="flex items-center gap-2 overflow-hidden">
-            <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-[#3B82F6]/15 text-[#3B82F6] border border-[#3B82F6]/30 uppercase font-mono">
+            <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-[#EC69AE]/15 text-[#EC69AE] border border-[#EC69AE]/30 uppercase font-mono">
               {isBook ? "Book" : isArt ? "Image" : isMagnet ? "Torrent" : "Stream"}
             </span>
             <h4 className="text-xs sm:text-sm font-semibold text-[#F8FAFC] truncate" title={player.title}>{player.title}</h4>
           </div>
           <div className="flex items-center gap-2 shrink-0">
-            <button onClick={() => setTheater(!theater)} className="px-2.5 py-1 rounded bg-[#243044] border border-[#1E2A3C] text-xs text-[#94A3B8] hover:text-[#F8FAFC] spring-transition flex items-center gap-1">
+            <button onClick={() => setTheater(!theater)} className="px-2.5 py-1 rounded bg-[#2A303D] border border-[#323947] text-xs text-[#B3B7C1] hover:text-[#F8FAFC] spring-transition flex items-center gap-1">
               <Gauge className="w-3 h-3" /> {theater ? "Normal" : "Theater"}
             </button>
-            <button onClick={close} className="p-1.5 rounded bg-[#243044] border border-[#1E2A3C] text-[#94A3B8] hover:text-[#F8FAFC] spring-transition" aria-label="Close">
+            <button onClick={close} className="p-1.5 rounded bg-[#2A303D] border border-[#323947] text-[#B3B7C1] hover:text-[#F8FAFC] spring-transition" aria-label="Close">
               <X className="w-4 h-4" />
             </button>
           </div>
         </div>
 
         {/* Server Selector Bar */}
-        <div className="px-3.5 py-2 bg-[#131A26] border-b border-[#1E2A3C] flex flex-wrap items-center justify-between gap-2 text-xs">
+        <div className="px-3.5 py-2 bg-[#151922] border-b border-[#323947] flex flex-wrap items-center justify-between gap-2 text-xs">
           <div className="flex items-center gap-1.5 overflow-x-auto scrollbar-none">
-            <span className="text-[#64748B] font-mono text-[11px] uppercase mr-1">Server:</span>
+            <span className="text-[#878C97] font-mono text-[11px] uppercase mr-1">Server:</span>
             {usableServers.length === 0 ? (
-              <span className="text-[11px] text-[#64748B]">none available for this title</span>
+              <span className="text-[11px] text-[#878C97]">none available for this title</span>
             ) : (
               usableServers.map((s) => (
                 <button
                   key={s.key}
                   onClick={() => setServer(s.key)}
-                  className={cn("px-2.5 py-1 rounded text-xs font-semibold spring-transition whitespace-nowrap", server === s.key ? "bg-[#3B82F6] text-white" : "bg-[#1B2433] text-[#94A3B8] border border-[#1E2A3C] hover:text-white")}
+                  className={cn("px-2.5 py-1 rounded text-xs font-semibold spring-transition whitespace-nowrap", server === s.key ? "bg-[#EC69AE] text-[#0B0E15]" : "bg-[#202530] text-[#B3B7C1] border border-[#323947] hover:text-white")}
                   title={s.note}
                 >
                   {s.label}
@@ -387,25 +387,25 @@ export function PlayerModal() {
               ))
             )}
             {isTv && (
-              <span className="flex items-center gap-1 ml-2 text-[#94A3B8] font-mono text-[11px]">
+              <span className="flex items-center gap-1 ml-2 text-[#B3B7C1] font-mono text-[11px]">
                 S
                 <input
                   type="number" min={1} max={99} value={season}
                   onChange={(e) => setSeason(Math.max(1, parseInt(e.target.value || "1", 10)))}
-                  className="w-10 bg-[#1B2433] border border-[#1E2A3C] rounded px-1 py-0.5 text-center"
+                  className="w-10 bg-[#202530] border border-[#323947] rounded px-1 py-0.5 text-center"
                   aria-label="Season"
                 />
                 E
                 <input
                   type="number" min={1} max={999} value={episode}
                   onChange={(e) => setEpisode(Math.max(1, parseInt(e.target.value || "1", 10)))}
-                  className="w-12 bg-[#1B2433] border border-[#1E2A3C] rounded px-1 py-0.5 text-center"
+                  className="w-12 bg-[#202530] border border-[#323947] rounded px-1 py-0.5 text-center"
                   aria-label="Episode"
                 />
               </span>
             )}
           </div>
-          <button onClick={handleDownload} className="px-2.5 py-1 rounded bg-[#10B981]/15 text-[#10B981] border border-[#10B981]/30 text-xs font-semibold hover:bg-[#10B981]/25 spring-transition flex items-center gap-1">
+          <button onClick={handleDownload} className="px-2.5 py-1 rounded bg-[#6AB27A]/15 text-[#6AB27A] border border-[#6AB27A]/30 text-xs font-semibold hover:bg-[#6AB27A]/25 spring-transition flex items-center gap-1">
             <Download className="w-3.5 h-3.5" />
             <span>Download</span>
           </button>
@@ -418,17 +418,17 @@ export function PlayerModal() {
               /\.(pdf)(\?|#|$)/i.test(player.url) ? (
                 <iframe src={player.url} title={player.title} className="w-full h-full border-0 bg-white" />
               ) : (
-                <div className="absolute inset-0 bg-[#1B2433]/95 flex flex-col items-center justify-center p-6 text-center gap-4">
-                  <div className="w-14 h-14 rounded-full bg-[#8B5CF6]/15 border border-[#8B5CF6]/30 flex items-center justify-center">
+                <div className="absolute inset-0 bg-[#202530]/95 flex flex-col items-center justify-center p-6 text-center gap-4">
+                  <div className="w-14 h-14 rounded-full bg-[#DB3E98]/15 border border-[#DB3E98]/30 flex items-center justify-center">
                     <span className="text-xl">📚</span>
                   </div>
                   <div className="space-y-1">
                     <h5 className="text-sm font-bold text-[#F8FAFC]">{player.title}</h5>
-                    <p className="text-xs text-[#94A3B8] max-w-md mx-auto">Book — PDF/EPUB available. Read online or download to your device.</p>
+                    <p className="text-xs text-[#B3B7C1] max-w-md mx-auto">Book — PDF/EPUB available. Read online or download to your device.</p>
                   </div>
                   <div className="flex items-center gap-2">
-                    <a href={player.url} target="_blank" rel="noreferrer" className="px-3.5 py-1.5 rounded-lg bg-[#8B5CF6] text-white text-xs font-semibold hover:bg-violet-600">Read Online</a>
-                    <button onClick={handleDownload} className="px-3.5 py-1.5 rounded-lg bg-[#243044] border border-[#1E2A3C] text-xs font-semibold text-[#F8FAFC] hover:border-[#2D3D54]">Download</button>
+                    <a href={player.url} target="_blank" rel="noreferrer" className="px-3.5 py-1.5 rounded-lg bg-[#DB3E98] text-[#0B0E15] text-xs font-semibold hover:bg-violet-600">Read Online</a>
+                    <button onClick={handleDownload} className="px-3.5 py-1.5 rounded-lg bg-[#2A303D] border border-[#323947] text-xs font-semibold text-[#F8FAFC] hover:border-[#4D5566]">Download</button>
                   </div>
                 </div>
               )
@@ -442,33 +442,33 @@ export function PlayerModal() {
                 <img src={player.url} alt={player.title} className="max-w-full max-h-full object-contain" />
               </a>
             ) : (
-              <EmptyState icon={<ImageIcon className="w-8 h-8 text-[#64748B] mx-auto mb-2" />} text="No image source for this item." />
+              <EmptyState icon={<ImageIcon className="w-8 h-8 text-[#878C97] mx-auto mb-2" />} text="No image source for this item." />
             )
           ) : isMagnet ? (
-            <div className="absolute inset-0 bg-[#1B2433]/95 flex flex-col items-center justify-center p-6 text-center gap-4">
+            <div className="absolute inset-0 bg-[#202530]/95 flex flex-col items-center justify-center p-6 text-center gap-4">
               <div className="w-14 h-14 rounded-full bg-[#F59E0B]/10 border border-[#F59E0B]/25 flex items-center justify-center">
                 <Magnet className="w-7 h-7 text-[#F59E0B]" />
               </div>
               <div className="space-y-1">
                 <h5 className="text-sm font-bold text-[#F8FAFC]">BitTorrent Magnet</h5>
-                <p className="text-xs text-[#94A3B8] max-w-md mx-auto">
+                <p className="text-xs text-[#B3B7C1] max-w-md mx-auto">
                   This release is a BitTorrent URI. Launch your torrent client, or queue it on the server (requires aria2c or webtorrent installed).
                 </p>
               </div>
               <div className="flex items-center gap-2">
                 <a href={player.url || "#"} className="px-3.5 py-1.5 rounded-lg bg-[#F59E0B] text-black text-xs font-semibold hover:bg-amber-400 spring-transition">Launch Client</a>
-                <button onClick={handleDownload} className="px-3.5 py-1.5 rounded-lg bg-[#243044] border border-[#1E2A3C] text-xs font-semibold text-[#F8FAFC] hover:border-[#2D3D54] spring-transition">Queue on Server</button>
+                <button onClick={handleDownload} className="px-3.5 py-1.5 rounded-lg bg-[#2A303D] border border-[#323947] text-xs font-semibold text-[#F8FAFC] hover:border-[#4D5566] spring-transition">Queue on Server</button>
               </div>
             </div>
           ) : resolving ? (
             <EmptyState
-              icon={<Loader2 className="w-8 h-8 animate-spin text-[#64748B] mx-auto mb-2" />}
+              icon={<Loader2 className="w-8 h-8 animate-spin text-[#878C97] mx-auto mb-2" />}
               text="Resolving stream source…"
               sub="Extracting the real video URL from the provider (usually 5–30 seconds)."
             />
           ) : resolveFailed ? (
             <EmptyState
-              icon={<Film className="w-8 h-8 text-[#64748B] mx-auto mb-2" />}
+              icon={<Film className="w-8 h-8 text-[#878C97] mx-auto mb-2" />}
               text="Couldn't extract a stream from this source."
               sub="The provider may be blocking server playback. Download still works — or open the source page directly."
             />
@@ -505,7 +505,7 @@ export function PlayerModal() {
             />
           ) : (
             <EmptyState
-              icon={<Film className="w-8 h-8 text-[#64748B] mx-auto mb-2" />}
+              icon={<Film className="w-8 h-8 text-[#878C97] mx-auto mb-2" />}
               text="No stream source available for this title."
               sub="This catalog entry has no TMDB/IMDb id, so no embed server can be built for it. Use Download or search the title on a provider."
             />
@@ -558,8 +558,8 @@ export function PlayerModal() {
         </div>
 
         {/* Footer */}
-        <div className="p-3 bg-[#1B2433] border-t border-[#1E2A3C] flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
-          <div className="flex items-center gap-2 text-[#64748B] font-mono text-[11px] min-w-0">
+        <div className="p-3 bg-[#202530] border-t border-[#323947] flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+          <div className="flex items-center gap-2 text-[#878C97] font-mono text-[11px] min-w-0">
             <span className="truncate">
               {embedUrlFinal && server !== "direct"
                 ? `Embed: ${new URL(embedUrlFinal).hostname}`
@@ -571,14 +571,14 @@ export function PlayerModal() {
           </div>
           {(showNativeVideo || isDirectHls) && (
             <div className="flex items-center gap-1 self-end sm:self-auto font-mono text-xs shrink-0">
-              <span className="text-[#64748B] mr-1">Speed:</span>
+              <span className="text-[#878C97] mr-1">Speed:</span>
               {[1.0, 1.25, 1.5, 2.0].map((s) => (
                 <button
                   key={s}
                   onClick={() => setSpeed(s)}
                   className={cn(
                     "px-2 py-0.5 rounded border text-xs spring-transition",
-                    speed === s ? "bg-[#3B82F6] text-white border-[#3B82F6]" : "bg-[#243044] border-[#1E2A3C] text-[#94A3B8] hover:text-white"
+                    speed === s ? "bg-[#EC69AE] text-[#0B0E15] border-[#EC69AE]" : "bg-[#2A303D] border-[#323947] text-[#B3B7C1] hover:text-white"
                   )}
                 >
                   {s}x
@@ -597,8 +597,8 @@ function EmptyState({ icon, text, sub }: { icon: React.ReactNode; text: string; 
   return (
     <div className="px-6 text-center">
       {icon}
-      <p className="text-sm text-[#94A3B8]">{text}</p>
-      {sub && <p className="text-xs text-[#64748B] mt-1 max-w-md">{sub}</p>}
+      <p className="text-sm text-[#B3B7C1]">{text}</p>
+      {sub && <p className="text-xs text-[#878C97] mt-1 max-w-md">{sub}</p>}
     </div>
   );
 }

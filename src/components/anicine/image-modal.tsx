@@ -87,7 +87,7 @@ export function ImageModal() {
       {/* Header Controls */}
       <div className="absolute top-0 inset-x-0 p-4 bg-gradient-to-b from-black/80 to-transparent flex items-center justify-between z-20 pointer-events-auto">
         <div className="flex items-center space-x-3 overflow-hidden max-w-[65%]">
-          <span className="px-2 py-0.5 rounded text-[10px] font-bold font-mono bg-[#10B981]/20 text-[#10B981] border border-[#10B981]/30 uppercase flex items-center gap-1">
+          <span className="px-2 py-0.5 rounded text-[10px] font-bold font-mono bg-[#6AB27A]/20 text-[#6AB27A] border border-[#6AB27A]/30 uppercase flex items-center gap-1">
             <ImageIcon className="w-3 h-3" />
             HD Photo
           </span>
@@ -121,7 +121,7 @@ export function ImageModal() {
           {/* Download button */}
           <button
             onClick={handleDownload}
-            className="px-3.5 py-1.5 rounded-lg bg-[#10B981] hover:bg-[#059669] text-black font-bold text-xs flex items-center gap-1.5 transition shadow-lg"
+            className="px-3.5 py-1.5 rounded-lg bg-[#6AB27A] hover:bg-[#059669] text-black font-bold text-xs flex items-center gap-1.5 transition shadow-lg"
           >
             <Download className="w-4 h-4" />
             <span className="hidden sm:inline">Save Image</span>
@@ -141,7 +141,7 @@ export function ImageModal() {
       <div className="relative max-w-7xl max-h-[85vh] w-full h-full flex items-center justify-center p-4 z-10 overflow-hidden">
         {loading && (
           <div className="absolute inset-0 flex items-center justify-center z-0">
-            <Loader2 className="w-8 h-8 text-[#10B981] animate-spin" />
+            <Loader2 className="w-8 h-8 text-[#6AB27A] animate-spin" />
           </div>
         )}
         
@@ -183,7 +183,7 @@ export function ImageModal() {
                 setLoading(true);
               }}
               className={`w-12 h-12 rounded-lg overflow-hidden border-2 transition shrink-0 ${
-                idx === currentIndex ? "border-[#10B981] scale-105" : "border-white/20 opacity-60 hover:opacity-100"
+                idx === currentIndex ? "border-[#6AB27A] scale-105" : "border-white/20 opacity-60 hover:opacity-100"
               }`}
             >
               <img src={img} alt={`Thumb ${idx + 1}`} className="w-full h-full object-cover" />

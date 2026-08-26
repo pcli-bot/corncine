@@ -60,7 +60,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
   };
 
   return (
-    <main className="min-h-screen bg-[#0B0F17] text-[#F8FAFC] px-4 py-10 max-w-5xl mx-auto">
+    <main className="min-h-screen bg-[#0B0E15] text-[#F8FAFC] px-4 py-10 max-w-5xl mx-auto">
       <nav className="text-sm text-slate-400 mb-6">
         <Link href="/" className="hover:text-[#F8FAFC]">CornCine</Link>
         <span className="mx-2">/</span>

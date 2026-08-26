@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import Script from "next/script";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
-import { CATALOG_MODES } from "@/lib/anicine-data";
 import { ErrorBoundary } from "@/components/error-boundary";
 import { AgeGate } from "@/components/corncine/age-gate";
 
@@ -136,25 +134,18 @@ export default function RootLayout({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdWebsite) }}
       />
       <body
-        className={`${inter.variable} ${jetbrains.variable} antialiased font-sans bg-[#0B0F17] text-[#F8FAFC] min-h-screen flex flex-col overflow-x-hidden`}
+        className={`${inter.variable} ${jetbrains.variable} antialiased font-sans bg-[#0B0E15] text-[#F8FAFC] min-h-screen flex flex-col overflow-x-hidden`}
       >
         <ErrorBoundary>
           <AgeGate />
           {children}
         </ErrorBoundary>
-        <footer className="border-t border-white/10 mt-12 py-8 px-4 text-sm text-slate-500">
-          <div className="max-w-5xl mx-auto flex flex-col gap-3">
-            <div className="flex flex-wrap gap-x-4 gap-y-2">
-              {CATALOG_MODES.map((m) => (
-                <Link key={m.key} href={`/category/${m.key}`} className="hover:text-slate-200">
-                  {m.label}
-                </Link>
-              ))}
-              <Link href="/sitemap.xml" className="hover:text-slate-200">Sitemap</Link>
-            </div>
-            <p>© CornCine — universal stream &amp; download index across {CATALOG_MODES.reduce((n, m) => n + m.count, 0)}+ sources.</p>
-          </div>
-        </footer>
+        {/* The site footer is rendered by <Footer /> at page level. A second
+            footer used to live here, so every page shipped two <footer>
+            landmarks: duplicated links, and an ambiguous landmark for screen
+            readers. Its catalog and sitemap links all exist in <Footer />,
+            which also carries the Legal column. Its text-slate-500 body copy
+            measured 4.06:1 on this surface, under the 4.5 AA floor. */}
         <Toaster position="bottom-right" richColors closeButton />
       </body>
     </html>

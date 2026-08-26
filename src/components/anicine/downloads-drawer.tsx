@@ -42,24 +42,24 @@ export function DownloadsDrawer() {
       {/* Backdrop */}
       <div
         onClick={() => setOpen(false)}
-        className={cn("absolute inset-0 bg-[#0B0F17]/80 backdrop-blur-sm transition-opacity duration-300", open ? "opacity-100" : "opacity-0")}
+        className={cn("absolute inset-0 bg-[#0B0E15]/80 backdrop-blur-sm transition-opacity duration-300", open ? "opacity-100" : "opacity-0")}
       />
       {/* Drawer */}
       <aside
         className={cn(
-          "absolute right-0 top-0 bottom-0 w-full max-w-md bg-[#1B2433] border-l border-[#1E2A3C] flex flex-col shadow-2xl transition-transform duration-300",
+          "absolute right-0 top-0 bottom-0 w-full max-w-md bg-[#202530] border-l border-[#323947] flex flex-col shadow-2xl transition-transform duration-300",
           open ? "translate-x-0" : "translate-x-full"
         )}
       >
         {/* Header */}
-        <div className="flex items-center justify-between border-b border-[#1E2A3C] p-4">
+        <div className="flex items-center justify-between border-b border-[#323947] p-4">
           <div className="flex items-center gap-2">
-            <FolderOpen className="w-4 h-4 text-[#3B82F6]" />
+            <FolderOpen className="w-4 h-4 text-[#EC69AE]" />
             <h3 className="text-sm font-semibold text-[#F8FAFC]">Downloads Monitor</h3>
           </div>
           <button
             onClick={() => setOpen(false)}
-            className="p-1.5 rounded-lg bg-[#131A26] border border-[#1E2A3C] text-[#94A3B8] hover:text-[#F8FAFC] spring-transition"
+            className="p-1.5 rounded-lg bg-[#151922] border border-[#323947] text-[#B3B7C1] hover:text-[#F8FAFC] spring-transition"
             aria-label="Close"
           >
             <X className="w-4 h-4" />
@@ -67,14 +67,14 @@ export function DownloadsDrawer() {
         </div>
 
         {/* Summary */}
-        <div className="p-4 border-b border-[#1E2A3C]">
-          <div className="bg-[#0B0F17] border border-[#1E2A3C] rounded-lg p-3 flex items-center justify-between font-mono text-xs">
+        <div className="p-4 border-b border-[#323947]">
+          <div className="bg-[#0B0E15] border border-[#323947] rounded-lg p-3 flex items-center justify-between font-mono text-xs">
             <div>
-              <div className="text-[#64748B]">Overall speed</div>
-              <div className="text-[#10B981] font-semibold mt-0.5">{formatSpeed(totalSpeed)}</div>
+              <div className="text-[#878C97]">Overall speed</div>
+              <div className="text-[#6AB27A] font-semibold mt-0.5">{formatSpeed(totalSpeed)}</div>
             </div>
             <div className="text-right">
-              <div className="text-[#64748B]">Active / Done / Failed</div>
+              <div className="text-[#878C97]">Active / Done / Failed</div>
               <div className="text-[#F8FAFC] font-semibold mt-0.5">{active} / {done} / {errored}</div>
             </div>
           </div>
@@ -83,10 +83,10 @@ export function DownloadsDrawer() {
         {/* Queue list */}
         <div className="flex-1 overflow-y-auto scrollbar-thin p-4 space-y-3">
           {tasks.length === 0 ? (
-            <div className="h-full flex flex-col items-center justify-center text-center gap-2 text-[#64748B]">
+            <div className="h-full flex flex-col items-center justify-center text-center gap-2 text-[#878C97]">
               <Clock className="w-8 h-8" />
               <p className="text-xs">No active downloads.</p>
-              <p className="text-[11px] text-[#64748B]">Start a download from the catalog or Link Downloader.</p>
+              <p className="text-[11px] text-[#878C97]">Start a download from the catalog or Link Downloader.</p>
             </div>
           ) : (
             tasks.map((t) => <TaskRow key={t.id} task={t} onPause={pauseTask} onResume={resumeTask} onRemove={removeTask} />)
@@ -94,21 +94,21 @@ export function DownloadsDrawer() {
         </div>
 
         {/* Footer */}
-        <div className="p-4 border-t border-[#1E2A3C] space-y-3 bg-[#1B2433]">
-          <div className="flex items-center justify-between text-[11px] text-[#64748B] font-mono">
+        <div className="p-4 border-t border-[#323947] space-y-3 bg-[#202530]">
+          <div className="flex items-center justify-between text-[11px] text-[#878C97] font-mono">
             <span>Storage:</span>
-            <code className="text-[#F8FAFC] bg-[#0B0F17] px-2 py-0.5 rounded border border-[#1E2A3C]">server: .downloads/&lt;job&gt;</code>
+            <code className="text-[#F8FAFC] bg-[#0B0E15] px-2 py-0.5 rounded border border-[#323947]">server: .downloads/&lt;job&gt;</code>
           </div>
           <div className="grid grid-cols-2 gap-2">
             <button
               onClick={() => { clearTasks(); showToast("Queue cleared", "info"); }}
-              className="py-2 rounded-lg bg-[#131A26] border border-[#1E2A3C] hover:bg-[#243044] text-xs font-semibold text-[#94A3B8] hover:text-[#F8FAFC] spring-transition flex items-center justify-center gap-1.5"
+              className="py-2 rounded-lg bg-[#151922] border border-[#323947] hover:bg-[#2A303D] text-xs font-semibold text-[#B3B7C1] hover:text-[#F8FAFC] spring-transition flex items-center justify-center gap-1.5"
             >
               <Trash2 className="w-3.5 h-3.5" /> Clear All
             </button>
             <button
               onClick={() => setOpen(false)}
-              className="py-2 rounded-lg bg-[#3B82F6] text-white text-xs font-semibold hover:bg-blue-600 spring-transition"
+              className="py-2 rounded-lg bg-[#EC69AE] text-[#0B0E15] text-xs font-semibold hover:bg-blue-600 spring-transition"
             >
               Hide
             </button>
@@ -128,12 +128,12 @@ function TaskRow({ task, onPause, onResume, onRemove }: {
   const canPause = task.status === "active" || task.status === "queued";
   const canResume = task.status === "paused" || (task.status === "error" && !!task.url);
   return (
-    <div className="rounded-lg border border-[#1E2A3C] bg-[#131A26] p-3 space-y-2 animate-fade-in">
+    <div className="rounded-lg border border-[#323947] bg-[#151922] p-3 space-y-2 animate-fade-in">
       <div className="flex items-start justify-between gap-2">
         <div className="min-w-0 flex-1">
           <div className="text-xs font-semibold text-[#F8FAFC] truncate">{task.title}</div>
-          <div className="text-[10px] font-mono text-[#64748B] flex items-center gap-1.5 mt-0.5">
-            <span className="text-[#94A3B8]">{task.source}</span>
+          <div className="text-[10px] font-mono text-[#878C97] flex items-center gap-1.5 mt-0.5">
+            <span className="text-[#B3B7C1]">{task.source}</span>
             <span>•</span>
             <span>{task.quality}</span>
             <span>•</span>
@@ -145,16 +145,16 @@ function TaskRow({ task, onPause, onResume, onRemove }: {
 
       {/* Progress */}
       <div className="space-y-1">
-        <div className="h-1.5 rounded-full bg-[#0B0F17] overflow-hidden">
+        <div className="h-1.5 rounded-full bg-[#0B0E15] overflow-hidden">
           <div
             className={cn(
               "h-full rounded-full spring-transition",
-              task.status === "done" ? "bg-[#10B981]" : task.status === "error" ? "bg-[#EF4444]" : task.status === "paused" ? "bg-[#64748B]" : "bg-[#3B82F6]"
+              task.status === "done" ? "bg-[#6AB27A]" : task.status === "error" ? "bg-[#EF4444]" : task.status === "paused" ? "bg-[#878C97]" : "bg-[#EC69AE]"
             )}
             style={{ width: `${task.progress}%` }}
           />
         </div>
-        <div className="flex items-center justify-between text-[10px] font-mono text-[#64748B]">
+        <div className="flex items-center justify-between text-[10px] font-mono text-[#878C97]">
           <span>{task.progress.toFixed(1)}%</span>
           <span>{task.status === "active" ? formatSpeed(task.speed) : task.status === "paused" ? "Paused" : task.status === "done" ? "Completed" : task.status === "error" ? "Failed" : "Queued"}</span>
         </div>
@@ -181,22 +181,22 @@ function TaskRow({ task, onPause, onResume, onRemove }: {
               a.click();
               a.remove();
             }}
-            className="px-2 py-1 rounded bg-[#10B981]/15 text-[#10B981] border border-[#10B981]/30 hover:bg-[#10B981]/25 text-[11px] font-semibold spring-transition flex items-center gap-1"
+            className="px-2 py-1 rounded bg-[#6AB27A]/15 text-[#6AB27A] border border-[#6AB27A]/30 hover:bg-[#6AB27A]/25 text-[11px] font-semibold spring-transition flex items-center gap-1"
           >
             ⬇️ Save
           </button>
         )}
         {canPause && (
-          <button onClick={() => onPause(task.id)} className="p-1.5 rounded bg-[#1B2433] border border-[#1E2A3C] text-[#94A3B8] hover:text-[#F8FAFC] spring-transition" aria-label="Pause">
+          <button onClick={() => onPause(task.id)} className="p-1.5 rounded bg-[#202530] border border-[#323947] text-[#B3B7C1] hover:text-[#F8FAFC] spring-transition" aria-label="Pause">
             <Pause className="w-3.5 h-3.5" />
           </button>
         )}
         {canResume && (
-          <button onClick={() => onResume(task.id)} className="p-1.5 rounded bg-[#1B2433] border border-[#1E2A3C] text-[#10B981] hover:text-[#10B981] spring-transition flex items-center gap-1" aria-label={task.status === "paused" ? "Resume" : "Retry"}>
+          <button onClick={() => onResume(task.id)} className="p-1.5 rounded bg-[#202530] border border-[#323947] text-[#6AB27A] hover:text-[#6AB27A] spring-transition flex items-center gap-1" aria-label={task.status === "paused" ? "Resume" : "Retry"}>
             {task.status === "paused" ? <Play className="w-3.5 h-3.5" /> : <RotateCw className="w-3.5 h-3.5" />}
           </button>
         )}
-        <button onClick={() => onRemove(task.id)} className="p-1.5 rounded bg-[#1B2433] border border-[#1E2A3C] text-[#94A3B8] hover:text-[#EF4444] hover:border-[#EF4444]/30 spring-transition" aria-label="Remove">
+        <button onClick={() => onRemove(task.id)} className="p-1.5 rounded bg-[#202530] border border-[#323947] text-[#B3B7C1] hover:text-[#EF4444] hover:border-[#EF4444]/30 spring-transition" aria-label="Remove">
           <Trash2 className="w-3.5 h-3.5" />
         </button>
       </div>
@@ -206,10 +206,10 @@ function TaskRow({ task, onPause, onResume, onRemove }: {
 
 function StatusBadge({ status }: { status: DownloadTask["status"] }) {
   const map: Record<DownloadTask["status"], { icon: React.ReactNode; cls: string; label: string }> = {
-    queued: { icon: <Clock className="w-3 h-3" />, cls: "text-[#64748B] bg-[#1B2433] border-[#1E2A3C]", label: "Queued" },
-    active: { icon: <Loader2 className="w-3 h-3 animate-spin" />, cls: "text-[#3B82F6] bg-[#3B82F6]/10 border-[#3B82F6]/30", label: "Active" },
-    paused: { icon: <Pause className="w-3 h-3" />, cls: "text-[#94A3B8] bg-[#1B2433] border-[#1E2A3C]", label: "Paused" },
-    done: { icon: <CheckCircle2 className="w-3 h-3" />, cls: "text-[#10B981] bg-[#10B981]/10 border-[#10B981]/30", label: "Done" },
+    queued: { icon: <Clock className="w-3 h-3" />, cls: "text-[#878C97] bg-[#202530] border-[#323947]", label: "Queued" },
+    active: { icon: <Loader2 className="w-3 h-3 animate-spin" />, cls: "text-[#EC69AE] bg-[#EC69AE]/10 border-[#EC69AE]/30", label: "Active" },
+    paused: { icon: <Pause className="w-3 h-3" />, cls: "text-[#B3B7C1] bg-[#202530] border-[#323947]", label: "Paused" },
+    done: { icon: <CheckCircle2 className="w-3 h-3" />, cls: "text-[#6AB27A] bg-[#6AB27A]/10 border-[#6AB27A]/30", label: "Done" },
     error: { icon: <AlertCircle className="w-3 h-3" />, cls: "text-[#EF4444] bg-[#EF4444]/10 border-[#EF4444]/30", label: "Error" },
   };
   const s = map[status];

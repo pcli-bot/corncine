@@ -9,11 +9,11 @@ export const metadata: Metadata = {
 
 export default function CompliancePage() {
   return (
-    <main className="min-h-screen bg-[#0B0F17] text-[#F8FAFC] px-4 py-12">
+    <main className="min-h-screen bg-[#0B0E15] text-[#F8FAFC] px-4 py-12">
       <div className="max-w-3xl mx-auto space-y-6">
         <h1 className="text-2xl font-extrabold">18 U.S.C. § 2257 Record-Keeping Requirements Compliance Statement</h1>
 
-        <div className="rounded-2xl border border-white/10 bg-[#131A26] p-6 space-y-4 text-sm leading-relaxed text-[#CBD5E1]">
+        <div className="rounded-2xl border border-white/10 bg-[#151922] p-6 space-y-4 text-sm leading-relaxed text-[#B3B7C1]">
           <p className="font-semibold text-[#F8FAFC]">
             All models, actors, actresses and other persons that appear in any visual portrayal of
             actual or simulated sexually explicit conduct appearing on or otherwise contained in
@@ -22,7 +22,7 @@ export default function CompliancePage() {
           </p>
         </div>
 
-        <div className="rounded-2xl border border-white/10 bg-[#131A26] p-6 space-y-4 text-sm leading-relaxed text-[#CBD5E1]">
+        <div className="rounded-2xl border border-white/10 bg-[#151922] p-6 space-y-4 text-sm leading-relaxed text-[#B3B7C1]">
           <h2 className="text-lg font-bold text-[#F8FAFC]">Producer &amp; Records</h2>
           <p>
             CornCine is <strong>not</strong> a &ldquo;producer&rdquo; (primary or secondary) of any
@@ -46,7 +46,7 @@ export default function CompliancePage() {
           </p>
         </div>
 
-        <div className="rounded-2xl border border-white/10 bg-[#131A26] p-6 space-y-4 text-sm leading-relaxed text-[#CBD5E1]">
+        <div className="rounded-2xl border border-white/10 bg-[#151922] p-6 space-y-4 text-sm leading-relaxed text-[#B3B7C1]">
           <h2 className="text-lg font-bold text-[#F8FAFC]">Exemption Statement</h2>
           <p>
             To the extent any content on this website falls within the exemption set forth in
@@ -57,11 +57,11 @@ export default function CompliancePage() {
           <p>
             Any content that appears in violation of this policy, or of applicable law, will be
             removed promptly upon notice — see our{" "}
-            <a href="/dmca" className="text-[#3B82F6] underline">DMCA / Takedown Policy</a>.
+            <a href="/dmca" className="text-[#EC69AE] underline">DMCA / Takedown Policy</a>.
           </p>
         </div>
 
-        <p className="text-xs text-[#64748B]">Last updated: August 2026</p>
+        <p className="text-xs text-[#878C97]">Last updated: August 2026</p>
       </div>
     </main>
   );

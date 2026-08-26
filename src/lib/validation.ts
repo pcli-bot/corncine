@@ -29,7 +29,7 @@ export const DownloadBodySchema = z.object({
   url: z.string().trim().min(1).max(2048).refine((v) => /^(https?:\/\/|magnet:)/i.test(v), "url must be http(s) or magnet:"),
   title: z.string().max(300).optional(),
   source: z.string().max(100).optional(),
-  format: z.enum(["video", "audio", "lossless"]).optional().default("video"),
+  format: z.enum(["video", "audio", "lossless", "file"]).optional().default("video"),
   quality: z.string().max(20).optional().default("best"),
   engine: z.string().max(30).optional(),
 });
