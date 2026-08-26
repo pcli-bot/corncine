@@ -1,6 +1,7 @@
 "use client";
 
 import { PILLARS, FAQS, DIRECTORY } from "@/lib/anicine-data";
+import { IconByName } from "@/lib/anicine-icons";
 import { useAnicineStore } from "@/lib/anicine-store";
 import { cn } from "@/lib/utils";
 
@@ -39,8 +40,8 @@ export function KnowledgeBase() {
             const t = tone[p.tone];
             return (
               <article key={p.title} className="bg-[#151922] border border-[#323947] rounded-xl p-5 space-y-3 card-hover">
-                <div className={cn("w-11 h-11 rounded-lg flex items-center justify-center text-xl border", t.bg, t.border)}>
-                  <span>{p.emoji}</span>
+                <div className={cn("w-11 h-11 rounded-lg flex items-center justify-center border", t.bg, t.border)}>
+                  <IconByName name={p.icon} className={cn("w-5 h-5", t.text)} />
                 </div>
                 <h3 className="text-base font-bold text-[#F8FAFC]">{p.title}</h3>
                 <p className="text-xs text-[#B3B7C1] leading-relaxed" dangerouslySetInnerHTML={{ __html: p.body.replace(/<strong>/g, `<strong class="${t.text} font-semibold">`) }} />
@@ -112,7 +113,8 @@ function DirectoryHub() {
         {DIRECTORY.map((cat) => (
           <div key={cat.title} className="space-y-2.5">
             <div className="font-bold text-[#F8FAFC] flex items-center gap-1.5 border-b border-[#323947] pb-1.5">
-              <span>{cat.emoji}</span> <span>{cat.title}</span>
+              <IconByName name={cat.icon} className="w-3.5 h-3.5 text-[#EC69AE]" />
+              <span>{cat.title}</span>
             </div>
             <ul className="space-y-1.5">
               {(cat.links as Array<{ label: string; q: string; mode: import("@/lib/anicine-data").ModeKey; action?: string }>)?.map((l, i) => (

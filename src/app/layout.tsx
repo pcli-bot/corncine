@@ -77,13 +77,25 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "/",
-    images: [{ url: "/og-corncine.png", width: 1200, height: 630, alt: "CornCine — 22 Adult Providers" }],
+    images: [{ url: "/og-corncine.jpg", width: 1200, height: 630, alt: "CornCine — 22 Adult Providers" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "CornCine — JAV, Hentai, Desi & OnlyFans Leaks 4K",
     description: "JAV, hentai, DesiTales2, tubes 4K, OnlyFans leaks — 22+ adult providers.",
-    images: ["/og-corncine.png"],
+    images: ["/og-corncine.jpg"],
+  },
+  icons: {
+    // .ico first: it carries hand-checked 16-48px rasters, which is the size
+    // Google draws in a result row. The SVG is offered to browsers that
+    // prefer it.
+    icon: [
+      { url: "/favicon.ico", sizes: "32x32" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
+    ],
+    // iOS does not render SVG touch icons; it needs a PNG or it silently
+    // falls back to a screenshot of the page.
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
   },
   verification: {
     google: process.env.NEXT_PUBLIC_GOOGLE_VERIFICATION || undefined,

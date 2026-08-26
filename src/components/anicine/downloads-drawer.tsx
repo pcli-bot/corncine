@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { useAnicineStore, formatSpeed, type DownloadTask } from "@/lib/anicine-store";
 import { showToast } from "@/lib/anicine-toast";
-import { X, Trash2, Pause, Play, CheckCircle2, Loader2, AlertCircle, Clock, FolderOpen, RotateCw } from "lucide-react";
+import { X, Trash2, Pause, Play, CheckCircle2, Loader2, AlertCircle, Clock, FolderOpen, RotateCw, Download } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export function DownloadsDrawer() {
@@ -183,7 +183,7 @@ function TaskRow({ task, onPause, onResume, onRemove }: {
             }}
             className="px-2 py-1 rounded bg-[#6AB27A]/15 text-[#6AB27A] border border-[#6AB27A]/30 hover:bg-[#6AB27A]/25 text-[11px] font-semibold spring-transition flex items-center gap-1"
           >
-            ⬇️ Save
+            <Download className="w-3 h-3" /> Save
           </button>
         )}
         {canPause && (

@@ -3,7 +3,7 @@
 import { API_BASE } from "@/lib/api";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Play, Download, Star, Users, Search as SearchIcon, Loader2, Film, Heart, ExternalLink, SlidersHorizontal, Image as ImageIcon, Sparkles, Video } from "lucide-react";
+import { Play, Download, Star, Users, Search as SearchIcon, Loader2, Film, Heart, ExternalLink, SlidersHorizontal, Image as ImageIcon, Sparkles, Video, Camera } from "lucide-react";
 import { useAnicineStore } from "@/lib/anicine-store";
 import {
   CATALOG_MODES,
@@ -221,25 +221,29 @@ export function CatalogBrowser() {
           {/* Media Kind and Quality Filter Buttons */}
           <div className="flex items-center gap-1 pl-2 border-l border-[#323947]">
             {[
-              { key: "all", label: "All" },
-              { key: "video", label: "🎬 Videos" },
-              { key: "photo", label: "📸 Photos" },
-              { key: "4k", label: "✨ 4K" },
-              { key: "1080p", label: "1080p" },
-            ].map((f) => (
-              <button
-                key={f.key}
-                onClick={() => setFilter(f.key as FilterType)}
-                className={cn(
-                  "px-2.5 py-1 rounded text-xs font-semibold spring-transition",
-                  filter === f.key
-                    ? "bg-[#EC69AE] text-[#0B0E15] shadow-md shadow-blue-500/20"
-                    : "bg-[#151922] border border-[#323947] text-[#B3B7C1] hover:text-[#F8FAFC]"
-                )}
-              >
-                {f.label}
-              </button>
-            ))}
+              { key: "all", label: "All", icon: null },
+              { key: "video", label: "Videos", icon: Film },
+              { key: "photo", label: "Photos", icon: Camera },
+              { key: "4k", label: "4K", icon: Sparkles },
+              { key: "1080p", label: "1080p", icon: null },
+            ].map((f) => {
+              const Icon = (f as { icon?: React.ComponentType<{ className?: string }> }).icon;
+              return (
+                <button
+                  key={f.key}
+                  onClick={() => setFilter(f.key as FilterType)}
+                  className={cn(
+                    "inline-flex items-center gap-1 px-2.5 py-1 rounded text-xs font-semibold spring-transition",
+                    filter === f.key
+                      ? "bg-[#EC69AE] text-[#0B0E15] shadow-md shadow-blue-500/20"
+                      : "bg-[#151922] border border-[#323947] text-[#B3B7C1] hover:text-[#F8FAFC]"
+                  )}
+                >
+                  {Icon ? <Icon className="w-3 h-3" /> : null}
+                  {f.label}
+                </button>
+              );
+            })}
           </div>
         </div>
       </div>

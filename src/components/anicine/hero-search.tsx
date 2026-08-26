@@ -5,6 +5,7 @@ import { useEffect, useState, useCallback } from "react";
 import { Search, Link2, ClipboardPaste, Play, Download, ShieldCheck, Sparkles } from "lucide-react";
 import { useAnicineStore } from "@/lib/anicine-store";
 import { TOPICS, detectLink, type LinkDetection } from "@/lib/anicine-data";
+import { IconByName } from "@/lib/anicine-icons";
 import { showToast } from "@/lib/anicine-toast";
 import { cn } from "@/lib/utils";
 
@@ -122,9 +123,9 @@ export function HeroSearch() {
                 <button
                   key={t.key}
                   onClick={() => onTopic(t.query, t.mode)}
-                  className="px-3 py-1 rounded-full bg-[#202530] border border-[#323947] text-[#B3B7C1] hover:text-white hover:border-[#EC69AE] hover:bg-[#EC69AE]/15 font-medium spring-transition"
+                  className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#202530] border border-[#323947] text-[#B3B7C1] hover:text-white hover:border-[#EC69AE] hover:bg-[#EC69AE]/15 font-medium spring-transition"
                 >
-                  <span className="mr-1">{t.emoji}</span>
+                  <IconByName name={t.icon} className="w-3.5 h-3.5" />
                   {t.label}
                 </button>
               ))}
@@ -244,7 +245,7 @@ function LinkDownloader() {
           {detection && detection.kind !== "unknown" && (
             <div className="p-2.5 rounded-lg bg-[#0B0E15] border border-[#323947] text-xs font-mono flex items-center justify-between spring-transition animate-fade-in">
               <div className="flex items-center gap-2">
-                <span className="text-sm">{detection.icon}</span>
+                <IconByName name={detection.icon} className="w-4 h-4 text-[#EC69AE]" />
                 <span className="text-[#EC69AE] font-semibold">{detection.platform}</span>
                 <span className="text-[#949AA5]">•</span>
                 <span className="text-[#B3B7C1]">{detection.type}</span>

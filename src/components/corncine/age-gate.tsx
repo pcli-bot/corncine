@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { ShieldAlert } from "lucide-react";
 
 export function AgeGate() {
   const [open, setOpen] = useState(false);
@@ -26,7 +27,7 @@ export function AgeGate() {
     <div className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
       <div className="w-full max-w-md rounded-2xl border border-white/10 bg-[#151922] p-6 text-center shadow-2xl">
         <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-[#EF4444]/15 border border-[#EF4444]/30">
-          <span className="text-xl">🔞</span>
+          <ShieldAlert className="w-6 h-6 text-[#EF4444]" aria-label="18+ warning" />
         </div>
         <h2 className="text-lg font-extrabold text-[#F8FAFC]">Adults only — 18+</h2>
         <p className="mt-2 text-sm leading-relaxed text-[#B3B7C1]">

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Search, Download, ExternalLink, Menu, X, TerminalSquare } from "lucide-react";
+import { Search, Download, ExternalLink, Menu, X } from "lucide-react";
 import { useAnicineStore } from "@/lib/anicine-store";
 import { cn } from "@/lib/utils";
 
@@ -38,8 +38,9 @@ export function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-3">
         {/* Brand */}
         <a href="#" className="flex items-center gap-2.5 shrink-0">
-          <span className="relative grid place-items-center w-9 h-9 rounded-xl bg-gradient-to-br from-[#EC69AE] to-[#F997C6] shadow-lg shadow-blue-500/20">
-            <TerminalSquare className="w-5 h-5 text-white" />
+          <span className="relative grid place-items-center w-9 h-9 rounded-xl overflow-hidden shadow-lg shadow-pink-500/20">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/logo-corncine-mark.svg" alt="" className="w-full h-full" />
             <span className="absolute -bottom-1 -right-1 w-3 h-3 rounded-full bg-[#6AB27A] ring-2 ring-[#0B0E15]" />
           </span>
           <span className="text-xl font-bold tracking-tight text-[#F8FAFC]">CornCine</span>

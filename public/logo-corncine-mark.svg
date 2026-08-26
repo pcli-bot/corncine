@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="CornCine mark">
+  <defs>
+    <linearGradient id="corncine-grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#EC69AE"/>
+      <stop offset="100%" stop-color="#F997C6"/>
+    </linearGradient>
+  </defs>
+  <rect x="2" y="2" width="60" height="60" rx="14" fill="url(#corncine-grad)"/>
+  <!-- Film strip perforations: left + right columns -->
+  <g fill="#0B0E15" fill-opacity="0.18">
+    <rect x="8"  y="14" width="5" height="3.5" rx="1"/>
+    <rect x="8"  y="22" width="5" height="3.5" rx="1"/>
+    <rect x="8"  y="30" width="5" height="3.5" rx="1"/>
+    <rect x="8"  y="38" width="5" height="3.5" rx="1"/>
+    <rect x="8"  y="46" width="5" height="3.5" rx="1"/>
+    <rect x="51" y="14" width="5" height="3.5" rx="1"/>
+    <rect x="51" y="22" width="5" height="3.5" rx="1"/>
+    <rect x="51" y="30" width="5" height="3.5" rx="1"/>
+    <rect x="51" y="38" width="5" height="3.5" rx="1"/>
+    <rect x="51" y="46" width="5" height="3.5" rx="1"/>
+  </g>
+  <!-- Play triangle -->
+  <path d="M24 20 L46 32 L24 44 Z" fill="#FFFFFF"/>
+</svg>

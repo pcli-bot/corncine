@@ -4,7 +4,7 @@ import { API_BASE } from "@/lib/api";
 import { useEffect, useMemo, useRef, useState, useCallback } from "react";
 import { useAnicineStore } from "@/lib/anicine-store";
 import { EMBED_SERVERS, buildEmbedUrl, isDirectMediaFile, type EmbedServerKey } from "@/lib/anicine-data";
-import { X, Gauge, Magnet, Film, Download, Image as ImageIcon, Maximize2, Minimize2, Settings, Loader2, PictureInPicture2 } from "lucide-react";
+import { X, Gauge, Magnet, Film, Download, Image as ImageIcon, Maximize2, Minimize2, Settings, Loader2, PictureInPicture2, BookOpen } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { showToast } from "@/lib/anicine-toast";
 
@@ -420,7 +420,7 @@ export function PlayerModal() {
               ) : (
                 <div className="absolute inset-0 bg-[#202530]/95 flex flex-col items-center justify-center p-6 text-center gap-4">
                   <div className="w-14 h-14 rounded-full bg-[#DB3E98]/15 border border-[#DB3E98]/30 flex items-center justify-center">
-                    <span className="text-xl">📚</span>
+                    <BookOpen className="w-7 h-7 text-[#DB3E98]" />
                   </div>
                   <div className="space-y-1">
                     <h5 className="text-sm font-bold text-[#F8FAFC]">{player.title}</h5>
@@ -433,7 +433,7 @@ export function PlayerModal() {
                 </div>
               )
             ) : (
-              <EmptyState icon={<span className="text-2xl">📚</span>} text="No book source for this item." />
+              <EmptyState icon={<BookOpen className="w-8 h-8 text-[#DB3E98] mx-auto mb-2" />} text="No book source for this item." />
             )
           ) : isArt ? (
             player.url ? (

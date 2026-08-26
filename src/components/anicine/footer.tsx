@@ -1,4 +1,4 @@
-import { Github, ShieldCheck, Zap } from "lucide-react";
+import { Github, ShieldCheck, Lock } from "lucide-react";
 
 export function Footer() {
   return (
@@ -8,8 +8,9 @@ export function Footer() {
           {/* Brand */}
           <div className="space-y-3">
             <div className="flex items-center gap-2">
-              <span className="grid place-items-center w-7 h-7 rounded-lg bg-gradient-to-br from-[#EC69AE] to-[#F997C6]">
-                <Zap className="w-4 h-4 text-white" />
+              <span className="grid place-items-center w-7 h-7 rounded-lg overflow-hidden">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/logo-corncine-mark.svg" alt="" className="w-full h-full" />
               </span>
               <span className="text-base font-bold text-[#F8FAFC]">CornCine</span>
             </div>
@@ -35,7 +36,11 @@ export function Footer() {
               <li><a href="https://github.com/pcli-bot/pcli/blob/main/LICENSE" target="_blank" rel="noreferrer" className="text-[#B3B7C1] hover:text-[#EC69AE] spring-transition">License (GPLv3)</a></li>
               <li><a href="https://github.com/pcli-bot/pcli/issues" target="_blank" rel="noreferrer" className="text-[#B3B7C1] hover:text-[#EC69AE] spring-transition">Report an Issue</a></li>
               <li><a href="https://github.com/fmhy/FMHY" target="_blank" rel="noreferrer" className="text-[#B3B7C1] hover:text-[#EC69AE] spring-transition">FMHY Provider Wiki</a></li>
-              <li><a href="/mcp" className="text-[#B3B7C1] hover:text-red-400 spring-transition">MCP for AI Agents 🔞</a></li>
+              <li>
+                <a href="/mcp" className="inline-flex items-center gap-1.5 text-[#B3B7C1] hover:text-red-400 spring-transition">
+                  <Lock className="w-3 h-3" /> MCP for AI Agents <span className="text-[10px] font-bold text-red-400">18+</span>
+                </a>
+              </li>
             </ul>
           </div>
 

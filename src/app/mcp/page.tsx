@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ShieldAlert, Lock } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "MCP — CornCine Adult Agent 18+ | Download via AI (JAV, Hentai, Desi, Leaks)",
@@ -43,7 +44,7 @@ export default function McpAdultDocs() {
       </nav>
 
       <div className="inline-flex items-center gap-2 rounded-full border border-red-500/30 bg-red-500/10 px-3 py-1 text-xs font-bold text-red-300">
-        🔞 18+ ONLY — Age verification required
+        <ShieldAlert className="w-3.5 h-3.5" aria-hidden="true" /> 18+ ONLY — Age verification required
       </div>
 
       <h1 className="text-3xl font-extrabold mt-4">CornCine MCP — Adult Agent</h1>
@@ -123,7 +124,11 @@ Rejection handling:
                 <span className={`font-mono ${t.gate ? "text-red-300" : "text-emerald-300"}`}>{t.name}</span>
                 <span className="text-[#B3B7C1]"> — {t.desc}</span>
                 <span className="block text-xs font-mono text-[#949AA5] mt-1">{t.args}</span>
-                {t.gate && t.name !== "verify_age" && <span className="text-[11px] text-red-400">🔒 requires verify_age first</span>}
+                {t.gate && t.name !== "verify_age" && (
+                  <span className="inline-flex items-center gap-1 text-[11px] text-red-400">
+                    <Lock className="w-3 h-3" /> requires verify_age first
+                  </span>
+                )}
               </li>
             ))}
           </ul>
@@ -133,7 +138,7 @@ Rejection handling:
           <h3 className="font-semibold text-amber-300">Why AI Rejects & How to Pass</h3>
           <ul className="list-disc list-inside text-sm text-[#B3B7C1] mt-2 space-y-1">
             <li><strong>Vague adult intent → blocked.</strong> Bad: <code className="bg-white/10 px-1 rounded">Download something adult</code> — no explicit query, safety filter fires. Good: <code className="bg-white/10 px-1 rounded">I am 18+, search CornCine for “Sunny Leone”</code></li>
-            <li><strong>No 18+ confirmation → blocked.</strong> The MCP itself returns `🔞 call verify_age first` — the AI must surface that question to the user, not skip it.</li>
+            <li><strong>No 18+ confirmation → blocked.</strong> The MCP itself returns <code className="bg-white/10 px-1 rounded">call verify_age first</code> — the AI must surface that question to the user, not skip it.</li>
             <li><strong>Mixing clean + adult in one turn → flagged.</strong> Keep them separate. Adult requests go to CornCine MCP, everything else to AniCine clean MCP.</li>
             <li><strong>Some models (Claude) are stricter than others (Cursor/GPT-4o) on adult leaks.</strong> If Claude refuses a leak search (e.g., Eva Elfie), suggest the user try the same query via the website directly: <code className="bg-white/10 px-1 rounded">https://corncine.com/search?q=eva+elfie</code></li>
           </ul>
@@ -143,7 +148,7 @@ Rejection handling:
           <h3 className="font-semibold">Troubleshooting</h3>
           <ul className="list-disc list-inside text-sm text-[#B3B7C1] space-y-1">
             <li><code className="bg-white/10 px-1 rounded">CORN_API</code> must be reachable — use hosted <code className="bg-white/10 px-1 rounded">https://corncine.com</code> when not running locally</li>
-            <li>If you see <code className="bg-white/10 px-1 rounded">🔞 call verify_age first</code>, the AI skipped the age step — tell it “I am 18+, please verify”</li>
+            <li>If you see <code className="bg-white/10 px-1 rounded">call verify_age first</code>, the AI skipped the age step — tell it “I am 18+, please verify”</li>
             <li>Large 4K downloads return an R2 link, not a Telegram file — open the link to save</li>
           </ul>
         </div>

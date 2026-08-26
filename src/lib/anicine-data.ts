@@ -43,7 +43,8 @@ export interface MediaItem {
 export interface Topic {
   key: string;
   label: string;
-  emoji: string;
+  /** Lucide icon name (see src/lib/anicine-icons.tsx). */
+  icon: string;
   query: string;
   mode: ModeKey;
 }
@@ -265,10 +266,10 @@ export const CATALOG_MODES: CatalogModeInfo[] = [
 ];
 
 export const TOPICS: Topic[] = [
-  { key: "jav", label: "JAV", emoji: "🇯🇵", query: "JAV uncensored", mode: "all" },
-  { key: "hentai", label: "Hentai", emoji: "🔞", query: "hentai uncensored", mode: "all" },
-  { key: "4kad", label: "4K Ultra HD", emoji: "✨", query: "4K HDR", mode: "adult" },
-  { key: "onlyfans", label: "OnlyFans Leaks", emoji: "💎", query: "onlyfans leak", mode: "all" },
+  { key: "jav", label: "JAV", icon: "Film", query: "JAV uncensored", mode: "all" },
+  { key: "hentai", label: "Hentai", icon: "Lock", query: "hentai uncensored", mode: "all" },
+  { key: "4kad", label: "4K Ultra HD", icon: "Sparkles", query: "4K HDR", mode: "adult" },
+  { key: "onlyfans", label: "OnlyFans Leaks", icon: "Diamond", query: "onlyfans leak", mode: "all" },
 ];
 
 export const DESKTOP_FEATURES = [
@@ -285,10 +286,10 @@ export const INSTALL_PACKAGES = [
 ];
 
 export const PILLARS = [
-  { emoji: "🇯🇵", title: "JAV Streaming & Download", body: "Censored and uncensored JAV from <strong>MissAV</strong>, <strong>JAVGuru</strong>, <strong>SupJAV</strong>, and <strong>JAVLibrary</strong> — 1080p multi-server streams with direct MP4.", tags: ["JAV", "Uncensored", "1080p"], tone: "blue" as const },
-  { emoji: "🔞", title: "Hentai & Doujinshi", body: "Subbed uncensored hentai from <strong>Hanime</strong>, <strong>HentaiHaven</strong>, and doujinshi via <strong>Nhentai</strong> — direct 1080p episodes.", tags: ["Hentai", "Sub/Dub", "1080p"], tone: "emerald" as const },
-  { emoji: "💎", title: "OnlyFans & Creator Leaks", body: "Search <strong>Kemono</strong> & <strong>Coomer</strong> archives for OnlyFans, Patreon, and Fansly creators — photos, videos, archives.", tags: ["Leaks", "Creators", "Archive"], tone: "cyan" as const },
-  { emoji: "⚡", title: "Universal Adult Downloader", body: "Download 4K HDR from <strong>Pornhub</strong>, <strong>Eporner</strong>, <strong>SpankBang</strong>, and torrent packs via <strong>1337x XXX</strong> — yt-dlp + aria2c powered.", tags: ["4K HDR", "MP4 / MKV", "Torrent"], tone: "amber" as const },
+  { icon: "Film", title: "JAV Streaming & Download", body: "Censored and uncensored JAV from <strong>MissAV</strong>, <strong>JAVGuru</strong>, <strong>SupJAV</strong>, and <strong>JAVLibrary</strong> — 1080p multi-server streams with direct MP4.", tags: ["JAV", "Uncensored", "1080p"], tone: "blue" as const },
+  { icon: "Lock", title: "Hentai & Doujinshi", body: "Subbed uncensored hentai from <strong>Hanime</strong>, <strong>HentaiHaven</strong>, and doujinshi via <strong>Nhentai</strong> — direct 1080p episodes.", tags: ["Hentai", "Sub/Dub", "1080p"], tone: "emerald" as const },
+  { icon: "Diamond", title: "OnlyFans & Creator Leaks", body: "Search <strong>Kemono</strong> & <strong>Coomer</strong> archives for OnlyFans, Patreon, and Fansly creators — photos, videos, archives.", tags: ["Leaks", "Creators", "Archive"], tone: "cyan" as const },
+  { icon: "Zap", title: "Universal Adult Downloader", body: "Download 4K HDR from <strong>Pornhub</strong>, <strong>Eporner</strong>, <strong>SpankBang</strong>, and torrent packs via <strong>1337x XXX</strong> — yt-dlp + aria2c powered.", tags: ["4K HDR", "MP4 / MKV", "Torrent"], tone: "amber" as const },
 ];
 
 export const FAQS = [
@@ -300,7 +301,7 @@ export const FAQS = [
 
 export const DIRECTORY = [
   {
-    emoji: "🔥", title: "Trending Adult (4K / 1080p)",
+    icon: "Flame", title: "Trending Adult (4K / 1080p)",
     links: [
       { label: "Overflow Uncensored HD", q: "overflow", mode: "adult" as ModeKey },
       { label: "Mankitsu Happening", q: "mankitsu", mode: "adult" as ModeKey },
@@ -309,7 +310,7 @@ export const DIRECTORY = [
     ],
   },
   {
-    emoji: "🇯🇵", title: "JAV Index",
+    icon: "Film", title: "JAV Index",
     links: [
       { label: "MissAV Search", q: "", mode: "all" as ModeKey },
       { label: "JAVGuru Censored/Uncensored", q: "", mode: "all" as ModeKey },
@@ -317,7 +318,7 @@ export const DIRECTORY = [
     ],
   },
   {
-    emoji: "💎", title: "Creator Leaks",
+    icon: "Diamond", title: "Creator Leaks",
     links: [
       { label: "Kemono Archive", q: "", mode: "all" as ModeKey },
       { label: "Coomer Archive", q: "", mode: "all" as ModeKey },
@@ -325,7 +326,7 @@ export const DIRECTORY = [
     ],
   },
   {
-    emoji: "⚡", title: "Universal Extractors",
+    icon: "Zap", title: "Universal Extractors",
     links: [
       { label: "Pornhub to MP4 (4K)", q: "", mode: "all" as ModeKey, action: "downloader" },
       { label: "Torrent Magnet Player", q: "", mode: "all" as ModeKey, action: "downloader" },
@@ -342,15 +343,15 @@ export interface LinkDetection {
 
 export function detectLink(input: string): LinkDetection {
   const v = (input || "").trim().toLowerCase();
-  if (!v) return { platform: "Awaiting link", icon: "🎬", type: "—", kind: "unknown" };
-  if (v.startsWith("magnet:?")) return { platform: "BitTorrent Magnet", icon: "🧲", type: "Swarm Stream", kind: "magnet" };
-  if (v.includes("youtube.com") || v.includes("youtu.be")) return { platform: "YouTube", icon: "▶️", type: "Video", kind: "video" };
-  if (v.includes("tiktok.com")) return { platform: "TikTok", icon: "🎵", type: "No-Watermark Video", kind: "video" };
-  if (v.includes("twitter.com") || v.includes("x.com")) return { platform: "Twitter / X", icon: "🐦", type: "Video", kind: "video" };
-  if (v.includes("reddit.com") || v.includes("redd.it")) return { platform: "Reddit", icon: "👽", type: "Video", kind: "video" };
-  if (v.includes("vimeo.com")) return { platform: "Vimeo", icon: "🎥", type: "Video", kind: "video" };
-  if (/\.(mp4|mkv|webm|mov|avi)(\?|$)/.test(v)) return { platform: "Direct Stream", icon: "📥", type: "MP4 / MKV", kind: "video" };
-  if (/\.(mp3|flac|wav|m4a)(\?|$)/.test(v)) return { platform: "Audio File", icon: "🎧", type: "Audio", kind: "audio" };
-  if (v.startsWith("http")) return { platform: "Generic URL", icon: "🔗", type: "Auto-Detect", kind: "video" };
-  return { platform: "Unknown", icon: "❓", type: "—", kind: "unknown" };
+  if (!v) return { platform: "Awaiting link", icon: "Film", type: "—", kind: "unknown" };
+  if (v.startsWith("magnet:?")) return { platform: "BitTorrent Magnet", icon: "Magnet", type: "Swarm Stream", kind: "magnet" };
+  if (v.includes("youtube.com") || v.includes("youtu.be")) return { platform: "YouTube", icon: "PlayCircle", type: "Video", kind: "video" };
+  if (v.includes("tiktok.com")) return { platform: "TikTok", icon: "Music", type: "No-Watermark Video", kind: "video" };
+  if (v.includes("twitter.com") || v.includes("x.com")) return { platform: "Twitter / X", icon: "Twitter", type: "Video", kind: "video" };
+  if (v.includes("reddit.com") || v.includes("redd.it")) return { platform: "Reddit", icon: "MessagesSquare", type: "Video", kind: "video" };
+  if (v.includes("vimeo.com")) return { platform: "Vimeo", icon: "Video", type: "Video", kind: "video" };
+  if (/\.(mp4|mkv|webm|mov|avi)(\?|$)/.test(v)) return { platform: "Direct Stream", icon: "Download", type: "MP4 / MKV", kind: "video" };
+  if (/\.(mp3|flac|wav|m4a)(\?|$)/.test(v)) return { platform: "Audio File", icon: "Headphones", type: "Audio", kind: "audio" };
+  if (v.startsWith("http")) return { platform: "Generic URL", icon: "Link2", type: "Auto-Detect", kind: "video" };
+  return { platform: "Unknown", icon: "CircleHelp", type: "—", kind: "unknown" };
 }
