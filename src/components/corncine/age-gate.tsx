@@ -32,7 +32,7 @@ export function AgeGate() {
         <p className="mt-2 text-sm leading-relaxed text-[#B3B7C1]">
           CornCine indexes adult material (JAV, hentai, tubes, OnlyFans leaks). You must be 18 or older and consent to viewing adult content where legal.
         </p>
-        <p className="mt-3 text-xs text-[#878C97]">
+        <p className="mt-3 text-xs text-[#949AA5]">
           By entering you confirm you are 18+ and have read our <Link href="/sites/pornhub.com" className="underline hover:text-[#B3B7C1]">terms</Link>. No accounts, no tracking.
         </p>
         <div className="mt-6 grid grid-cols-2 gap-3">
@@ -49,7 +49,7 @@ export function AgeGate() {
             I am 18+ — Enter
           </button>
         </div>
-        <p className="mt-3 text-[10px] font-mono text-[#878C97]">CornCine — 21+ adult providers. 18+ only.</p>
+        <p className="mt-3 text-[10px] font-mono text-[#949AA5]">CornCine — 21+ adult providers. 18+ only.</p>
       </div>
     </div>
   );

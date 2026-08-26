@@ -95,7 +95,7 @@ export function HeroSearch() {
             {/* Search input */}
             <div className="relative bg-[#151922] rounded-xl p-1.5 border border-[#4D5566] shadow-xl focus-within:ring-2 focus-within:ring-[#EC69AE]/40 focus-within:border-[#EC69AE] spring-transition">
               <div className="flex items-center">
-                <div className="pl-3 text-[#878C97]">
+                <div className="pl-3 text-[#949AA5]">
                   <Search className="w-5 h-5" />
                 </div>
                 <input
@@ -104,7 +104,7 @@ export function HeroSearch() {
                   onChange={(e) => onInput(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && triggerSearch()}
                   placeholder="Search JAV, hentai, tubes, creators, 4K releases..."
-                  className="w-full bg-transparent border-0 px-3 py-3 text-white font-semibold text-sm sm:text-base placeholder:text-[#878C97] focus:outline-none focus:ring-0"
+                  className="w-full bg-transparent border-0 px-3 py-3 text-white font-semibold text-sm sm:text-base placeholder:text-[#949AA5] focus:outline-none focus:ring-0"
                 />
                 <button
                   onClick={triggerSearch}
@@ -117,7 +117,7 @@ export function HeroSearch() {
 
             {/* Topic pills */}
             <div className="flex flex-wrap items-center justify-center gap-1.5 text-xs">
-              <span className="text-xs font-medium text-[#878C97] mr-1">Topics:</span>
+              <span className="text-xs font-medium text-[#949AA5] mr-1">Topics:</span>
               {TOPICS.map((t) => (
                 <button
                   key={t.key}
@@ -219,7 +219,7 @@ function LinkDownloader() {
               "text-[10px] font-mono font-medium px-2 py-0.5 rounded border",
               detection && detection.kind !== "unknown"
                 ? "bg-[#6AB27A]/10 border-[#6AB27A]/30 text-[#6AB27A]"
-                : "bg-[#202530] border-[#323947] text-[#878C97]"
+                : "bg-[#202530] border-[#323947] text-[#949AA5]"
             )}>
               {detection && detection.kind !== "unknown" ? detection.platform : "Awaiting link..."}
             </span>
@@ -230,7 +230,7 @@ function LinkDownloader() {
               value={url}
               onChange={(e) => setUrl(e.target.value)}
               placeholder="Paste YouTube, BitTorrent Magnet, TikTok, Twitter/X, Reddit, or MP4 URL..."
-              className="w-full bg-transparent border-0 px-3 py-2.5 text-white font-semibold text-xs sm:text-sm placeholder:text-[#878C97] focus:outline-none"
+              className="w-full bg-transparent border-0 px-3 py-2.5 text-white font-semibold text-xs sm:text-sm placeholder:text-[#949AA5] focus:outline-none"
             />
             <button
               onClick={paste}
@@ -246,7 +246,7 @@ function LinkDownloader() {
               <div className="flex items-center gap-2">
                 <span className="text-sm">{detection.icon}</span>
                 <span className="text-[#EC69AE] font-semibold">{detection.platform}</span>
-                <span className="text-[#878C97]">•</span>
+                <span className="text-[#949AA5]">•</span>
                 <span className="text-[#B3B7C1]">{detection.type}</span>
               </div>
               <span className="text-[10px] text-[#6AB27A] font-semibold bg-[#6AB27A]/10 px-2 py-0.5 rounded flex items-center gap-1">
@@ -259,7 +259,7 @@ function LinkDownloader() {
         {/* Options grid */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
           <div className="space-y-1">
-            <label className="text-[11px] font-medium text-[#878C97]">Download Format</label>
+            <label className="text-[11px] font-medium text-[#949AA5]">Download Format</label>
             <select value={format} onChange={(e) => setFormat(e.target.value as typeof format)} className="w-full bg-[#202530] border border-[#323947] rounded-lg px-2.5 py-2 text-xs font-medium text-white focus:outline-none focus:border-[#EC69AE]">
               <option value="video">Full Video (MP4 / MKV)</option>
               <option value="audio">Audio Only (MP3 320kbps)</option>
@@ -267,7 +267,7 @@ function LinkDownloader() {
             </select>
           </div>
           <div className="space-y-1">
-            <label className="text-[11px] font-medium text-[#878C97]">Quality Target</label>
+            <label className="text-[11px] font-medium text-[#949AA5]">Quality Target</label>
             <select value={quality} onChange={(e) => setQuality(e.target.value)} className="w-full bg-[#202530] border border-[#323947] rounded-lg px-2.5 py-2 text-xs font-medium text-white focus:outline-none focus:border-[#EC69AE]">
               <option value="1080p">1080p Full HD</option>
               <option value="4k">4K Ultra HD (2160p)</option>
@@ -277,7 +277,7 @@ function LinkDownloader() {
             </select>
           </div>
           <div className="space-y-1">
-            <label className="text-[11px] font-medium text-[#878C97]">Download Engine</label>
+            <label className="text-[11px] font-medium text-[#949AA5]">Download Engine</label>
             <select value={engine} onChange={(e) => setEngine(e.target.value)} className="w-full bg-[#202530] border border-[#323947] rounded-lg px-2.5 py-2 text-xs font-medium text-white focus:outline-none focus:border-[#EC69AE]">
               <option value="aria2c">Multi-Thread (aria2c)</option>
               <option value="webtorrent">BitTorrent Swarm</option>
@@ -288,7 +288,7 @@ function LinkDownloader() {
 
         {/* Action row */}
         <div className="pt-3 flex flex-col sm:flex-row items-center justify-between gap-3 border-t border-[#323947]">
-          <div className="flex flex-wrap items-center gap-1.5 text-[11px] text-[#878C97]">
+          <div className="flex flex-wrap items-center gap-1.5 text-[11px] text-[#949AA5]">
             <span className="font-medium">Supported:</span>
             <span className="text-[#B3B7C1]">YouTube</span>•
             <span className="text-[#B3B7C1]">Magnets</span>•

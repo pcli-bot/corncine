@@ -129,21 +129,21 @@ export function CommandPalette() {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Type a command or search catalogs..."
-            className="w-full bg-transparent border-0 text-white placeholder:text-[#878C97] focus:outline-none text-sm font-semibold"
+            className="w-full bg-transparent border-0 text-white placeholder:text-[#949AA5] focus:outline-none text-sm font-semibold"
           />
-          <kbd className="px-2 py-0.5 rounded bg-[#151922] border border-[#323947] text-[10px] font-mono text-[#878C97]">ESC</kbd>
+          <kbd className="px-2 py-0.5 rounded bg-[#151922] border border-[#323947] text-[10px] font-mono text-[#949AA5]">ESC</kbd>
         </div>
 
         {/* Results */}
         <div className="max-h-[320px] overflow-y-auto scrollbar-thin p-2">
           {results.length === 0 ? (
-            <div className="py-10 text-center text-xs text-[#878C97]">
+            <div className="py-10 text-center text-xs text-[#949AA5]">
               No matches for &quot;{input}&quot;. Try a movie, anime, or provider name.
             </div>
           ) : (
             groups.map((g) => (
               <div key={g.kind} className="mb-2">
-                <div className="px-2 py-1 text-[10px] font-mono uppercase tracking-wider text-[#878C97]">{g.label}</div>
+                <div className="px-2 py-1 text-[10px] font-mono uppercase tracking-wider text-[#949AA5]">{g.label}</div>
                 {g.items.map((c) => {
                   flatIndex++;
                   const idx = flatIndex;
@@ -161,11 +161,11 @@ export function CommandPalette() {
                         {c.icon}
                         <div className="min-w-0">
                           <div className="text-xs font-semibold text-[#F8FAFC] truncate">{c.label}</div>
-                          {c.hint && <div className="text-[10px] font-mono text-[#878C97] truncate">{c.hint}</div>}
+                          {c.hint && <div className="text-[10px] font-mono text-[#949AA5] truncate">{c.hint}</div>}
                         </div>
                       </div>
                       {c.shortcut && (
-                        <span className="text-[10px] font-mono text-[#878C97] bg-[#151922] border border-[#323947] px-1.5 py-0.5 rounded shrink-0">
+                        <span className="text-[10px] font-mono text-[#949AA5] bg-[#151922] border border-[#323947] px-1.5 py-0.5 rounded shrink-0">
                           {c.shortcut}
                         </span>
                       )}
@@ -178,7 +178,7 @@ export function CommandPalette() {
         </div>
 
         {/* Footer */}
-        <div className="p-2.5 bg-[#151922] border-t border-[#323947] flex items-center justify-between text-[11px] text-[#878C97]">
+        <div className="p-2.5 bg-[#151922] border-t border-[#323947] flex items-center justify-between text-[11px] text-[#949AA5]">
           <span className="flex items-center gap-1.5">
             <ArrowUpDown className="w-3 h-3" />
             <span>Navigate</span>

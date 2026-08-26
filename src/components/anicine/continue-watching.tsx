@@ -44,7 +44,7 @@ export function ContinueWatching() {
         </h2>
         <button
           onClick={() => void clearHistory()}
-          className="text-[11px] text-[#878C97] hover:text-[#F8FAFC] font-mono spring-transition"
+          className="text-[11px] text-[#949AA5] hover:text-[#F8FAFC] font-mono spring-transition"
         >
           Clear
         </button>

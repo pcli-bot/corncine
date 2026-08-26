@@ -71,7 +71,7 @@ export function Header() {
           {/* Command palette trigger */}
           <button
             onClick={() => setPalette(true)}
-            className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#151922] border border-[#323947] text-xs text-[#878C97] hover:border-[#4D5566] hover:text-[#B3B7C1] spring-transition"
+            className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#151922] border border-[#323947] text-xs text-[#949AA5] hover:border-[#4D5566] hover:text-[#B3B7C1] spring-transition"
           >
             <Search className="w-3.5 h-3.5" />
             <span>Search</span>

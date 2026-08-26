@@ -48,21 +48,21 @@ export default async function SitePage({ params }: { params: Promise<{ slug: str
 
   return (
     <main className="min-h-screen bg-[#0B0E15] text-[#F8FAFC] px-4 py-10 max-w-3xl mx-auto">
-      <nav className="text-sm text-slate-400 mb-6">
+      <nav className="text-sm text-[#B3B7C1] mb-6">
         <Link href="/" className="hover:text-[#F8FAFC]">CornCine</Link>
         <span className="mx-2">/</span>
         {mode ? (
           <Link href={`/category/${mode.key}`} className="hover:text-[#F8FAFC]">{mode.label}</Link>
         ) : (
-          <span className="text-slate-300">Sources</span>
+          <span className="text-[#B3B7C1]">Sources</span>
         )}
         <span className="mx-2">/</span>
-        <span className="text-slate-200">{p.name}</span>
+        <span className="text-[#E7EAEF]">{p.name}</span>
       </nav>
 
       <h1 className="text-3xl font-extrabold mb-2">{p.name}</h1>
-      <p className="text-slate-500 text-sm mb-4">{p.domain}</p>
-      <p className="text-slate-300 mb-8 max-w-2xl">{p.blurb}</p>
+      <p className="text-[#949AA5] text-sm mb-4">{p.domain}</p>
+      <p className="text-[#B3B7C1] mb-8 max-w-2xl">{p.blurb}</p>
 
       <div className="flex flex-wrap gap-3 mb-10">
         <a
@@ -91,7 +91,7 @@ export default async function SitePage({ params }: { params: Promise<{ slug: str
         ) : null}
       </div>
 
-      <p className="text-slate-400 text-sm max-w-2xl">
+      <p className="text-[#B3B7C1] text-sm max-w-2xl">
         {p.name} is one of {PROVIDERS.length} sources indexed by CornCine. Use the search above to resolve
         direct streams and downloads across every indexed provider in one place.
       </p>

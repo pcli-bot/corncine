@@ -61,7 +61,7 @@ export default function CompliancePage() {
           </p>
         </div>
 
-        <p className="text-xs text-[#878C97]">Last updated: August 2026</p>
+        <p className="text-xs text-[#949AA5]">Last updated: August 2026</p>
       </div>
     </main>
   );

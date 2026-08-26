@@ -20,7 +20,7 @@ export default function DsaPage() {
             <p className="mt-1">Languages: English</p>
             <p className="mt-1">Response time: within 48 hours</p>
           </div>
-          <p className="text-xs text-[#878C97]">This contact point is for authorities and does not handle general user support or copyright reports — please use the DMCA contact for copyright matters.</p>
+          <p className="text-xs text-[#949AA5]">This contact point is for authorities and does not handle general user support or copyright reports — please use the DMCA contact for copyright matters.</p>
         </div>
         <div className="rounded-2xl border border-white/10 bg-[#151922] p-6 space-y-4 text-sm leading-relaxed text-[#B3B7C1]">
           <h2 className="text-lg font-bold text-[#F8FAFC]">Transparency</h2>
@@ -30,9 +30,9 @@ export default function DsaPage() {
             <li>Manual review of reports submitted via DMCA / CSAM contacts</li>
             <li>Removal or delisting of reported content within 48 hours of a valid notice</li>
           </ul>
-          <p className="text-xs text-[#878C97]">Annual transparency reports will be published here if required by applicable law.</p>
+          <p className="text-xs text-[#949AA5]">Annual transparency reports will be published here if required by applicable law.</p>
         </div>
-        <p className="text-xs text-[#878C97]">Last updated: August 2026</p>
+        <p className="text-xs text-[#949AA5]">Last updated: August 2026</p>
       </div>
     </main>
   );

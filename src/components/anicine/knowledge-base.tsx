@@ -102,7 +102,7 @@ function DirectoryHub() {
   return (
     <div id="directory-hub" className="pt-8 border-t border-[#323947] space-y-6">
       <div className="space-y-1">
-        <h3 className="text-xs font-bold text-[#878C97] uppercase tracking-wider font-mono">
+        <h3 className="text-xs font-bold text-[#949AA5] uppercase tracking-wider font-mono">
           CornCine Global Media Index &amp; Streaming Directory
         </h3>
         <p className="text-xs text-[#B3B7C1]">Direct index of trending titles, simulcasts, and high-speed extractors supported across all 1,896+ providers.</p>
@@ -128,7 +128,7 @@ function DirectoryHub() {
               {(cat as { providers?: Array<{ name: string; note: string }> }).providers?.map((p, i) => (
                 <li key={i}>
                   <span className="text-[#F8FAFC] font-medium">{p.name}</span>{" "}
-                  <span className="text-[10px] text-[#878C97]">({p.note})</span>
+                  <span className="text-[10px] text-[#949AA5]">({p.note})</span>
                 </li>
               ))}
             </ul>

@@ -52,7 +52,7 @@ export function DesktopApps() {
 
             {/* Terminal */}
             <div className="bg-[#0B0E15] border border-[#4D5566] rounded-xl p-4 font-mono text-xs text-[#F8FAFC] relative overflow-hidden">
-              <div className="flex items-center justify-between mb-2 text-[#878C97] border-b border-[#323947]/60 pb-2">
+              <div className="flex items-center justify-between mb-2 text-[#949AA5] border-b border-[#323947]/60 pb-2">
                 <span className="text-xs font-semibold text-[#B3B7C1] flex items-center gap-1.5">
                   <Terminal className="w-3.5 h-3.5" /> INSTALL FROM SOURCE
                 </span>
@@ -81,7 +81,7 @@ export function DesktopApps() {
                   className="p-3 rounded-lg bg-[#202530] border border-[#323947] hover:border-[#4D5566] text-center spring-transition group"
                 >
                   <div className="text-xs font-semibold text-[#F8FAFC] group-hover:text-[#EC69AE]">{pkg.os}</div>
-                  <div className="text-[10px] font-mono text-[#878C97]">{pkg.ext}</div>
+                  <div className="text-[10px] font-mono text-[#949AA5]">{pkg.ext}</div>
                 </a>
               ))}
             </div>
@@ -114,7 +114,7 @@ export function DesktopApps() {
               <Metric icon={<Radio className="w-3.5 h-3.5" />} label="Peers" value="1,204" />
             </div>
 
-            <div className="flex items-center justify-between pt-2 border-t border-[#323947] text-[11px] text-[#878C97]">
+            <div className="flex items-center justify-between pt-2 border-t border-[#323947] text-[11px] text-[#949AA5]">
               <span className="flex items-center gap-1.5"><Shield className="w-3.5 h-3.5 text-[#6AB27A]" /> Ad-block filter engine active</span>
               <span className="font-mono">PID 7421</span>
             </div>
@@ -129,8 +129,8 @@ export function DesktopApps() {
 function Metric({ icon, label, value }: { icon: React.ReactNode; label: string; value: string }) {
   return (
     <div className="rounded-lg bg-[#151922] border border-[#323947] p-2 text-center">
-      <div className="flex items-center justify-center text-[#878C97] mb-1">{icon}</div>
-      <div className="text-[10px] text-[#878C97] font-mono uppercase tracking-wider">{label}</div>
+      <div className="flex items-center justify-center text-[#949AA5] mb-1">{icon}</div>
+      <div className="text-[10px] text-[#949AA5] font-mono uppercase tracking-wider">{label}</div>
       <div className="text-xs font-bold text-[#F8FAFC] font-mono">{value}</div>
     </div>
   );

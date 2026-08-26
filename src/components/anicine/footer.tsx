@@ -13,11 +13,11 @@ export function Footer() {
               </span>
               <span className="text-base font-bold text-[#F8FAFC]">CornCine</span>
             </div>
-            <p className="text-xs text-[#878C97] leading-relaxed max-w-sm">
+            <p className="text-xs text-[#949AA5] leading-relaxed max-w-sm">
               Client-side link parsing and media indexing. No media files are hosted on CornCine
               servers — all resolution happens in your browser or through local native binaries.
             </p>
-            <div className="flex items-center gap-2 text-[11px] text-[#878C97]">
+            <div className="flex items-center gap-2 text-[11px] text-[#949AA5]">
               <ShieldCheck className="w-3.5 h-3.5 text-[#6AB27A]" />
               <span>Zero ads • Zero tracking • GPLv3</span>
             </div>
@@ -25,7 +25,7 @@ export function Footer() {
 
           {/* Project links */}
           <div className="space-y-3">
-            <h4 className="text-[11px] font-mono font-semibold uppercase tracking-wider text-[#878C97]">Project</h4>
+            <h4 className="text-[11px] font-mono font-semibold uppercase tracking-wider text-[#949AA5]">Project</h4>
             <ul className="space-y-2 text-xs">
               <li>
                 <a href="https://github.com/pcli-bot/pcli" target="_blank" rel="noreferrer" className="flex items-center gap-2 text-[#B3B7C1] hover:text-[#EC69AE] spring-transition">
@@ -41,7 +41,7 @@ export function Footer() {
 
           {/* Legal / compliance */}
           <div className="space-y-3">
-            <h4 className="text-[11px] font-mono font-semibold uppercase tracking-wider text-[#878C97]">Legal</h4>
+            <h4 className="text-[11px] font-mono font-semibold uppercase tracking-wider text-[#949AA5]">Legal</h4>
             <ul className="space-y-2 text-xs">
               <li><a href="/dmca" className="text-[#B3B7C1] hover:text-[#EC69AE] spring-transition">DMCA / Takedown</a></li>
               <li><a href="/2257" className="text-[#B3B7C1] hover:text-[#EC69AE] spring-transition">2257 Compliance</a></li>
@@ -55,7 +55,7 @@ export function Footer() {
 
           {/* Directory */}
           <div className="space-y-3">
-            <h4 className="text-[11px] font-mono font-semibold uppercase tracking-wider text-[#878C97]">Directory</h4>
+            <h4 className="text-[11px] font-mono font-semibold uppercase tracking-wider text-[#949AA5]">Directory</h4>
             <ul className="grid grid-cols-2 gap-2 text-xs">
               <li><a href="?q=Interstellar" className="text-[#B3B7C1] hover:text-[#EC69AE] spring-transition">Free Movies</a></li>
               <li><a href="?q=One+Piece&mode=anime" className="text-[#B3B7C1] hover:text-[#6AB27A] spring-transition">Anime Stream</a></li>
@@ -67,7 +67,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-8 pt-6 border-t border-[#323947] flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-[#878C97]">
+        <div className="mt-8 pt-6 border-t border-[#323947] flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-[#949AA5]">
           <p>© {new Date().getFullYear()} CornCine open source collective. Built for the open web.</p>
           <p className="font-mono">v2.6.0 • 1,896+ providers indexed</p>
         </div>

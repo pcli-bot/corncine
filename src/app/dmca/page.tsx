@@ -57,13 +57,13 @@ export default function DmcaPage() {
             reference/index entry only; the content itself remains the responsibility of the
             third-party host, which you may also contact directly.
           </p>
-          <p className="text-[#878C97] text-xs">
+          <p className="text-[#949AA5] text-xs">
             Note: a false DMCA statement is made under penalty of perjury and may expose you to
             liability for damages, including costs and attorneys&rsquo; fees, under 17 U.S.C. § 512(f).
           </p>
         </div>
 
-        <p className="text-xs text-[#878C97]">Last updated: August 2026</p>
+        <p className="text-xs text-[#949AA5]">Last updated: August 2026</p>
       </div>
     </main>
   );

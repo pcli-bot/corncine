@@ -137,7 +137,7 @@ export function CatalogBrowser() {
                 <span
                   className={cn(
                     "text-[10px] font-mono px-1.5 py-0.5 rounded-full font-bold",
-                    active ? "bg-white/20 text-white" : "bg-[#202530] text-[#878C97]"
+                    active ? "bg-white/20 text-white" : "bg-[#202530] text-[#949AA5]"
                   )}
                 >
                   {tab.count}
@@ -189,7 +189,7 @@ export function CatalogBrowser() {
 
           {/* Provider selector */}
           <div className="flex items-center gap-1.5">
-            <span className="text-xs text-[#878C97]">Provider:</span>
+            <span className="text-xs text-[#949AA5]">Provider:</span>
             <select
               value={providerFilter}
               onChange={(e) => setProviderFilter(e.target.value)}
@@ -206,7 +206,7 @@ export function CatalogBrowser() {
 
           {/* Sort selector */}
           <div className="flex items-center gap-1.5">
-            <span className="text-xs text-[#878C97]">Sort:</span>
+            <span className="text-xs text-[#949AA5]">Sort:</span>
             <select
               value={sort}
               onChange={(e) => setSort(e.target.value as typeof sort)}
@@ -250,7 +250,7 @@ export function CatalogBrowser() {
       )}
 
       {/* Status row */}
-      <div className="flex items-center justify-between mb-4 text-[11px] text-[#878C97] font-mono">
+      <div className="flex items-center justify-between mb-4 text-[11px] text-[#949AA5] font-mono">
         <span>
           {!showFavorites && isFetching ? "Scanning providers..." : `${gridItems.length} results`}
           {!showFavorites && debounced ? ` for "${debounced}"` : ""}
@@ -487,7 +487,7 @@ export function MediaCard({ item }: { item: MediaItem }) {
         >
           {item.title}
         </h3>
-        <div className="flex items-center justify-between text-[11px] text-[#878C97] font-mono">
+        <div className="flex items-center justify-between text-[11px] text-[#949AA5] font-mono">
           <span className="flex items-center gap-1">
             <Star className="w-3 h-3 text-[#F59E0B] fill-[#F59E0B]" /> {item.rating.toFixed(1)}
           </span>
@@ -629,9 +629,9 @@ function SearchAcrossSites({
                 <div className="font-semibold text-[#F8FAFC] truncate group-hover:text-[#EC69AE]">
                   {p.name}
                 </div>
-                <div className="text-[10px] text-[#878C97] font-mono truncate">{p.domain}</div>
+                <div className="text-[10px] text-[#949AA5] font-mono truncate">{p.domain}</div>
               </div>
-              <ExternalLink className="w-3.5 h-3.5 text-[#878C97] group-hover:text-[#EC69AE] shrink-0 ml-2" />
+              <ExternalLink className="w-3.5 h-3.5 text-[#949AA5] group-hover:text-[#EC69AE] shrink-0 ml-2" />
             </a>
           ))}
         </div>
@@ -646,7 +646,7 @@ function GridSkeleton() {
       {Array.from({ length: 10 }).map((_, i) => (
         <div key={i} className="rounded-xl border border-[#323947] bg-[#151922] overflow-hidden">
           <div className="aspect-[2/3] bg-[#202530] animate-pulse-soft flex items-center justify-center">
-            <Loader2 className="w-5 h-5 text-[#878C97] animate-spin" />
+            <Loader2 className="w-5 h-5 text-[#949AA5] animate-spin" />
           </div>
           <div className="p-3 space-y-2">
             <div className="h-3 w-3/4 rounded bg-[#202530]" />
@@ -662,7 +662,7 @@ function EmptyState({ message }: { message: string }) {
   return (
     <div className="py-16 text-center bg-[#151922] rounded-xl border border-[#323947] border-dashed">
       <div className="inline-grid place-items-center w-12 h-12 rounded-xl bg-[#202530] border border-[#323947] mb-3">
-        <SearchIcon className="w-5 h-5 text-[#878C97]" />
+        <SearchIcon className="w-5 h-5 text-[#949AA5]" />
       </div>
       <p className="text-xs font-medium text-[#B3B7C1]">{message}</p>
     </div>

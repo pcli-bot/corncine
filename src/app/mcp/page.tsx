@@ -38,8 +38,8 @@ export default function McpAdultDocs() {
     <main className="min-h-screen bg-[#0B0E15] text-[#F8FAFC] px-4 py-10 max-w-3xl mx-auto">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      <nav className="text-sm text-slate-400 mb-6">
-        <Link href="/" className="hover:text-white">CornCine</Link> <span className="mx-2">/</span> <span className="text-slate-200">MCP</span>
+      <nav className="text-sm text-[#B3B7C1] mb-6">
+        <Link href="/" className="hover:text-white">CornCine</Link> <span className="mx-2">/</span> <span className="text-[#E7EAEF]">MCP</span>
       </nav>
 
       <div className="inline-flex items-center gap-2 rounded-full border border-red-500/30 bg-red-500/10 px-3 py-1 text-xs font-bold text-red-300">
@@ -47,15 +47,15 @@ export default function McpAdultDocs() {
       </div>
 
       <h1 className="text-3xl font-extrabold mt-4">CornCine MCP — Adult Agent</h1>
-      <p className="text-slate-400 mt-2">
-        Gives any AI agent the same engine as the site: <strong className="text-slate-200">verify → search → extract → download</strong> across 22 adult providers. Every tool except <code className="bg-white/10 px-1 rounded">verify_age</code> is locked behind an 18+ gate.
+      <p className="text-[#B3B7C1] mt-2">
+        Gives any AI agent the same engine as the site: <strong className="text-[#E7EAEF]">verify → search → extract → download</strong> across 22 adult providers. Every tool except <code className="bg-white/10 px-1 rounded">verify_age</code> is locked behind an 18+ gate.
       </p>
 
       {/* AI-readable */}
       <div className="mt-8 rounded-2xl border border-red-500/20 bg-red-950/20 p-6">
         <h2 className="text-sm font-bold tracking-wider text-red-300 uppercase">For AI to read — Quick Start + Rejection Handling</h2>
         <p className="text-xs text-red-300/70 mt-1">Copy this verbatim into your system prompt. It is written to pass safety filters.</p>
-        <pre className="mt-3 rounded-xl bg-black/40 border border-red-500/20 p-4 text-xs leading-relaxed text-slate-300 whitespace-pre-wrap">
+        <pre className="mt-3 rounded-xl bg-black/40 border border-red-500/20 p-4 text-xs leading-relaxed text-[#B3B7C1] whitespace-pre-wrap">
 {`You have access to CornCine MCP (adult, 18+).
 
 Gate: You MUST call verify_age({"confirmed": true}) first, but ONLY if the user explicitly confirms they are 18+ and requests adult content. Do not call it otherwise.
@@ -79,13 +79,13 @@ Rejection handling:
       <div className="mt-4 space-y-6">
         <div className="rounded-2xl border border-white/10 bg-[#151922] p-6">
           <h3 className="font-semibold text-red-300">1. Install</h3>
-          <pre className="mt-2 rounded-lg bg-black/50 p-3 text-xs text-slate-300 overflow-x-auto">npm i -g @corncine/mcp-adult
+          <pre className="mt-2 rounded-lg bg-black/50 p-3 text-xs text-[#B3B7C1] overflow-x-auto">npm i -g @corncine/mcp-adult
 # or: npx @corncine/mcp-adult</pre>
         </div>
 
         <div className="rounded-2xl border border-white/10 bg-[#151922] p-6">
           <h3 className="font-semibold text-red-300">2. Claude Desktop — claude_desktop_config.json</h3>
-          <pre className="mt-2 rounded-lg bg-black/50 p-3 text-xs text-slate-300 overflow-x-auto">{`{
+          <pre className="mt-2 rounded-lg bg-black/50 p-3 text-xs text-[#B3B7C1] overflow-x-auto">{`{
   "mcpServers": {
     "corncine-adult": {
       "command": "npx",
@@ -99,12 +99,12 @@ Rejection handling:
     }
   }
 }`}</pre>
-          <p className="text-xs text-slate-500 mt-2">Install both — Claude will route clean vs adult automatically. Adult tools stay locked until <code className="bg-white/10 px-1 rounded">verify_age</code>.</p>
+          <p className="text-xs text-[#949AA5] mt-2">Install both — Claude will route clean vs adult automatically. Adult tools stay locked until <code className="bg-white/10 px-1 rounded">verify_age</code>.</p>
         </div>
 
         <div className="rounded-2xl border border-white/10 bg-[#151922] p-6">
           <h3 className="font-semibold">3. Cursor / Windsurf</h3>
-          <pre className="mt-2 rounded-lg bg-black/50 p-3 text-xs text-slate-300 overflow-x-auto">{`{
+          <pre className="mt-2 rounded-lg bg-black/50 p-3 text-xs text-[#B3B7C1] overflow-x-auto">{`{
   "mcpServers": {
     "corncine-adult": {
       "command": "npx",
@@ -121,8 +121,8 @@ Rejection handling:
             {adultTools.map((t) => (
               <li key={t.name} className={`rounded-lg border p-3 ${t.gate ? "bg-red-950/20 border-red-500/20" : "bg-black/30 border-white/5"}`}>
                 <span className={`font-mono ${t.gate ? "text-red-300" : "text-emerald-300"}`}>{t.name}</span>
-                <span className="text-slate-400"> — {t.desc}</span>
-                <span className="block text-xs font-mono text-slate-500 mt-1">{t.args}</span>
+                <span className="text-[#B3B7C1]"> — {t.desc}</span>
+                <span className="block text-xs font-mono text-[#949AA5] mt-1">{t.args}</span>
                 {t.gate && t.name !== "verify_age" && <span className="text-[11px] text-red-400">🔒 requires verify_age first</span>}
               </li>
             ))}
@@ -131,7 +131,7 @@ Rejection handling:
 
         <div className="rounded-2xl border border-amber-500/20 bg-amber-950/20 p-6">
           <h3 className="font-semibold text-amber-300">Why AI Rejects & How to Pass</h3>
-          <ul className="list-disc list-inside text-sm text-slate-300 mt-2 space-y-1">
+          <ul className="list-disc list-inside text-sm text-[#B3B7C1] mt-2 space-y-1">
             <li><strong>Vague adult intent → blocked.</strong> Bad: <code className="bg-white/10 px-1 rounded">Download something adult</code> — no explicit query, safety filter fires. Good: <code className="bg-white/10 px-1 rounded">I am 18+, search CornCine for “Sunny Leone”</code></li>
             <li><strong>No 18+ confirmation → blocked.</strong> The MCP itself returns `🔞 call verify_age first` — the AI must surface that question to the user, not skip it.</li>
             <li><strong>Mixing clean + adult in one turn → flagged.</strong> Keep them separate. Adult requests go to CornCine MCP, everything else to AniCine clean MCP.</li>
@@ -141,7 +141,7 @@ Rejection handling:
 
         <div className="rounded-2xl border border-white/10 bg-[#151922] p-6">
           <h3 className="font-semibold">Troubleshooting</h3>
-          <ul className="list-disc list-inside text-sm text-slate-400 space-y-1">
+          <ul className="list-disc list-inside text-sm text-[#B3B7C1] space-y-1">
             <li><code className="bg-white/10 px-1 rounded">CORN_API</code> must be reachable — use hosted <code className="bg-white/10 px-1 rounded">https://corncine.com</code> when not running locally</li>
             <li>If you see <code className="bg-white/10 px-1 rounded">🔞 call verify_age first</code>, the AI skipped the age step — tell it “I am 18+, please verify”</li>
             <li>Large 4K downloads return an R2 link, not a Telegram file — open the link to save</li>
@@ -149,7 +149,7 @@ Rejection handling:
         </div>
       </div>
 
-      <p className="text-xs text-slate-500 mt-10">
+      <p className="text-xs text-[#949AA5] mt-10">
         Clean alternative: <Link href="https://anicine.com/mcp" className="text-emerald-400 underline">AniCine MCP (no adult)</Link> · GitHub: <a href="https://github.com/pcli-bot/pcli" className="text-sky-400 underline">pcli-bot/pcli</a>
       </p>
     </main>

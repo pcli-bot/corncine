@@ -92,16 +92,16 @@ export function LeakBrowser() {
           <div className="max-w-2xl mx-auto mb-6">
             <div className="relative bg-[#151922] rounded-xl p-1.5 border border-[#4D5566] shadow-xl focus-within:ring-2 focus-within:ring-[#EC69AE]/40">
               <div className="flex items-center">
-                <div className="pl-3 text-[#878C97]"><Search className="w-5 h-5" /></div>
+                <div className="pl-3 text-[#949AA5]"><Search className="w-5 h-5" /></div>
                 <input
                   type="text"
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && (e.target as HTMLInputElement).blur()}
                   placeholder="Search a model or creator name (e.g. emma, derpixon)…"
-                  className="w-full bg-transparent border-0 px-3 py-3 text-white font-semibold text-sm placeholder:text-[#878C97] focus:outline-none"
+                  className="w-full bg-transparent border-0 px-3 py-3 text-white font-semibold text-sm placeholder:text-[#949AA5] focus:outline-none"
                 />
-                {creators.isFetching && <Loader2 className="w-4 h-4 mr-3 text-[#878C97] animate-spin" />}
+                {creators.isFetching && <Loader2 className="w-4 h-4 mr-3 text-[#949AA5] animate-spin" />}
               </div>
             </div>
           </div>
@@ -117,7 +117,7 @@ export function LeakBrowser() {
           )}
 
           {creators.data && creators.data.results.length > 0 && (
-            <div className="text-center text-[#878C97] text-xs mb-4 font-mono">
+            <div className="text-center text-[#949AA5] text-xs mb-4 font-mono">
               {creators.data.total} matches across sites · showing top {creators.data.results.length}
             </div>
           )}
@@ -131,7 +131,7 @@ export function LeakBrowser() {
               >
                 <div className="min-w-0">
                   <div className="text-[#F8FAFC] font-bold truncate">{c.name}</div>
-                  <div className="text-[11px] text-[#878C97] font-mono mt-0.5 capitalize">{c.service}</div>
+                  <div className="text-[11px] text-[#949AA5] font-mono mt-0.5 capitalize">{c.service}</div>
                 </div>
                 <div className="flex flex-col items-end gap-1 shrink-0">
                   <span className={cn("text-[10px] font-semibold px-2 py-0.5 rounded-full",
@@ -147,7 +147,7 @@ export function LeakBrowser() {
           </div>
 
           {creators.data && creators.data.results.length === 0 && !creators.isFetching && (
-            <div className="text-center text-[#878C97] text-sm py-10">
+            <div className="text-center text-[#949AA5] text-sm py-10">
               No models found on Kemono/Coomer. Try a different name — or search the other leak sites below.
             </div>
           )}
@@ -174,7 +174,7 @@ export function LeakBrowser() {
                     )}
                     <div className="min-w-0">
                       <div className="text-[#F8FAFC] text-xs font-semibold truncate">{w.name}</div>
-                      <div className="text-[10px] text-[#878C97] font-mono truncate">{w.site}</div>
+                      <div className="text-[10px] text-[#949AA5] font-mono truncate">{w.site}</div>
                     </div>
                   </a>
                 ))}
@@ -211,7 +211,7 @@ export function LeakBrowser() {
             </div>
           </div>
 
-          <div className="flex items-center justify-between mb-4 text-[#878C97] text-xs font-mono">
+          <div className="flex items-center justify-between mb-4 text-[#949AA5] text-xs font-mono">
             <span className="text-[#F8FAFC] font-bold text-sm">{selected.name}</span>
             <span>
               {filteredTotal} {mediaType === "all" ? "items" : mediaType + "s"} · {selected.site}/{selected.service}
@@ -243,7 +243,7 @@ export function LeakBrowser() {
           </div>
 
           {posts.data && visiblePosts.length === 0 && !posts.isLoading && (
-            <div className="text-center text-[#878C97] text-sm py-10">
+            <div className="text-center text-[#949AA5] text-sm py-10">
               No {mediaType === "all" ? "" : mediaType + " "}content found for this model.
             </div>
           )}
@@ -278,7 +278,7 @@ function AllSitesPanel({ query }: { query: string }) {
           </a>
         ))}
       </div>
-      <p className="text-[11px] text-[#878C97] mt-3 leading-relaxed">
+      <p className="text-[11px] text-[#949AA5] mt-3 leading-relaxed">
         Kemono &amp; Coomer results above are live. The chips open each site&apos;s own search in a new tab —
         most have no public API to aggregate, so the <span className="text-[#B3B7C1]">Leak CSE</span> does the true cross-site sweep.
       </p>

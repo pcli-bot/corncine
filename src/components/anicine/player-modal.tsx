@@ -371,9 +371,9 @@ export function PlayerModal() {
         {/* Server Selector Bar */}
         <div className="px-3.5 py-2 bg-[#151922] border-b border-[#323947] flex flex-wrap items-center justify-between gap-2 text-xs">
           <div className="flex items-center gap-1.5 overflow-x-auto scrollbar-none">
-            <span className="text-[#878C97] font-mono text-[11px] uppercase mr-1">Server:</span>
+            <span className="text-[#949AA5] font-mono text-[11px] uppercase mr-1">Server:</span>
             {usableServers.length === 0 ? (
-              <span className="text-[11px] text-[#878C97]">none available for this title</span>
+              <span className="text-[11px] text-[#949AA5]">none available for this title</span>
             ) : (
               usableServers.map((s) => (
                 <button
@@ -442,7 +442,7 @@ export function PlayerModal() {
                 <img src={player.url} alt={player.title} className="max-w-full max-h-full object-contain" />
               </a>
             ) : (
-              <EmptyState icon={<ImageIcon className="w-8 h-8 text-[#878C97] mx-auto mb-2" />} text="No image source for this item." />
+              <EmptyState icon={<ImageIcon className="w-8 h-8 text-[#949AA5] mx-auto mb-2" />} text="No image source for this item." />
             )
           ) : isMagnet ? (
             <div className="absolute inset-0 bg-[#202530]/95 flex flex-col items-center justify-center p-6 text-center gap-4">
@@ -462,13 +462,13 @@ export function PlayerModal() {
             </div>
           ) : resolving ? (
             <EmptyState
-              icon={<Loader2 className="w-8 h-8 animate-spin text-[#878C97] mx-auto mb-2" />}
+              icon={<Loader2 className="w-8 h-8 animate-spin text-[#949AA5] mx-auto mb-2" />}
               text="Resolving stream source…"
               sub="Extracting the real video URL from the provider (usually 5–30 seconds)."
             />
           ) : resolveFailed ? (
             <EmptyState
-              icon={<Film className="w-8 h-8 text-[#878C97] mx-auto mb-2" />}
+              icon={<Film className="w-8 h-8 text-[#949AA5] mx-auto mb-2" />}
               text="Couldn't extract a stream from this source."
               sub="The provider may be blocking server playback. Download still works — or open the source page directly."
             />
@@ -505,7 +505,7 @@ export function PlayerModal() {
             />
           ) : (
             <EmptyState
-              icon={<Film className="w-8 h-8 text-[#878C97] mx-auto mb-2" />}
+              icon={<Film className="w-8 h-8 text-[#949AA5] mx-auto mb-2" />}
               text="No stream source available for this title."
               sub="This catalog entry has no TMDB/IMDb id, so no embed server can be built for it. Use Download or search the title on a provider."
             />
@@ -559,7 +559,7 @@ export function PlayerModal() {
 
         {/* Footer */}
         <div className="p-3 bg-[#202530] border-t border-[#323947] flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
-          <div className="flex items-center gap-2 text-[#878C97] font-mono text-[11px] min-w-0">
+          <div className="flex items-center gap-2 text-[#949AA5] font-mono text-[11px] min-w-0">
             <span className="truncate">
               {embedUrlFinal && server !== "direct"
                 ? `Embed: ${new URL(embedUrlFinal).hostname}`
@@ -571,7 +571,7 @@ export function PlayerModal() {
           </div>
           {(showNativeVideo || isDirectHls) && (
             <div className="flex items-center gap-1 self-end sm:self-auto font-mono text-xs shrink-0">
-              <span className="text-[#878C97] mr-1">Speed:</span>
+              <span className="text-[#949AA5] mr-1">Speed:</span>
               {[1.0, 1.25, 1.5, 2.0].map((s) => (
                 <button
                   key={s}
@@ -598,7 +598,7 @@ function EmptyState({ icon, text, sub }: { icon: React.ReactNode; text: string; 
     <div className="px-6 text-center">
       {icon}
       <p className="text-sm text-[#B3B7C1]">{text}</p>
-      {sub && <p className="text-xs text-[#878C97] mt-1 max-w-md">{sub}</p>}
+      {sub && <p className="text-xs text-[#949AA5] mt-1 max-w-md">{sub}</p>}
     </div>
   );
 }

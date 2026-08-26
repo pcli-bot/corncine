@@ -61,18 +61,18 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
 
   return (
     <main className="min-h-screen bg-[#0B0E15] text-[#F8FAFC] px-4 py-10 max-w-5xl mx-auto">
-      <nav className="text-sm text-slate-400 mb-6">
+      <nav className="text-sm text-[#B3B7C1] mb-6">
         <Link href="/" className="hover:text-[#F8FAFC]">CornCine</Link>
         <span className="mx-2">/</span>
-        <span className="text-slate-300">Categories</span>
+        <span className="text-[#B3B7C1]">Categories</span>
         <span className="mx-2">/</span>
-        <span className="text-slate-200">{mode.label}</span>
+        <span className="text-[#E7EAEF]">{mode.label}</span>
       </nav>
 
       <h1 className="text-3xl font-extrabold mb-2">{mode.title}</h1>
-      <p className="text-slate-400 mb-8 max-w-2xl">{mode.desc}</p>
+      <p className="text-[#B3B7C1] mb-8 max-w-2xl">{mode.desc}</p>
 
-      <h2 className="text-lg font-semibold mb-4 text-slate-200">
+      <h2 className="text-lg font-semibold mb-4 text-[#E7EAEF]">
         Indexed sources ({providers.length})
       </h2>
       <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -84,9 +84,9 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
             >
               <div className="flex items-center justify-between gap-2">
                 <span className="font-semibold">{p.name}</span>
-                <span className="text-xs text-slate-500">{p.domain}</span>
+                <span className="text-xs text-[#949AA5]">{p.domain}</span>
               </div>
-              <p className="text-sm text-slate-400 mt-1">{p.blurb}</p>
+              <p className="text-sm text-[#B3B7C1] mt-1">{p.blurb}</p>
             </Link>
           </li>
         ))}
@@ -95,7 +95,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
       {/* Top searched for this category — crawlable internal links for SEO */}
       {topForMode.length > 0 && (
         <section className="mt-10">
-          <h2 className="text-lg font-semibold mb-4 text-slate-200">Top searched in {mode.label}</h2>
+          <h2 className="text-lg font-semibold mb-4 text-[#E7EAEF]">Top searched in {mode.label}</h2>
           <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             {topForMode.map((e) => (
               <li key={e.slug}>
@@ -104,7 +104,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
                   className="block rounded-xl border border-white/10 bg-white/[0.03] hover:bg-white/10 transition p-3"
                 >
                   <span className="font-medium text-[#F8FAFC] text-sm">{e.title}</span>
-                  <p className="text-xs text-slate-400 mt-1 line-clamp-2">{e.desc}</p>
+                  <p className="text-xs text-[#B3B7C1] mt-1 line-clamp-2">{e.desc}</p>
                 </Link>
               </li>
             ))}

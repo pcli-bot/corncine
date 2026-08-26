@@ -84,7 +84,7 @@
   --strong: #4D5566;
   --primary-text: #E7EAEF;
   --secondary-text: #B3B7C1;
-  --muted-text: #878C97;
+  --muted-text: #949AA5; /* lifted from #878C97: the old value measured 3.92:1 on surface-3 (#2A303D), failing AA on its own elevation ladder */
 
   /* Signature accents — electric violet, cyan, hot magenta, amber */
   --accent-blue: #EC69AE;

@@ -70,11 +70,11 @@ export function DownloadsDrawer() {
         <div className="p-4 border-b border-[#323947]">
           <div className="bg-[#0B0E15] border border-[#323947] rounded-lg p-3 flex items-center justify-between font-mono text-xs">
             <div>
-              <div className="text-[#878C97]">Overall speed</div>
+              <div className="text-[#949AA5]">Overall speed</div>
               <div className="text-[#6AB27A] font-semibold mt-0.5">{formatSpeed(totalSpeed)}</div>
             </div>
             <div className="text-right">
-              <div className="text-[#878C97]">Active / Done / Failed</div>
+              <div className="text-[#949AA5]">Active / Done / Failed</div>
               <div className="text-[#F8FAFC] font-semibold mt-0.5">{active} / {done} / {errored}</div>
             </div>
           </div>
@@ -83,10 +83,10 @@ export function DownloadsDrawer() {
         {/* Queue list */}
         <div className="flex-1 overflow-y-auto scrollbar-thin p-4 space-y-3">
           {tasks.length === 0 ? (
-            <div className="h-full flex flex-col items-center justify-center text-center gap-2 text-[#878C97]">
+            <div className="h-full flex flex-col items-center justify-center text-center gap-2 text-[#949AA5]">
               <Clock className="w-8 h-8" />
               <p className="text-xs">No active downloads.</p>
-              <p className="text-[11px] text-[#878C97]">Start a download from the catalog or Link Downloader.</p>
+              <p className="text-[11px] text-[#949AA5]">Start a download from the catalog or Link Downloader.</p>
             </div>
           ) : (
             tasks.map((t) => <TaskRow key={t.id} task={t} onPause={pauseTask} onResume={resumeTask} onRemove={removeTask} />)
@@ -95,7 +95,7 @@ export function DownloadsDrawer() {
 
         {/* Footer */}
         <div className="p-4 border-t border-[#323947] space-y-3 bg-[#202530]">
-          <div className="flex items-center justify-between text-[11px] text-[#878C97] font-mono">
+          <div className="flex items-center justify-between text-[11px] text-[#949AA5] font-mono">
             <span>Storage:</span>
             <code className="text-[#F8FAFC] bg-[#0B0E15] px-2 py-0.5 rounded border border-[#323947]">server: .downloads/&lt;job&gt;</code>
           </div>
@@ -132,7 +132,7 @@ function TaskRow({ task, onPause, onResume, onRemove }: {
       <div className="flex items-start justify-between gap-2">
         <div className="min-w-0 flex-1">
           <div className="text-xs font-semibold text-[#F8FAFC] truncate">{task.title}</div>
-          <div className="text-[10px] font-mono text-[#878C97] flex items-center gap-1.5 mt-0.5">
+          <div className="text-[10px] font-mono text-[#949AA5] flex items-center gap-1.5 mt-0.5">
             <span className="text-[#B3B7C1]">{task.source}</span>
             <span>•</span>
             <span>{task.quality}</span>
@@ -149,12 +149,12 @@ function TaskRow({ task, onPause, onResume, onRemove }: {
           <div
             className={cn(
               "h-full rounded-full spring-transition",
-              task.status === "done" ? "bg-[#6AB27A]" : task.status === "error" ? "bg-[#EF4444]" : task.status === "paused" ? "bg-[#878C97]" : "bg-[#EC69AE]"
+              task.status === "done" ? "bg-[#6AB27A]" : task.status === "error" ? "bg-[#EF4444]" : task.status === "paused" ? "bg-[#949AA5]" : "bg-[#EC69AE]"
             )}
             style={{ width: `${task.progress}%` }}
           />
         </div>
-        <div className="flex items-center justify-between text-[10px] font-mono text-[#878C97]">
+        <div className="flex items-center justify-between text-[10px] font-mono text-[#949AA5]">
           <span>{task.progress.toFixed(1)}%</span>
           <span>{task.status === "active" ? formatSpeed(task.speed) : task.status === "paused" ? "Paused" : task.status === "done" ? "Completed" : task.status === "error" ? "Failed" : "Queued"}</span>
         </div>
@@ -206,7 +206,7 @@ function TaskRow({ task, onPause, onResume, onRemove }: {
 
 function StatusBadge({ status }: { status: DownloadTask["status"] }) {
   const map: Record<DownloadTask["status"], { icon: React.ReactNode; cls: string; label: string }> = {
-    queued: { icon: <Clock className="w-3 h-3" />, cls: "text-[#878C97] bg-[#202530] border-[#323947]", label: "Queued" },
+    queued: { icon: <Clock className="w-3 h-3" />, cls: "text-[#949AA5] bg-[#202530] border-[#323947]", label: "Queued" },
     active: { icon: <Loader2 className="w-3 h-3 animate-spin" />, cls: "text-[#EC69AE] bg-[#EC69AE]/10 border-[#EC69AE]/30", label: "Active" },
     paused: { icon: <Pause className="w-3 h-3" />, cls: "text-[#B3B7C1] bg-[#202530] border-[#323947]", label: "Paused" },
     done: { icon: <CheckCircle2 className="w-3 h-3" />, cls: "text-[#6AB27A] bg-[#6AB27A]/10 border-[#6AB27A]/30", label: "Done" },

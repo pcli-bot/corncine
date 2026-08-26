@@ -95,7 +95,7 @@ export function ImageModal() {
             {imageViewer.title || "Media Viewer"}
           </h3>
           {images.length > 1 && (
-            <span className="text-xs font-mono text-slate-400 bg-white/10 px-2 py-0.5 rounded-full">
+            <span className="text-xs font-mono text-[#B3B7C1] bg-white/10 px-2 py-0.5 rounded-full">
               {currentIndex + 1} / {images.length}
             </span>
           )}
@@ -105,14 +105,14 @@ export function ImageModal() {
           {/* Zoom controls */}
           <button
             onClick={() => setZoom((z) => Math.max(0.5, z - 0.25))}
-            className="p-2 rounded-lg bg-white/10 hover:bg-white/20 text-slate-300 hover:text-white transition"
+            className="p-2 rounded-lg bg-white/10 hover:bg-white/20 text-[#B3B7C1] hover:text-white transition"
             title="Zoom Out"
           >
             <ZoomOut className="w-4 h-4" />
           </button>
           <button
             onClick={() => setZoom((z) => Math.min(2.5, z + 0.25))}
-            className="p-2 rounded-lg bg-white/10 hover:bg-white/20 text-slate-300 hover:text-white transition"
+            className="p-2 rounded-lg bg-white/10 hover:bg-white/20 text-[#B3B7C1] hover:text-white transition"
             title="Zoom In"
           >
             <ZoomIn className="w-4 h-4" />
@@ -130,7 +130,7 @@ export function ImageModal() {
           {/* Close button */}
           <button
             onClick={close}
-            className="p-2 rounded-lg bg-white/10 hover:bg-red-500/20 text-slate-300 hover:text-red-400 transition"
+            className="p-2 rounded-lg bg-white/10 hover:bg-red-500/20 text-[#B3B7C1] hover:text-red-400 transition"
           >
             <X className="w-5 h-5" />
           </button>

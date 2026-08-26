@@ -34,7 +34,7 @@ export class ErrorBoundary extends React.Component<Props, State> {
         <div className="min-h-[50vh] flex flex-col items-center justify-center p-8 text-center bg-[#0B0E15] border border-[#323947] rounded-xl m-4">
           <h2 className="text-lg font-bold text-[#F8FAFC]">Something went wrong</h2>
           <p className="text-sm text-[#B3B7C1] mt-2 max-w-md">The application hit an unexpected error. Try refreshing the page. If the problem persists, check the logs.</p>
-          <details className="mt-4 text-xs font-mono text-[#878C97] bg-[#151922] border border-[#323947] rounded p-3 max-w-lg w-full text-left overflow-auto">
+          <details className="mt-4 text-xs font-mono text-[#949AA5] bg-[#151922] border border-[#323947] rounded p-3 max-w-lg w-full text-left overflow-auto">
             <summary className="cursor-pointer text-[#B3B7C1]">Error details</summary>
             <pre className="mt-2 whitespace-pre-wrap break-words">{this.state.error?.message}</pre>
           </details>

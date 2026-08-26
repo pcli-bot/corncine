@@ -144,7 +144,7 @@ export default function RootLayout({
             footer used to live here, so every page shipped two <footer>
             landmarks: duplicated links, and an ambiguous landmark for screen
             readers. Its catalog and sitemap links all exist in <Footer />,
-            which also carries the Legal column. Its text-slate-500 body copy
+            which also carries the Legal column. Its text-[#949AA5] body copy
             measured 4.06:1 on this surface, under the 4.5 AA floor. */}
         <Toaster position="bottom-right" richColors closeButton />
       </body>

@@ -25,7 +25,7 @@ export default function CookiesPage() {
           <p>You can control or delete cookies through your browser settings (Chrome: Settings → Privacy → Cookies; Firefox: Settings → Privacy & Security; Safari: Preferences → Privacy). Blocking essential cookies may affect site functionality. To opt out of interest-based advertising, visit <a href="https://www.youronlinechoices.eu" className="text-[#EC69AE] underline">youronlinechoices.eu</a> or <a href="https://optout.aboutads.info" className="text-[#EC69AE] underline">aboutads.info</a>.</p>
           <p>For questions about cookies, contact <a href="/privacy-policy" className="text-[#EC69AE] underline">Privacy Policy</a>.</p>
         </div>
-        <p className="text-xs text-[#878C97]">Last updated: August 2026</p>
+        <p className="text-xs text-[#949AA5]">Last updated: August 2026</p>
       </div>
     </main>
   );
