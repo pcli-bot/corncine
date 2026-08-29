@@ -25,14 +25,22 @@ const nextConfig: NextConfig = {
             key: "Content-Security-Policy",
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googletagmanager.com https://cdn.tsyndicate.com",
+              // The TrafficStars loader pulls its engine and beacons from sibling
+              // hosts (jssdk.tsyndicate.com, and cdn over plain http), so pinning
+              // only cdn.tsyndicate.com blocked every ad request and the slot
+              // never filled. Wildcard the vendor and upgrade its http
+              // sub-requests rather than widening script-src to https:.
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googletagmanager.com https://*.tsyndicate.com",
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
               "font-src 'self' https://fonts.gstatic.com data:",
               "img-src 'self' data: blob: https: http:",
               "media-src 'self' blob: https: http:",
               "connect-src 'self' https: wss:", // tsyndicate beacons covered by https:
-              "frame-src 'self' https://vidlink.pro https://anyembed.xyz https://www.2embed.skin https://vidsrc.to https://*.vidsrc.*",
+              "frame-src 'self' https://vidlink.pro https://anyembed.xyz https://www.2embed.skin https://vidsrc.to https://*.vidsrc.to https://*.vidsrc.net",
               "frame-ancestors 'none'",
+              // Forces the ad SDK's http:// sub-resources to https so CSP keeps
+              // them rather than dropping them as mixed content.
+              "upgrade-insecure-requests",
             ].join("; "),
           },
         ],

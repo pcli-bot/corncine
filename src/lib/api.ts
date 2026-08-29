@@ -7,7 +7,13 @@
 // once via POST /api/account and stores it in localStorage. The token IS the
 // credential — only its SHA-256 (account_id) lives server-side.
 
-const RAW = process.env.NEXT_PUBLIC_API_URL || process.env.NEXT_PUBLIC_API_BASE || "https://corncine.onrender.com";
+// Falls back to same-origin (""), matching the AniCine client. Hardcoding a
+// production host here baked it into the static bundle, so every page --
+// including a local build -- fetched the remote Render service and sat on its
+// ~3s cold start showing "Scanning providers..." before any card appeared.
+// Same-origin means the app talks to whoever served it; deployments that split
+// the API onto another host set NEXT_PUBLIC_API_URL explicitly.
+const RAW = process.env.NEXT_PUBLIC_API_URL || process.env.NEXT_PUBLIC_API_BASE || "";
 export const API_BASE = RAW.replace(/\/+$/, "");
 export const apiEnabled = API_BASE.length > 0;
 

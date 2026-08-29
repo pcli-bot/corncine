@@ -43,25 +43,55 @@ function score(haystack: string, q: string): number {
 const CURATED_MIN_SCORE = 12;
 const UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36";
 
-async function getJson(url: string, headers: Record<string, string> = {}, timeoutMs = 5000): Promise<any | null> {
-  try {
-    const res = await fetch(url, {
-      headers: { "User-Agent": UA, Accept: "application/json", ...headers },
-      signal: AbortSignal.timeout(timeoutMs),
-      cache: "no-store",
-    });
-    if (!res.ok) return null;
-    return await res.json();
-  } catch {
-    return null;
+/**
+ * Upstream indexes reset connections under load -- Eporner in particular
+ * throws ECONNRESET on a noticeable fraction of requests. A single attempt
+ * that swallowed the error made one blip look like "no adult results", so the
+ * grid silently fell back to torrent rows with placeholder art and the whole
+ * page read as broken thumbnails.
+ *
+ * Retries are read-only and idempotent, so they are safe here. The failure is
+ * logged rather than discarded: a provider that starts failing constantly
+ * should be visible in the server log, not inferred from an empty grid.
+ */
+async function getJson(
+  url: string,
+  headers: Record<string, string> = {},
+  timeoutMs = 5000,
+  attempts = 3,
+): Promise<any | null> {
+  let lastErr: unknown = null;
+  for (let i = 0; i < attempts; i++) {
+    try {
+      const res = await fetch(url, {
+        headers: { "User-Agent": UA, Accept: "application/json", ...headers },
+        signal: AbortSignal.timeout(timeoutMs),
+        cache: "no-store",
+      });
+      // 4xx is a real answer -- retrying will not change it.
+      if (res.status >= 400 && res.status < 500) return null;
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      return await res.json();
+    } catch (err) {
+      lastErr = err;
+      if (i < attempts - 1) {
+        await new Promise((r) => setTimeout(r, 250 * 2 ** i)); // 250ms, 500ms
+      }
+    }
   }
+  console.warn(`[search] upstream failed after ${attempts} attempts: ${new URL(url).host} -- ${lastErr}`);
+  return null;
 }
 
 // ---------------------------------------------------------------------------
 // 1. Live Adult Media Search (Eporner 4K/1080p API)
 // ---------------------------------------------------------------------------
 async function searchAdultLive(query: string): Promise<MediaItem[]> {
-  const data = await getJson(`https://www.eporner.com/api/v2/video/search/?query=${encodeURIComponent(query)}&per_page=20&thumbsize=big`);
+  // `format=json` is required. Without it the endpoint does not negotiate a
+  // JSON body and the request fails outright, so every adult search silently
+  // fell through to torrent magnets with placeholder art -- which is what made
+  // the grid look like "thumbnails not loading".
+  const data = await getJson(`https://www.eporner.com/api/v2/video/search/?query=${encodeURIComponent(query)}&per_page=20&thumbsize=big&format=json`);
   const videos = data?.videos;
   if (!Array.isArray(videos) || videos.length === 0) return [];
   return videos.map((v: any): MediaItem => {
