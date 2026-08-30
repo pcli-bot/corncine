@@ -539,7 +539,12 @@ export class DownloadEngine {
       bin = WEBTORRENT_BIN;
       args = ["download", job.url, "-o", outDir];
     }
-    const proc = spawn(bin, args, { env: process.env });
+    // turbopackIgnore: the binary is resolved at runtime, but static analysis
+    // cannot see that and so traces the ENTIRE project into the server bundle
+    // ("Dynamic filesystem access causes tracing of the whole project"). That
+    // inflated the build past Render's 512 MB ceiling, where an OOM kill
+    // surfaces only as a bare "exit 1" with no error in the log.
+    const proc = spawn(/* turbopackIgnore: true */ bin, args, { env: process.env });
     job.proc = proc;
 
     // Watchdog: if no progress for 5min or total >30min, kill and fail — prevents hour-long zombie
