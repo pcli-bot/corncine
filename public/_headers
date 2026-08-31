@@ -1,0 +1,25 @@
+# Cloudflare Pages header rules.
+#
+# next.config.ts headers() only applies to the Node server. A static export
+# serves plain files, so none of it reaches production on Pages -- the deployed
+# site was going out with no CSP at all: no frame-ancestors (framable, so
+# clickjackable), no script-src, no frame-src. This file is the Pages
+# equivalent and must be kept in step with next.config.ts.
+#
+# script-src wildcards the ad vendor because the TrafficStars loader pulls its
+# engine from a sibling host (jssdk.tsyndicate.com), not just the cdn one.
+# Pinning a single host blocked every ad request and the slot never filled.
+# upgrade-insecure-requests forces the SDK's http:// sub-resources to https so
+# they are not dropped as mixed content.
+#
+# connect-src allows https: because the browser calls the API on whatever host
+# NEXT_PUBLIC_API_URL points at, which is a different origin from the Pages
+# deployment.
+
+/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  X-XSS-Protection: 1; mode=block
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googletagmanager.com https://*.tsyndicate.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https: http:; media-src 'self' blob: https: http:; connect-src 'self' https: wss:; frame-src 'self' https://vidlink.pro https://anyembed.xyz https://www.2embed.skin https://vidsrc.to https://*.vidsrc.to https://*.vidsrc.net; frame-ancestors 'none'; upgrade-insecure-requests
